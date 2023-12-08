@@ -1,0 +1,17 @@
+button {
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: 1px solid;
+	border-radius: 5px;
+  &:active {
+  	background: transparent;
+  	box-shadow: inset 0px 0px 3px 0px #a3a3a3;
+  }
+  &.active {
+  	background: #f4c300;
+  	&.blue-active {
+  		background: #0085c7;
+  	}
+  }
+}
