@@ -10,6 +10,14 @@ export class AppComponent {
   output_text = ""
   moveList : string[] = []
 
+  clearDisplay() {
+    this.output_text = ""
+  }
+
+  clearDisplayList() {
+    this.moveList = []
+  }
+
   onClick = (newText: string) => {
     this.moveList.push(newText);
   };

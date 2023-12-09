@@ -1,16 +1,32 @@
 <div class="d-flex flex-row mb-2">
+<!-- <div class="d-flex flex-column mb-2"> -->
   <div class="w-50 p-3">
+  <!-- <div class="w-100 p-3"> -->
     <app-keyboard
       [(output)]="output_text"
       (onSubmit)="onClick($event)">
     </app-keyboard>
   </div>
-  <div class="w-50">
-    <p>{{ output_text }}</p>
-    <ol>
-      <li *ngFor="let move of moveList">
-        {{move}}
-      </li>
-    </ol>
+  <div class="w-100">
+    <div class="p-2 d-flex justify-content-around">
+      <button class="btn btn-info"
+        type="button"
+        (click)="clearDisplay()">
+        Clear
+      </button>
+      <button class="btn btn-warning"
+        type="button"
+        (click)="clearDisplayList()">
+        Clear List
+      </button>
+    </div>
+    <div style="width: 100%; background: lightgrey; margin-right: 10px;">
+      ><code style="">{{ output_text }}</code>
+    </div>
+    <div class="d-flex mb-2 flex-wrap" style="max-width: 200px;">
+      <div class="w-50 p-1" *ngFor="let move of moveList; index as i; even as e;">
+        <span *ngIf="e">{{(i + 2) / 2}}. </span>{{move}}
+      </div>
+    </div>
   </div>
 </div>

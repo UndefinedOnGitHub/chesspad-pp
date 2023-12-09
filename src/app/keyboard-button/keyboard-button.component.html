@@ -4,5 +4,7 @@
 	*ngIf="button"
 	(click)="onButtonPressed()">
   <span *ngIf="!button.icon">{{ button.value }}</span>
-  <fa-icon *ngIf="button.icon" [icon]="button.icon"></fa-icon>
+  <fa-icon
+  	*ngIf="button.icon"
+  	[icon]="button.icon"></fa-icon>
 </button>

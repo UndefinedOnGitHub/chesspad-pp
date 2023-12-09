@@ -9,6 +9,7 @@ import {
   faXmark,
   faPlus,
   faDeleteLeft,
+  faChess
 } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -26,12 +27,12 @@ export class KeyboardComponent {
   onButtonPress(btn: KeyboardButton): void {
     if (btn.type == "piece") {
       this.pieceButtons.forEach((pb: KeyboardButton) => (pb.active = false));
-      this.activeMove.piece = btn.symbol;
+      this.activeMove.setPiece(btn.symbol);
     }
     if (btn.type == "column") {
       if (this.originMoveSelector) {
         this.letterButtons.forEach((pb: KeyboardButton) => (pb.class = ""));
-        this.activeMove.source = btn.symbol;
+        this.activeMove.setSource(btn.symbol);
         btn.class = "blue-active";
         btn.trigger();
         this.originMoveSelector = false;
@@ -39,12 +40,12 @@ export class KeyboardComponent {
         return;
       }
       this.letterButtons.filter((pb: KeyboardButton) => pb.class != "blue-active").forEach((pb: KeyboardButton) => (pb.active = false));
-      this.activeMove.desitnationCol = btn.symbol;
+      this.activeMove.setCol(btn.symbol);
     }
     if (btn.type == "row") {
       if (this.originMoveSelector) {
         this.numberButtons.forEach((pb: KeyboardButton) => (pb.class = ""));
-        this.activeMove.source = btn.symbol;
+        this.activeMove.setSource(btn.symbol);
         btn.class = "blue-active";
         btn.trigger();
         this.originMoveSelector = false;
@@ -52,7 +53,7 @@ export class KeyboardComponent {
         return;
       }
       this.numberButtons.filter((pb: KeyboardButton) => pb.class != "blue-active").forEach((pb: KeyboardButton) => (pb.active = false));
-      this.activeMove.desitnationRow = btn.symbol;
+      this.activeMove.setRow(btn.symbol);
     }
 
     btn.trigger();
@@ -88,17 +89,37 @@ export class KeyboardComponent {
     symbol: "",
     onTrigger: () => this.switchMainButtons(),
   });
-  checkButton: KeyboardButton = new KeyboardButton({
+  // checkButton: KeyboardButton = new KeyboardButton({
+  //   key: "mark_check",
+  //   symbol: "+",
+  //   icon: faPlus,
+  // });
+  castleButton: KeyboardButton = new KeyboardButton({
     key: "mark_check",
-    symbol: "+",
-    icon: faPlus,
+    symbol: "O-O",
+    icon: faChess,
+    onTrigger: () => {
+      if (this.activeMove.castle == "O-O") {
+        this.activeMove.setCastle("O-O-O");
+      } else {
+        this.activeMove.setCastle("O-O");
+      }
+    }
+  });
+  longCastleButton: KeyboardButton = new KeyboardButton({
+    key: "mark_check",
+    symbol: "O-O-O",
+    icon: faChess,
+    onTrigger: () => {
+      this.activeMove.setCastle("O-O-O");
+    }
   });
   captureButton: KeyboardButton = new KeyboardButton({
     key: "mark_capture",
     symbol: "x",
     icon: faXmark,
     onTrigger: () => {
-      this.activeMove.take = !this.activeMove.take;
+      this.activeMove.setTake();
     }
   });
   multiMoveButton: KeyboardButton = new KeyboardButton({
@@ -119,7 +140,7 @@ export class KeyboardComponent {
   });
   deleteButton: KeyboardButton = new KeyboardButton({
     key: "delete_keyboard",
-    symbol: "",
+    symbol: "-1",
     icon: faDeleteLeft,
     onTrigger: () => this.clearKeyboard(),
   });
@@ -127,7 +148,8 @@ export class KeyboardComponent {
   mainSection: KeyboardButton[] = [
     this.switchButton,
     this.multiMoveButton,
-    this.checkButton,
+    // longCastleButton
+    this.castleButton,
     this.captureButton,
   ];
   output_text = "";
@@ -160,12 +182,22 @@ export class KeyboardComponent {
       .concat(this.letterButtons)
       .concat(this.mainSection)
       .forEach((b) => (b.active = false));
+    this.clearKeyClass();
+    this.resetMainButtons()
+  }
+
+  clearKeyClass() : void {
+    this.letterButtons.forEach((pb: KeyboardButton) => pb.class = "");
+    this.numberButtons.forEach((pb: KeyboardButton) => pb.class = "");
+  }
+
+  resetMainButtons() : void {
+    this.middleColumn = [];
+    this.switchMainButtons();
   }
 
   submit(event: any): void {
     this.onSubmit.emit(this.displayCurrentMove());
     this.clearKeyboard();
-    this.middleColumn = [];
-    this.switchMainButtons();
   }
 }
