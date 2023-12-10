@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
+import { NotepadComponent } from './notepad/notepad.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KeyboardComponent,
-    KeyboardButtonComponent
+    KeyboardButtonComponent,
+    NotepadComponent
   ],
   imports: [
     BrowserModule,

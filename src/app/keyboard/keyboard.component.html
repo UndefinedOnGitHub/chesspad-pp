@@ -1,11 +1,11 @@
-<div class="d-flex flex-row mb-2" (click)="switchMainButtons()">
+<div class="d-flex flex-row mb-2">
   > {{ displayCurrentMove() }}
 </div>
 <div class="d-flex flex-row mb-2">
   <div class="d-flex flex-row mb-2 keyboard-container">
     <div class="d-flex flex-column flex-shrink-0 keyboard-border-section">
       <div class="keyboard-cell" *ngFor="let b of leftColumn">
-        <app-keyboard-button [button]="b" (onClick)="onButtonPress(b)">
+        <app-keyboard-button [button]="b">
         </app-keyboard-button>
       </div>
     </div>
@@ -13,13 +13,13 @@
       class="flex-fill d-flex flex-row flex-wrap align-content-start keyboard-main-section"
     >
       <div class="keyboard-cell" *ngFor="let b of middleColumn">
-        <app-keyboard-button [button]="b" (onClick)="onButtonPress(b)">
+        <app-keyboard-button [button]="b">
         </app-keyboard-button>
       </div>
     </div>
     <div class="d-flex flex-column flex-shrink-0 keyboard-border-section">
       <div class="keyboard-cell" *ngFor="let b of rightColumn">
-        <app-keyboard-button [button]="b" (onClick)="onButtonPress(b)">
+        <app-keyboard-button [button]="b">
         </app-keyboard-button>
       </div>
     </div>

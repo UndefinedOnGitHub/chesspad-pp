@@ -1,0 +1,7 @@
+<div class="container p-3">
+	<div class="d-flex flex-wrap">
+		<div class="w-50" *ngFor="let move of moves; let e = even; let i = index;">
+			<span *ngIf="e">{{(i + 2) / 2}}. </span>{{move}}
+		</div>
+	</div>
+</div>

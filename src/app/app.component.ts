@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Move } from "./move";
 
 @Component({
   selector: "app-root",
@@ -8,17 +9,9 @@ import { Component } from "@angular/core";
 export class AppComponent {
   title = "html_representation";
   output_text = ""
-  moveList : string[] = []
+  moves : Move[] = []
 
-  clearDisplay() {
-    this.output_text = ""
-  }
-
-  clearDisplayList() {
-    this.moveList = []
-  }
-
-  onClick = (newText: string) => {
-    this.moveList.push(newText);
+  onClick = (newText: Move) => {
+    this.moves.push(newText);
   };
 }

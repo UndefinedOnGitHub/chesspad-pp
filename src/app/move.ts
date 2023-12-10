@@ -1,10 +1,3 @@
-class MoveHistory {
-	move : "piece" | "source" | "" | undefined;
-	constructor(move:string) {
-		// this.move = move;
-	}
-}
-
 export class Move {
 	piece: string | null = null;
 	source: string | null = null;
@@ -14,13 +7,12 @@ export class Move {
 
 	take: boolean = false;
 	check: boolean = false;
-	// Todo Castle - short / long
-	history: any[] = [];
+	history: Move[] = [];
 	constructor() {
-		this.history = []
+		this.history = [];
 	}
 
-	clear() : void {
+	clear(excludeHistory : boolean = false): void {
 		this.piece = null;
 		this.column = null;
 		this.row = null;
@@ -28,46 +20,94 @@ export class Move {
 		this.castle = null;
 		this.take = false;
 		this.check = false;
-		this.history = []
+		if (!excludeHistory) {
+			this.history = [];
+		}
 	}
 
-	output() : string {
+	clone() {
+		var cloneObj = (new Move() as any);
+    for (var attribut in this) {
+		  cloneObj[attribut] = this[attribut];
+    }
+    return cloneObj;
+	}
+
+	storeMove() {
+		this.history.push(this.clone())
+	}
+
+	output(): string {
+		const emptyPlaceholder = "";
 		if (this.castle) {
 			return this.castle;
 		}
-		const piece = this.piece || "";
-		const source = this.source || "";
+		const piece = this.piece || emptyPlaceholder;
+		const source = this.source || emptyPlaceholder;
 		const take = this.take ? "x" : "";
-		const column = this.column || "";
-		const row = this.row || "";
-		return `${piece}${source}${take}${column}${row}`
+		const column = this.column || emptyPlaceholder;
+		const row = this.row || emptyPlaceholder;
+		const check = this.check ? "+" : "";
+		return `${piece}${source}${take}${column}${row}${check}`;
 	}
 
-	valid() : boolean {
-		return !!this.column && !!this.row
+	valid(): boolean {
+		if (this.castle) return true
+		return !!this.column && !!this.row;
 	}
 
-	setPiece(piece : string) : void {
-		this.piece = piece
+	subtractMove() {
+		if (this.check) {
+			this.check = false;
+		} else if (this.row) {
+			this.row = null;
+		} else if (this.column) {
+			this.column = null;
+		} else if (this.take) {
+			this.take = false;
+		} else if (this.source) {
+			this.source = null;
+		} else if (this.piece) {
+			this.piece = null;
+		}
+	}
+
+	setPiece(piece: string): void {
+		this.storeMove();
+		this.piece = piece;
 		this.castle = null;
 	}
-	setSource(source : string) : void {
-		this.source = source
+	setSource(source: string): void {
+		this.storeMove();
+		this.source = source;
 		this.castle = null;
 	}
-	setCol(col : string) : void {
-		this.column = col
+	setCol(col: string): void {
+		this.storeMove();
+		this.column = col;
 		this.castle = null;
 	}
-	setRow(row : string) : void {
-		this.row = row
+	setRow(row: string): void {
+		this.storeMove();
+		this.row = row;
 		this.castle = null;
 	}
-	setTake() : void {
-		this.take = !this.take
+	setTake(): void {
+		this.storeMove();
+		this.take = !this.take;
 		this.castle = null;
 	}
-	setCastle(direction : "O-O" | "O-O-O") : void {
-		this.castle = direction
+	setCheck(): void {
+		this.storeMove()
+		this.check = !this.check;
+	}
+	setCastle(direction: "O-O" | "O-O-O"): void {
+		this.storeMove()
+		this.clear(true)
+		this.castle = direction;
+	}
+
+	toString() : string {
+		return `${this.output()}`
 	}
 }

@@ -1,18 +1,10 @@
 import { 
-  faChessKing,
-  faChessQueen,
-  faChessRook,
-  faChessBishop,
-  faChessKnight,
-  faChessPawn,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 
-const DEFINED_PIECES = ["king", "queen", "rook", "bishop", "knight", "pawn"]
-
 interface KeyboardButtonParams {
 	key: string;
-	symbol: string;
+	symbol?: string;
 	type?: string;
   class?: string;
 	icon?: IconDefinition;
@@ -30,7 +22,7 @@ export class KeyboardButton {
 	active : boolean = false;
   constructor(params: KeyboardButtonParams) {
     this.key = params.key;
-    this.symbol = params.symbol;
+    this.symbol = params.symbol || "";
     this.icon = params.icon;
     // this.action = params.action;
     this.type = params.type || "base";
@@ -38,8 +30,8 @@ export class KeyboardButton {
     this.onTrigger = params.onTrigger || this.toggleActive;
   }
 
-  trigger() : void {
-  	this.onTrigger()
+  trigger(self : KeyboardButton) : void {
+  	this.onTrigger(self)
   }
 
   toggleActive() : void {
