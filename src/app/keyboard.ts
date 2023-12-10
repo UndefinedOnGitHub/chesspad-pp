@@ -159,9 +159,6 @@ export class Keyboard {
     symbol: '-1',
     icon: faDeleteLeft,
     onTrigger: () => {
-      // console.log(this.activeMove.toString());
-      // this.activeMove = this.activeMove.history.pop() || new Move();
-      // console.log(this.activeMove.toString());
       this.activeMove.subtractMove();
     },
   });
@@ -174,28 +171,17 @@ export class Keyboard {
     this.castleButton,
     this.captureButton,
   ];
-  output_text = '';
-  leftColumn: KeyboardButton[] = this.pieceButtons
-    .slice(0, 3)
-    .concat([this.clearButton]);
-  middleColumn: KeyboardButton[] = this.letterButtons.concat(this.mainSection);
   coordinateButtons: KeyboardButton[] = this.letterButtons;
-  rightColumn: KeyboardButton[] = this.pieceButtons
-    .slice(3, 6)
-    .concat([this.deleteButton]);
-  buttons = [this.leftColumn, this.coordinateButtons, this.rightColumn];
 
   displayCurrentMove(): string {
-    // this.activeMove.output();
     return this.activeMove.output();
   }
 
   switchMainButtons(): void {
-    // debugger
     if (this.coordinateButtons[0]?.type == 'column') {
-      this.coordinateButtons = this.numberButtons; //.concat(this.mainSection);
+      this.coordinateButtons = this.numberButtons;
     } else {
-      this.coordinateButtons = this.letterButtons; //.concat(this.mainSection);
+      this.coordinateButtons = this.letterButtons;
     }
   }
 
@@ -220,7 +206,7 @@ export class Keyboard {
   }
 
   resetMainButtons(): void {
-    this.middleColumn = [];
+    this.coordinateButtons = [];
     this.switchMainButtons();
     this.onKeyboardChange();
   }
