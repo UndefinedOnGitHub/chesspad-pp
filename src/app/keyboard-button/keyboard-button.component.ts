@@ -8,12 +8,10 @@ import { KeyboardButton } from "../button"
 })
 export class KeyboardButtonComponent {
   @Input() button : KeyboardButton | null = null;
-  // @Output() onClick = new EventEmitter<KeyboardButton>();
 
   onButtonPressed() {
     if (this.button) {
       this.button.trigger(this.button);
-      // this.onClick.emit(this.button)
     }
   }
 }

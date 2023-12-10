@@ -1,12 +1,12 @@
 <div class="container p-3">
 	<div class="d-flex flex-column">
-		<div class="" *ngFor="let moveRow of movesToRows(); let i = index;">
-			<span>{{i + 1}}. </span>{{moveRow[0]}} {{moveRow[1]}}
+		<div class="d-flex" *ngFor="let moveRow of movesToRows(); let i = index;">
+			<div class="with-padding-right">{{i + 1}}.</div>
+			<app-move-display
+				[ngClass]="{'with-padding-right': e}"
+				*ngFor="let move of moveRow; let e = even;"
+				[move]="move">
+			</app-move-display>
 		</div>
 	</div>
 </div>
-<!-- <mat-grid-list cols="2" rowHeight="32px">
-  <mat-grid-tile *ngFor="let moveRow of movesToRows(); let i = index;">
-  	<span>{{i + 1}}. </span>{{moveRow[0]}} {{moveRow[1]}}
-  </mat-grid-tile>
-</mat-grid-list> -->

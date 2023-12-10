@@ -33,7 +33,6 @@ export class KeyboardComponent implements OnInit {
   }
 
   onKeyboardChange() {
-    // debugger;
     this.setButtons();
   }
 

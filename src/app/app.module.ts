@@ -9,13 +9,15 @@ import { NotepadComponent } from './notepad/notepad.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MoveDisplayComponent } from './move-display/move-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KeyboardComponent,
     KeyboardButtonComponent,
-    NotepadComponent
+    NotepadComponent,
+    MoveDisplayComponent
   ],
   imports: [
     BrowserModule,

@@ -21,13 +21,6 @@ export class Keyboard {
   sourceMoveActive: boolean = false;
   onKeyboardChange: Function;
 
-  // onButtonPress(btn: KeyboardButton): void {
-  //   btn.trigger(btn);
-  //   // this.output += btn.symbol;
-
-  //   // this.outputChange.emit(this.output);
-  // }
-
   onPieceTrigger(btn: KeyboardButton) {
     this.pieceButtons.forEach((pb: KeyboardButton) => (pb.active = false));
     this.activeMove.setPiece(btn.symbol);
@@ -140,8 +133,9 @@ export class Keyboard {
     key: "mark_capture",
     symbol: "x",
     icon: faXmark,
-    onTrigger: () => {
+    onTrigger: (btn : KeyboardButton) => {
       this.activeMove.setTake();
+      btn.active = !btn.active;
     },
   });
   multiMoveButton: KeyboardButton = new KeyboardButton({
@@ -149,9 +143,9 @@ export class Keyboard {
     symbol: "",
     icon: faStarOfLife,
     class: "blue-active",
-    onTrigger: () => {
-      this.sourceMoveActive = true;
-      this.multiMoveButton.active = true;
+    onTrigger: (btn : KeyboardButton) => {
+      this.sourceMoveActive = !this.sourceMoveActive;
+      btn.active = this.sourceMoveActive;
     },
   });
   clearButton: KeyboardButton = new KeyboardButton({
