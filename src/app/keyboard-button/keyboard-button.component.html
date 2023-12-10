@@ -1,12 +1,11 @@
 <!-- <button mat-raised-button>Basic</button> -->
 <button
-	mat-raised-button
-	[ngClass]="{'active': button.active}"
-	[class]="button.class"
-	*ngIf="button"
-	(click)="onButtonPressed()">
+  mat-raised-button
+  [ngClass]="{ active: button.active }"
+  [class]="button.class"
+  *ngIf="button"
+  (click)="onButtonPressed()"
+>
   <span *ngIf="!button.icon">{{ button.value }}</span>
-  <fa-icon
-  	*ngIf="button.icon"
-  	[icon]="button.icon"></fa-icon>
+  <fa-icon *ngIf="button.icon" [icon]="button.icon"></fa-icon>
 </button>

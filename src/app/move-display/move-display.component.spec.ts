@@ -8,7 +8,7 @@ describe('MoveDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MoveDisplayComponent]
+      declarations: [MoveDisplayComponent],
     });
     fixture = TestBed.createComponent(MoveDisplayComponent);
     component = fixture.componentInstance;

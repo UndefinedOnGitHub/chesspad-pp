@@ -8,7 +8,7 @@ describe('NotepadComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotepadComponent]
+      declarations: [NotepadComponent],
     });
     fixture = TestBed.createComponent(NotepadComponent);
     component = fixture.componentInstance;

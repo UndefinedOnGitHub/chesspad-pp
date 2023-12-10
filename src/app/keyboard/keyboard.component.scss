@@ -1,36 +1,36 @@
-@use '../theme' as theme;
+@use "../theme" as theme;
 
 $keyboard-width: 200px;
 
 .keyboard-holder {
 }
 .keyboard-container {
-	max-width: $keyboard-width;
+  max-width: $keyboard-width;
 }
 .keyboard-border-section {
-	min-width: 40px;
+  min-width: 40px;
 }
 .keyboard-cell {
-	width: 100%;
-	height: 40px;
-	padding: 2px;
+  width: 100%;
+  height: 40px;
+  padding: 2px;
 }
 .keyboard-main-section {
-	> .keyboard-cell {
-		width: 33.33%;
-	}
+  > .keyboard-cell {
+    width: 33.33%;
+  }
 }
 .return-key {
-	min-width: 30px;
-	& button {
-		height: 95%;
-		width: 100%;
-		background: transparent;
-		border: 1px solid;
-		border-radius: 5px;
-		&:active {
-	  	background: transparent;
-	  	box-shadow: inset 0px 0px 3px 0px #a3a3a3;
-	  }
-	}
+  min-width: 30px;
+  & button {
+    height: 95%;
+    width: 100%;
+    background: transparent;
+    border: 1px solid;
+    border-radius: 5px;
+    &:active {
+      background: transparent;
+      box-shadow: inset 0px 0px 3px 0px #a3a3a3;
+    }
+  }
 }

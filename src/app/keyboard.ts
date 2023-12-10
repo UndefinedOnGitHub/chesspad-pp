@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { KeyboardButton } from "./button";
-import { Pieces, Columns, Rows } from "./constants";
-import { Move } from "./move";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { KeyboardButton } from './button';
+import { Pieces, Columns, Rows } from './constants';
+import { Move } from './move';
 import {
   faHashtag,
   faRotateRight,
@@ -10,14 +10,14 @@ import {
   faPlus,
   faDeleteLeft,
   faChess,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 export class Keyboard {
-	constructor(move: Move, onKeyboardChange : Function) {
-		this.activeMove = move;
-		this.onKeyboardChange = onKeyboardChange;
-	}
-	activeMove: Move;
+  constructor(move: Move, onKeyboardChange: Function) {
+    this.activeMove = move;
+    this.onKeyboardChange = onKeyboardChange;
+  }
+  activeMove: Move;
   sourceMoveActive: boolean = false;
   onKeyboardChange: Function;
 
@@ -27,10 +27,10 @@ export class Keyboard {
     btn.toggleActive();
   }
 
-  onOriginMove(buttons: KeyboardButton[], btn: KeyboardButton) : void {
-    buttons.forEach((pb: KeyboardButton) => (pb.class = ""));
+  onOriginMove(buttons: KeyboardButton[], btn: KeyboardButton): void {
+    buttons.forEach((pb: KeyboardButton) => (pb.class = ''));
     this.activeMove.setSource(btn.symbol);
-    btn.class = "blue-active";
+    btn.class = 'blue-active';
     btn.active = true;
     this.sourceMoveActive = false;
     this.multiMoveButton.active = false;
@@ -41,9 +41,9 @@ export class Keyboard {
       this.onOriginMove(this.letterButtons, btn);
       return;
     }
-    
+
     this.letterButtons
-      .filter((pb: KeyboardButton) => pb.class != "blue-active")
+      .filter((pb: KeyboardButton) => pb.class != 'blue-active')
       .forEach((pb: KeyboardButton) => (pb.active = false));
     this.activeMove.setCol(btn.symbol);
     btn.toggleActive();
@@ -54,14 +54,14 @@ export class Keyboard {
       return;
     }
     this.numberButtons
-      .filter((pb: KeyboardButton) => pb.class != "blue-active")
+      .filter((pb: KeyboardButton) => pb.class != 'blue-active')
       .forEach((pb: KeyboardButton) => (pb.active = false));
     this.activeMove.setRow(btn.symbol);
     btn.toggleActive();
   }
-  // 
+  //
   // Core Buttons
-  // 
+  //
   pieceButtons: KeyboardButton[] = Pieces.map(
     (p) =>
       new KeyboardButton({
@@ -84,85 +84,85 @@ export class Keyboard {
       }),
   );
 
-  // 
+  //
   // Additional Buttons
-  // 
+  //
 
   // Button to switch keyboard keys
   switchButton: KeyboardButton = new KeyboardButton({
-    key: "switch_keyboard",
+    key: 'switch_keyboard',
     icon: faHashtag,
-    symbol: "",
+    symbol: '',
     onTrigger: () => {
-    	this.switchMainButtons()
-    	this.onKeyboardChange()
+      this.switchMainButtons();
+      this.onKeyboardChange();
     },
   });
   // Button to mark the king is in check
   checkButton: KeyboardButton = new KeyboardButton({
-    key: "mark_check",
-    symbol: "+",
+    key: 'mark_check',
+    symbol: '+',
     icon: faPlus,
-    onTrigger: (btn : KeyboardButton) => {
+    onTrigger: (btn: KeyboardButton) => {
       this.activeMove.setCheck();
     },
   });
   // Button to show castle
   castleButton: KeyboardButton = new KeyboardButton({
-    key: "castle_button",
-    symbol: "O-O",
+    key: 'castle_button',
+    symbol: 'O-O',
     icon: faChess,
     onTrigger: () => {
       this.resetKeyboardKeys();
-      if (this.activeMove.castle == "O-O") {
-        this.activeMove.setCastle("O-O-O");
+      if (this.activeMove.castle == 'O-O') {
+        this.activeMove.setCastle('O-O-O');
       } else {
-        this.activeMove.setCastle("O-O");
+        this.activeMove.setCastle('O-O');
       }
     },
   });
   longCastleButton: KeyboardButton = new KeyboardButton({
-    key: "mark_check",
-    symbol: "O-O-O",
+    key: 'mark_check',
+    symbol: 'O-O-O',
     icon: faChess,
     onTrigger: () => {
-      this.activeMove.setCastle("O-O-O");
+      this.activeMove.setCastle('O-O-O');
     },
   });
   captureButton: KeyboardButton = new KeyboardButton({
-    key: "mark_capture",
-    symbol: "x",
+    key: 'mark_capture',
+    symbol: 'x',
     icon: faXmark,
-    onTrigger: (btn : KeyboardButton) => {
+    onTrigger: (btn: KeyboardButton) => {
       this.activeMove.setTake();
       btn.active = !btn.active;
     },
   });
   multiMoveButton: KeyboardButton = new KeyboardButton({
-    key: "multi_directional",
-    symbol: "",
+    key: 'multi_directional',
+    symbol: '',
     icon: faStarOfLife,
-    class: "blue-active",
-    onTrigger: (btn : KeyboardButton) => {
+    class: 'blue-active',
+    onTrigger: (btn: KeyboardButton) => {
       this.sourceMoveActive = !this.sourceMoveActive;
       btn.active = this.sourceMoveActive;
     },
   });
   clearButton: KeyboardButton = new KeyboardButton({
-    key: "reset_keyboard",
-    symbol: "",
+    key: 'reset_keyboard',
+    symbol: '',
     icon: faRotateRight,
     onTrigger: () => this.clearKeyboard(),
   });
   deleteButton: KeyboardButton = new KeyboardButton({
-    key: "delete_keyboard",
-    symbol: "-1",
+    key: 'delete_keyboard',
+    symbol: '-1',
     icon: faDeleteLeft,
     onTrigger: () => {
       // console.log(this.activeMove.toString());
       // this.activeMove = this.activeMove.history.pop() || new Move();
       // console.log(this.activeMove.toString());
-      this.activeMove.subtractMove()
+      this.activeMove.subtractMove();
     },
   });
 
@@ -174,7 +174,7 @@ export class Keyboard {
     this.castleButton,
     this.captureButton,
   ];
-  output_text = "";
+  output_text = '';
   leftColumn: KeyboardButton[] = this.pieceButtons
     .slice(0, 3)
     .concat([this.clearButton]);
@@ -191,15 +191,15 @@ export class Keyboard {
   }
 
   switchMainButtons(): void {
-  	// debugger
-    if (this.coordinateButtons[0]?.type == "column") {
-      this.coordinateButtons = this.numberButtons//.concat(this.mainSection);
+    // debugger
+    if (this.coordinateButtons[0]?.type == 'column') {
+      this.coordinateButtons = this.numberButtons; //.concat(this.mainSection);
     } else {
-      this.coordinateButtons = this.letterButtons//.concat(this.mainSection);
+      this.coordinateButtons = this.letterButtons; //.concat(this.mainSection);
     }
   }
 
-  resetKeyboardKeys() : void {
+  resetKeyboardKeys(): void {
     this.pieceButtons
       .concat(this.numberButtons)
       .concat(this.letterButtons)
@@ -215,8 +215,8 @@ export class Keyboard {
   }
 
   clearKeyClass(): void {
-    this.letterButtons.forEach((pb: KeyboardButton) => (pb.class = ""));
-    this.numberButtons.forEach((pb: KeyboardButton) => (pb.class = ""));
+    this.letterButtons.forEach((pb: KeyboardButton) => (pb.class = ''));
+    this.numberButtons.forEach((pb: KeyboardButton) => (pb.class = ''));
   }
 
   resetMainButtons(): void {

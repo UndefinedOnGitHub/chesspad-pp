@@ -17,7 +17,7 @@ import { MoveDisplayComponent } from './move-display/move-display.component';
     KeyboardComponent,
     KeyboardButtonComponent,
     NotepadComponent,
-    MoveDisplayComponent
+    MoveDisplayComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,9 +26,9 @@ import { MoveDisplayComponent } from './move-display/move-display.component';
     FontAwesomeModule,
     // Angular Material Modules
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

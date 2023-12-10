@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // mat.$pink-palette
 // mat.$blue-grey-palette
 // mat.$deep-purple-palette
@@ -9,52 +9,52 @@
 // mat.$brown-palette
 
 $white-palette: (
-	50: #fff,
-	100: #fff,
-	200: #fff,
-	300: #fff,
-	400: #fff,
-	500: #fff,
-	600: #fff,
-	700: #fff,
-	800: #fff,
-	900: #fff,
-	contrast: (
-	 	50: rgba(#fff, 0.87),
-		100: rgba(#fff, 0.87),
-		200: rgba(#fff, 0.87),
-		300: rgba(#fff, 0.87),
-		400: rgba(#fff, 0.87),
-		500: rgba(#fff, 0.87),
-		600: rgba(#fff, 0.87),
-		700: rgba(#fff, 0.87),
-		800: rgba(#fff, 0.87),
-		900: rgba(#fff, 0.87),
-	)
+  50: #fff,
+  100: #fff,
+  200: #fff,
+  300: #fff,
+  400: #fff,
+  500: #fff,
+  600: #fff,
+  700: #fff,
+  800: #fff,
+  900: #fff,
+  contrast: (
+    50: rgba(#fff, 0.87),
+    100: rgba(#fff, 0.87),
+    200: rgba(#fff, 0.87),
+    300: rgba(#fff, 0.87),
+    400: rgba(#fff, 0.87),
+    500: rgba(#fff, 0.87),
+    600: rgba(#fff, 0.87),
+    700: rgba(#fff, 0.87),
+    800: rgba(#fff, 0.87),
+    900: rgba(#fff, 0.87),
+  ),
 );
 $black-palette: (
-	50: #000,
-	100: #000,
-	200: #000,
-	300: #000,
-	400: #000,
-	500: #000,
-	600: #000,
-	700: #000,
-	800: #000,
-	900: #000,
-	contrast: (
-	 	50: rgba(#000, 0.87),
-		100: rgba(#000, 0.87),
-		200: rgba(#000, 0.87),
-		300: rgba(#000, 0.87),
-		400: rgba(#000, 0.87),
-		500: rgba(#000, 0.87),
-		600: rgba(#000, 0.87),
-		700: rgba(#000, 0.87),
-		800: rgba(#000, 0.87),
-		900: rgba(#000, 0.87),
-	)
+  50: #000,
+  100: #000,
+  200: #000,
+  300: #000,
+  400: #000,
+  500: #000,
+  600: #000,
+  700: #000,
+  800: #000,
+  900: #000,
+  contrast: (
+    50: rgba(#000, 0.87),
+    100: rgba(#000, 0.87),
+    200: rgba(#000, 0.87),
+    300: rgba(#000, 0.87),
+    400: rgba(#000, 0.87),
+    500: rgba(#000, 0.87),
+    600: rgba(#000, 0.87),
+    700: rgba(#000, 0.87),
+    800: rgba(#000, 0.87),
+    900: rgba(#000, 0.87),
+  ),
 );
 
 $primary: mat.$green-palette;
@@ -70,21 +70,23 @@ $primary-variant: $white-palette;
 $secondary-variant: $white-palette;
 $on-error: $white-palette;
 
-$my-theme: mat.define-light-theme((
- color: (
-   primary: $primary,
-   accent: $secondary,
-   warn: $error,
- ),
- typography: mat.define-typography-config(),
- density: 0,
-));
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $secondary,
+      warn: $error,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
-@mixin primary-color($primaryValue:600) {
+@mixin primary-color($primaryValue: 600) {
   background: mat.get-color-from-palette($primary, $primaryValue);
   color: mat.get-color-from-palette($on-primary, $primaryValue);
 }
-@mixin secondary-color($primaryValue:600) {
+@mixin secondary-color($primaryValue: 600) {
   background: mat.get-color-from-palette($secondary, $primaryValue);
   color: mat.get-color-from-palette($on-secondary, $primaryValue);
 }
