@@ -1,8 +1,6 @@
-<div class="d-flex flex-row mb-2">
+<div class="d-flex flex-row mb-2 keyboard-notepad-container">
   <div class="w-50 p-3">
-    <app-keyboard
-      [(output)]="output_text"
-      (onSubmit)="onClick($event)">
+    <app-keyboard [(output)]="output_text" (onSubmit)="onClick($event)">
     </app-keyboard>
   </div>
   <div class="w-100">

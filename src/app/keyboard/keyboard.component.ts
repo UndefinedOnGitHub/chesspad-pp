@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { KeyboardButton } from "../button";
-import { Pieces, Columns, Rows } from "../constants";
-import { Move } from "../move";
-import { Keyboard } from "../keyboard";
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { KeyboardButton } from '../button';
+import { Pieces, Columns, Rows } from '../constants';
+import { Move } from '../move';
+import { Keyboard } from '../keyboard';
 import {
   faHashtag,
   faRotateRight,
@@ -11,16 +11,16 @@ import {
   faPlus,
   faDeleteLeft,
   faChess,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: "app-keyboard",
-  templateUrl: "./keyboard.component.html",
-  styleUrls: ["./keyboard.component.scss"],
+  selector: 'app-keyboard',
+  templateUrl: './keyboard.component.html',
+  styleUrls: ['./keyboard.component.scss'],
 })
 export class KeyboardComponent implements OnInit {
   // String of key presses
-  @Input() output = "";
+  @Input() output = '';
   @Output() outputChange = new EventEmitter<string>();
   // Let the editor know the move
   @Output() onSubmit = new EventEmitter<Move>();
@@ -33,7 +33,6 @@ export class KeyboardComponent implements OnInit {
   }
 
   onKeyboardChange() {
-    // debugger;
     this.setButtons();
   }
 

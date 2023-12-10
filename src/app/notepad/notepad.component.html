@@ -1,7 +1,13 @@
 <div class="container p-3">
-	<div class="d-flex flex-wrap">
-		<div class="w-50" *ngFor="let move of moves; let e = even; let i = index;">
-			<span *ngIf="e">{{(i + 2) / 2}}. </span>{{move}}
-		</div>
-	</div>
+  <div class="d-flex flex-column">
+    <div class="d-flex" *ngFor="let moveRow of movesToRows(); let i = index">
+      <div class="with-padding-right">{{ i + 1 }}.</div>
+      <app-move-display
+        [ngClass]="{ 'with-padding-right': e }"
+        *ngFor="let move of moveRow; let e = even"
+        [move]="move"
+      >
+      </app-move-display>
+    </div>
+  </div>
 </div>

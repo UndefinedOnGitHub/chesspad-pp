@@ -8,7 +8,7 @@ describe('KeyboardButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [KeyboardButtonComponent]
+      declarations: [KeyboardButtonComponent],
     });
     fixture = TestBed.createComponent(KeyboardButtonComponent);
     component = fixture.componentInstance;
