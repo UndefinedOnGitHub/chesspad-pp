@@ -72,6 +72,16 @@ export class Move {
     }
   }
 
+  // Super naive: DO NOT USE
+  extractFromString(moveString : string) : Move {
+    this.clear();
+    const stringPieces = moveString.split("")
+    this.piece = stringPieces[0]
+    this.column = stringPieces[1]
+    this.row = stringPieces[2]
+    return this;
+  }
+
   setPiece(piece: string): void {
     this.storeMove();
     this.piece = piece;

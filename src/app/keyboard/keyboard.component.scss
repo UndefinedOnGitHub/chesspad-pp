@@ -1,6 +1,12 @@
 @use "../theme" as theme;
 
-$keyboard-width: 200px;
+// $keyboard-width: 200px;
+$keyboard-width: 300px;
+$key-width: calc($keyboard-width / 5);
+
+// $breakpoint: map-get(theme.$breakpoints, xs);
+// @media (min-width: $breakpoint) {
+// }
 
 .keyboard-holder {
 }
@@ -11,8 +17,8 @@ $keyboard-width: 200px;
   min-width: 40px;
 }
 .keyboard-cell {
-  width: 100%;
-  height: 40px;
+  width: $key-width;
+  height: $key-width;
   padding: 2px;
 }
 .keyboard-main-section {
@@ -21,9 +27,10 @@ $keyboard-width: 200px;
   }
 }
 .return-key {
-  min-width: 30px;
+  padding-left: 8px;
+  min-width: $key-width;
   & button {
-    height: 95%;
+    height: 100%;
     width: 100%;
     background: transparent;
     border: 1px solid;

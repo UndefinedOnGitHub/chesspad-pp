@@ -1,6 +1,12 @@
 @use "../theme" as theme;
 
-button {
+// Overwrite Angular Material
+button.mdc-button--raised {
+  padding: 0 8px 0 8px;
+}
+button.mdc-button {
+  font-size: var(--mdc-typography-button-font-size, 20px);
+  min-width: auto;
   width: 100%;
   height: 100%;
   &.active {
@@ -9,12 +15,4 @@ button {
       @include theme.secondary-color;
     }
   }
-}
-
-// Overwrite Angular Material
-button.mdc-button--raised {
-  padding: 0 8px 0 8px;
-}
-button.mdc-button {
-  min-width: auto;
 }

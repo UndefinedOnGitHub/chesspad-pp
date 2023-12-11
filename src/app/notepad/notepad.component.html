@@ -1,7 +1,7 @@
-<div class="container p-3">
+<!-- <div class="p-3">
   <div class="d-flex flex-column">
     <div class="d-flex" *ngFor="let moveRow of movesToRows(); let i = index">
-      <div class="with-padding-right">{{ i + 1 }}.</div>
+      <div class="notepad-row-index">{{ i + 1 }}.</div>
       <app-move-display
         [ngClass]="{ 'with-padding-right': e }"
         *ngFor="let move of moveRow; let e = even"
@@ -11,3 +11,26 @@
     </div>
   </div>
 </div>
+ -->
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">White</th>
+      <th scope="col">Black</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let moveRow of movesToRows(); let i = index">
+      <th scope="row">{{ i + 1 }}.</th>
+      <td>
+        <app-move-display [move]="moveRow[0]">
+        </app-move-display>
+      </td>
+      <td>
+        <app-move-display [move]="moveRow[1]">
+        </app-move-display>
+      </td>
+    </tr>
+  </tbody>
+</table>

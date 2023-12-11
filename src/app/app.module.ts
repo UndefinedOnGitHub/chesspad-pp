@@ -9,6 +9,9 @@ import { NotepadComponent } from './notepad/notepad.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
 import { MoveDisplayComponent } from './move-display/move-display.component';
 
 @NgModule({
@@ -27,6 +30,9 @@ import { MoveDisplayComponent } from './move-display/move-display.component';
     // Angular Material Modules
     MatButtonModule,
     MatGridListModule,
+    MatListModule,
+    MatToolbarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

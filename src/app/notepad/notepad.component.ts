@@ -11,9 +11,10 @@ export class NotepadComponent {
   @Input() moves: Move[] = [];
 
   movesToRows(): Move[][] {
-    if (this.moves.length == 0) {
-      return [[new Move()]];
+    const chunked = chunk(this.moves, 2);
+    if (this.moves.length % 2 == 0) {
+      chunked.push([new Move(), new Move()])
     }
-    return chunk(this.moves, 2);
+    return chunked
   }
 }
