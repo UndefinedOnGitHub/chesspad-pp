@@ -1,11 +1,11 @@
-@use '@angular/material' as mat;
+// @use '@angular/material' as mat;
 @use "./theme" as theme;
 
-@include mat.core();
+// @include mat.core();
 
-@include mat.core-theme(theme.$my-theme);
-@include mat.button-theme(theme.$my-theme);
-@include mat.toolbar-theme(theme.$my-theme);
+// @include mat.core-theme(theme.$my-theme);
+// @include mat.button-theme(theme.$my-theme);
+// @include mat.toolbar-theme(theme.$my-theme);
 
 
 .keyboard-notepad-container {

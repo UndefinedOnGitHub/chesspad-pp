@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Move } from './move';
-import { faBars, faHeart, faShare, IconDefinition } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faHeart, faShare, faCircleStop, IconDefinition } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ export class AppComponent {
   faBars: IconDefinition = faBars;
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
+  faCircleStop: IconDefinition = faCircleStop;
 
   onClick = (newText: Move) => {
     this.moves.push(newText);
