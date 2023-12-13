@@ -10,6 +10,7 @@ import {
   faPlus,
   faDeleteLeft,
   faChess,
+  faEquals
 } from '@fortawesome/free-solid-svg-icons';
 
 export class Keyboard {
@@ -19,9 +20,16 @@ export class Keyboard {
   }
   activeMove: Move;
   sourceMoveActive: boolean = false;
+  promotionMoveActive: boolean = false;
   onKeyboardChange: Function;
 
   onPieceTrigger(btn: KeyboardButton) {
+    if (this.promotionMoveActive) {
+      this.activeMove.setPromotion(btn.symbol);
+      this.promotionMoveActive = false;
+      this.promotionButton.active = false;
+      return;
+    }
     this.pieceButtons.forEach((pb: KeyboardButton) => (pb.active = false));
     this.activeMove.setPiece(btn.symbol);
     btn.toggleActive();
@@ -160,6 +168,15 @@ export class Keyboard {
     icon: faDeleteLeft,
     onTrigger: () => {
       this.activeMove.subtractMove();
+    },
+  });
+  promotionButton: KeyboardButton = new KeyboardButton({
+    key: 'mark_promotion',
+    symbol: '=',
+    icon: faEquals,
+    onTrigger: (btn: KeyboardButton) => {
+      this.promotionMoveActive = !this.promotionMoveActive;
+      btn.active = this.promotionMoveActive;
     },
   });
 

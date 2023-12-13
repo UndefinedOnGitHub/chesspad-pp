@@ -52,7 +52,7 @@ export class KeyboardComponent implements OnInit {
     );
     this.rightColumn = this.keyboard.pieceButtons
       .slice(3, 6)
-      .concat([this.keyboard.deleteButton]);
+      .concat([this.keyboard.promotionButton]);
   }
 
   displayCurrentMove(): string {

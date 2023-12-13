@@ -4,6 +4,7 @@ export class Move {
   column: string | null = null;
   row: string | null = null;
   castle: string | null = null;
+  promotionPiece: string | null = null;
 
   take: boolean = false;
   check: boolean = false;
@@ -18,6 +19,7 @@ export class Move {
     this.row = null;
     this.source = null;
     this.castle = null;
+    this.promotionPiece = null;
     this.take = false;
     this.check = false;
     if (!excludeHistory) {
@@ -48,7 +50,8 @@ export class Move {
     const column = this.column || emptyPlaceholder;
     const row = this.row || emptyPlaceholder;
     const check = this.check ? '+' : '';
-    return `${piece}${source}${take}${column}${row}${check}`;
+    const promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : '';
+    return `${piece}${source}${take}${column}${row}${check}${promotionPiece}`;
   }
 
   valid(): boolean {
@@ -115,6 +118,11 @@ export class Move {
     this.storeMove();
     this.clear(true);
     this.castle = direction;
+  }
+  setPromotion(piece: string): void {
+    this.storeMove();
+    this.promotionPiece = piece;
+    this.castle = null;
   }
 
   toString(): string {
