@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotepadComponent } from './notepad.component';
+import { MoveDisplayComponent } from '../move-display/move-display.component';
 
 describe('NotepadComponent', () => {
   let component: NotepadComponent;
@@ -8,7 +9,7 @@ describe('NotepadComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotepadComponent],
+      declarations: [NotepadComponent, MoveDisplayComponent],
     });
     fixture = TestBed.createComponent(NotepadComponent);
     component = fixture.componentInstance;

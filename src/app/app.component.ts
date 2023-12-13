@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Move } from './move';
 import { faBars, faHeart, faShare, faCircleStop, IconDefinition } from "@fortawesome/free-solid-svg-icons"
+import { EloCalculatorService, GameResult } from "./elo-calculator.service"
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,18 @@ export class AppComponent {
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
   faCircleStop: IconDefinition = faCircleStop;
+  eloCalculator : EloCalculatorService;
 
-  onClick = (newText: Move) => {
+  constructor(eloCalculator : EloCalculatorService) {
+    this.eloCalculator = eloCalculator;
+  }
+
+  onClick(newText: Move) {    
     this.moves.push(newText);
   };
+
+  onFinish() {
+    const a = this.eloCalculator.getNewRating(1200, 1000, GameResult.Win)
+    const b = this.eloCalculator.getNewRating(1000, 1200, GameResult.Lose)
+  }
 }

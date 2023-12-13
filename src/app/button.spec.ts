@@ -1,7 +1,7 @@
-import { Button } from './button';
+import { KeyboardButton } from './button';
 
-describe('Button', () => {
+describe('KeyboardButton', () => {
   it('should create an instance', () => {
-    expect(new Button()).toBeTruthy();
+    expect(new KeyboardButton({key: "button"})).toBeTruthy();
   });
 });

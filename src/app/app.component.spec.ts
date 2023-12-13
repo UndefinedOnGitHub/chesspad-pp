@@ -1,10 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NotepadComponent } from './notepad/notepad.component';
+import { KeyboardComponent } from './keyboard/keyboard.component';
+import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
+import { MoveDisplayComponent } from './move-display/move-display.component';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, NotepadComponent, KeyboardComponent, MoveDisplayComponent, KeyboardButtonComponent],
+      imports: [MatToolbarModule, FontAwesomeModule, MatCardModule, MatButtonModule]
     }),
   );
 
@@ -14,18 +23,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'html_representation'`, () => {
+  it(`should have as title 'chesspad.pp'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('html_representation');
+    expect(app.title).toEqual('chesspad.pp');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'html_representation app is running!',
-    );
+    const title = compiled.querySelector('#chesspad-pp-title');
+    expect(title?.textContent).toContain("Chesspad ++")
   });
 });

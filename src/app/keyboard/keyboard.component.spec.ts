@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { KeyboardComponent } from './keyboard.component';
+import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 describe('KeyboardComponent', () => {
   let component: KeyboardComponent;
@@ -8,7 +10,8 @@ describe('KeyboardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [KeyboardComponent],
+      declarations: [KeyboardComponent, KeyboardButtonComponent],
+      imports: [FontAwesomeModule]
     });
     fixture = TestBed.createComponent(KeyboardComponent);
     component = fixture.componentInstance;

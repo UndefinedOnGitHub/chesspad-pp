@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppComponent } from './app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { KeyboardComponent } from './keyboard/keyboard.component';
-import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
-import { NotepadComponent } from './notepad/notepad.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatListModule } from '@angular/material/list';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
-import { MoveDisplayComponent } from './move-display/move-display.component';
+import { AppComponent } from "./app.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { KeyboardComponent } from "./keyboard/keyboard.component";
+import { KeyboardButtonComponent } from "./keyboard-button/keyboard-button.component";
+import { NotepadComponent } from "./notepad/notepad.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatButtonModule } from "@angular/material/button";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatListModule } from "@angular/material/list";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatCardModule } from "@angular/material/card";
+import { MoveDisplayComponent } from "./move-display/move-display.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { MoveDisplayComponent } from './move-display/move-display.component';
     MatGridListModule,
     MatListModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
