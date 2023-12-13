@@ -10,7 +10,7 @@ import {
   faPlus,
   faDeleteLeft,
   faChess,
-  faEquals
+  faEquals,
 } from '@fortawesome/free-solid-svg-icons';
 
 export class Keyboard {

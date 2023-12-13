@@ -19,46 +19,71 @@ describe('EloCalculatorService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe("getNewRating", () => {
+  describe('getNewRating', () => {
     it('should throw exception when bad input is provided', () => {
-      expect(function() { 
+      expect(function () {
         service.getNewRating(targetUserElo, opponentUserElo, 1 + 3);
-      }).toThrowMatching(function(thrown) { return thrown.message === 'Not a valid game reuslt'; });
+      }).toThrowMatching(function (thrown) {
+        return thrown.message === 'Not a valid game reuslt';
+      });
     });
 
     it('should calculate elo when the target user wins', () => {
-      const userNewRating = service.getNewRating(targetUserElo, opponentUserElo, GameResult.Win)
-      const opponentNewRating = service.getNewRating(opponentUserElo, targetUserElo, GameResult.Lose)
+      const userNewRating = service.getNewRating(
+        targetUserElo,
+        opponentUserElo,
+        GameResult.Win,
+      );
+      const opponentNewRating = service.getNewRating(
+        opponentUserElo,
+        targetUserElo,
+        GameResult.Lose,
+      );
       // Check consistant Calculation
-      expect(userNewRating).toEqual(1812)
-      expect(opponentNewRating).toEqual(1688)
+      expect(userNewRating).toEqual(1812);
+      expect(opponentNewRating).toEqual(1688);
       // Check Ratings move in correct direction
-      expect(userNewRating).toBeGreaterThan(targetUserElo)
-      expect(opponentNewRating).toBeLessThan(opponentUserElo)
+      expect(userNewRating).toBeGreaterThan(targetUserElo);
+      expect(opponentNewRating).toBeLessThan(opponentUserElo);
     });
 
     it('should calculate elo when the target user loses', () => {
-      const userNewRating = service.getNewRating(targetUserElo, opponentUserElo, GameResult.Lose)
-      const opponentNewRating = service.getNewRating(opponentUserElo, targetUserElo, GameResult.Win)
+      const userNewRating = service.getNewRating(
+        targetUserElo,
+        opponentUserElo,
+        GameResult.Lose,
+      );
+      const opponentNewRating = service.getNewRating(
+        opponentUserElo,
+        targetUserElo,
+        GameResult.Win,
+      );
       // Check consistant Calculation
-      expect(userNewRating).toEqual(1780)
-      expect(opponentNewRating).toEqual(1720)
+      expect(userNewRating).toEqual(1780);
+      expect(opponentNewRating).toEqual(1720);
       // Check Ratings move in correct direction
-      expect(userNewRating).toBeLessThan(targetUserElo)
-      expect(opponentNewRating).toBeGreaterThan(opponentUserElo)
+      expect(userNewRating).toBeLessThan(targetUserElo);
+      expect(opponentNewRating).toBeGreaterThan(opponentUserElo);
     });
 
     it('should calculate elo when the players draw', () => {
-      const userNewRating = service.getNewRating(targetUserElo, opponentUserElo, GameResult.Draw)
-      const opponentNewRating = service.getNewRating(opponentUserElo, targetUserElo, GameResult.Draw)
+      const userNewRating = service.getNewRating(
+        targetUserElo,
+        opponentUserElo,
+        GameResult.Draw,
+      );
+      const opponentNewRating = service.getNewRating(
+        opponentUserElo,
+        targetUserElo,
+        GameResult.Draw,
+      );
 
       // Check consistant Calculation
-      expect(userNewRating).toEqual(1796)
-      expect(opponentNewRating).toEqual(1704)
+      expect(userNewRating).toEqual(1796);
+      expect(opponentNewRating).toEqual(1704);
       // Check Ratings move in correct direction
-      expect(userNewRating).toBeLessThan(targetUserElo)
-      expect(opponentNewRating).toBeGreaterThan(opponentUserElo)
+      expect(userNewRating).toBeLessThan(targetUserElo);
+      expect(opponentNewRating).toBeGreaterThan(opponentUserElo);
     });
-  })
-
+  });
 });

@@ -4,16 +4,27 @@ import { NotepadComponent } from './notepad/notepad.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
 import { MoveDisplayComponent } from './move-display/move-display.component';
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      declarations: [AppComponent, NotepadComponent, KeyboardComponent, MoveDisplayComponent, KeyboardButtonComponent],
-      imports: [MatToolbarModule, FontAwesomeModule, MatCardModule, MatButtonModule]
+      declarations: [
+        AppComponent,
+        NotepadComponent,
+        KeyboardComponent,
+        MoveDisplayComponent,
+        KeyboardButtonComponent,
+      ],
+      imports: [
+        MatToolbarModule,
+        FontAwesomeModule,
+        MatCardModule,
+        MatButtonModule,
+      ],
     }),
   );
 
@@ -34,6 +45,6 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const title = compiled.querySelector('#chesspad-pp-title');
-    expect(title?.textContent).toContain("Chesspad ++")
+    expect(title?.textContent).toContain('Chesspad ++');
   });
 });

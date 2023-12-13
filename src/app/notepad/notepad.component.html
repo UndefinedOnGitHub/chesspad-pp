@@ -24,12 +24,10 @@
     <tr *ngFor="let moveRow of movesToRows(); let i = index">
       <th scope="row">{{ i + 1 }}.</th>
       <td>
-        <app-move-display [move]="moveRow[0]">
-        </app-move-display>
+        <app-move-display [move]="moveRow[0]"> </app-move-display>
       </td>
       <td>
-        <app-move-display [move]="moveRow[1]">
-        </app-move-display>
+        <app-move-display [move]="moveRow[1]"> </app-move-display>
       </td>
     </tr>
   </tbody>

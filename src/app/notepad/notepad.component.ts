@@ -13,8 +13,8 @@ export class NotepadComponent {
   movesToRows(): Move[][] {
     const chunked = chunk(this.moves, 2);
     if (this.moves.length % 2 == 0) {
-      chunked.push([new Move(), new Move()])
+      chunked.push([new Move(), new Move()]);
     }
-    return chunked
+    return chunked;
   }
 }
