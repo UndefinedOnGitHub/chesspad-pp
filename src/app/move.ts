@@ -1,6 +1,7 @@
 export class Move {
   piece: string | null = null;
-  source: string | null = null;
+  sourceColumn: string | null = null;
+  sourceRow: string | null = null;
   column: string | null = null;
   row: string | null = null;
   castle: string | null = null;
@@ -16,7 +17,8 @@ export class Move {
   allPositions() : any[] {
     return [
       this.piece,
-      this.source,
+      this.sourceColumn,
+      this.sourceRow,
       this.column,
       this.row,
       this.castle,
@@ -30,7 +32,8 @@ export class Move {
     this.piece = null;
     this.column = null;
     this.row = null;
-    this.source = null;
+    this.sourceColumn = null;
+    this.sourceRow = null;
     this.castle = null;
     this.promotionPiece = null;
     this.take = false;
@@ -66,13 +69,14 @@ export class Move {
       return this.castle;
     }
     const piece = this.piece || emptyPlaceholder;
-    const source = this.source || emptyPlaceholder;
+    const sourceColumn = this.sourceColumn || emptyPlaceholder;
+    const sourceRow = this.sourceRow || emptyPlaceholder;
     const take = this.take ? 'x' : '';
     const column = this.column || emptyPlaceholder;
     const row = this.row || emptyPlaceholder;
     const check = this.check ? '+' : '';
     const promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : '';
-    return `${piece}${source}${take}${column}${row}${check}${promotionPiece}`;
+    return `${piece}${sourceColumn}${sourceRow}${take}${column}${row}${check}${promotionPiece}`;
   }
 
   valid(): boolean {
@@ -89,8 +93,10 @@ export class Move {
       this.column = null;
     } else if (this.take) {
       this.take = false;
-    } else if (this.source) {
-      this.source = null;
+    } else if (this.sourceRow) {
+      this.sourceRow = null;
+    } else if (this.sourceColumn) {
+      this.sourceColumn = null;
     } else if (this.piece) {
       this.piece = null;
     }
@@ -114,9 +120,13 @@ export class Move {
     this.piece = piece;
     this.castle = null;
   }
-  setSource(source: string): void {
+  setSource(source: string, location: "row" | "column" = "column"): void {
     this.storeMove();
-    this.source = source;
+    if(location == "column") {
+      this.sourceColumn = source;
+    } else if(location == "row") {
+      this.sourceRow = source;
+    }
     this.castle = null;
   }
   setCol(col: string): void {
