@@ -13,6 +13,19 @@ export class Move {
     this.history = [];
   }
 
+  allPositions() : any[] {
+    return [
+      this.piece,
+      this.source,
+      this.column,
+      this.row,
+      this.castle,
+      this.promotionPiece,
+      this.take,
+      this.check
+    ]
+  }
+
   clear(excludeHistory: boolean = false): void {
     this.piece = null;
     this.column = null;
@@ -25,6 +38,10 @@ export class Move {
     if (!excludeHistory) {
       this.history = [];
     }
+  }
+
+  isEmpty() : boolean {
+    return !this.allPositions().some(i => !!i)
   }
 
   clone() {
@@ -40,6 +57,10 @@ export class Move {
   }
 
   output(): string {
+    if (this.isEmpty()) {
+      return " . "
+    }
+
     const emptyPlaceholder = '';
     if (this.castle) {
       return this.castle;
@@ -79,6 +100,9 @@ export class Move {
   extractFromString(moveString: string): Move {
     this.clear();
     const stringPieces = moveString.split('');
+    if (stringPieces.length <= 2) {
+      stringPieces.unshift("")
+    }
     this.piece = stringPieces[0];
     this.column = stringPieces[1];
     this.row = stringPieces[2];

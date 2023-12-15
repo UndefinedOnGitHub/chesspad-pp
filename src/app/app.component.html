@@ -42,7 +42,7 @@
     <div class="d-flex p-1 justify-content-center">
       <!-- Add width change based on width row vs col -->
       <!-- <div class="w-50 p-1"> -->
-      <app-keyboard [(output)]="output_text" (onSubmit)="onClick($event)">
+      <app-keyboard [(output)]="output_text" (onSubmit)="onKeyboardSubmit($event)">
       </app-keyboard>
     </div>
   </div>

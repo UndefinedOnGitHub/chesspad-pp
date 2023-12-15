@@ -28,8 +28,8 @@ export class AppComponent {
     this.eloCalculator = eloCalculator;
   }
 
-  onClick(newText: Move) {
-    this.moves.push(newText);
+  onKeyboardSubmit(move: Move) {
+    this.moves.push(move);
   }
 
   onFinish() {
