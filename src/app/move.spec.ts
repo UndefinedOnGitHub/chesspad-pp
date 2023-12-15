@@ -5,44 +5,44 @@ describe('Move', () => {
     expect(new Move()).toBeTruthy();
   });
 
-  describe("extractFromString", () => {
-    let move : Move;
+  describe('extractFromString', () => {
+    let move: Move;
     beforeEach(() => {
       move = new Move();
     });
 
-    const expectFromString = (moveString : string, obj : any) => {
-      expect(
-        move.extractFromString(moveString)
-      ).toEqual(jasmine.objectContaining(obj));
-    }
+    const expectFromString = (moveString: string, obj: any) => {
+      expect(move.extractFromString(moveString)).toEqual(
+        jasmine.objectContaining(obj),
+      );
+    };
 
-    it("should extract a pawn moves", () => {
-      expectFromString("e4", {
-        piece: "",
-        column: "e",
-        row: "4"
+    it('should extract a pawn moves', () => {
+      expectFromString('e4', {
+        piece: '',
+        column: 'e',
+        row: '4',
       });
 
-      expectFromString("e5", {
-        piece: "",
-        column: "e",
-        row: "5"
-      });      
-    })
+      expectFromString('e5', {
+        piece: '',
+        column: 'e',
+        row: '5',
+      });
+    });
 
-    it("should extract a bishop moves", () => {
-      expectFromString("be4", {
-        piece: "b",
-        column: "e",
-        row: "4"
+    it('should extract a bishop moves', () => {
+      expectFromString('be4', {
+        piece: 'b',
+        column: 'e',
+        row: '4',
       });
 
-      expectFromString("be5", {
-        piece: "b",
-        column: "e",
-        row: "5"
-      });      
-    })
-  })
+      expectFromString('be5', {
+        piece: 'b',
+        column: 'e',
+        row: '5',
+      });
+    });
+  });
 });

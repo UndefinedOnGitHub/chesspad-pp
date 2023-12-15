@@ -35,7 +35,11 @@ export class Keyboard {
     btn.toggleActive();
   }
 
-  onOriginMove(buttons: KeyboardButton[], btn: KeyboardButton, location: "column" | "row"): void {
+  onOriginMove(
+    buttons: KeyboardButton[],
+    btn: KeyboardButton,
+    location: 'column' | 'row',
+  ): void {
     buttons.forEach((pb: KeyboardButton) => (pb.class = ''));
     this.activeMove.setSource(btn.symbol, location);
     btn.class = 'blue-active';
@@ -46,7 +50,7 @@ export class Keyboard {
 
   onColumnTrigger(btn: KeyboardButton) {
     if (this.sourceMoveActive) {
-      this.onOriginMove(this.letterButtons, btn, "column");
+      this.onOriginMove(this.letterButtons, btn, 'column');
       return;
     }
 
@@ -58,7 +62,7 @@ export class Keyboard {
   }
   onRowTrigger(btn: KeyboardButton) {
     if (this.sourceMoveActive) {
-      this.onOriginMove(this.numberButtons, btn, "row");
+      this.onOriginMove(this.numberButtons, btn, 'row');
       return;
     }
     this.numberButtons

@@ -14,7 +14,7 @@ export class Move {
     this.history = [];
   }
 
-  allPositions() : any[] {
+  allPositions(): any[] {
     return [
       this.piece,
       this.sourceColumn,
@@ -24,8 +24,8 @@ export class Move {
       this.castle,
       this.promotionPiece,
       this.take,
-      this.check
-    ]
+      this.check,
+    ];
   }
 
   clear(excludeHistory: boolean = false): void {
@@ -43,8 +43,8 @@ export class Move {
     }
   }
 
-  isEmpty() : boolean {
-    return !this.allPositions().some(i => !!i)
+  isEmpty(): boolean {
+    return !this.allPositions().some((i) => !!i);
   }
 
   clone() {
@@ -61,7 +61,7 @@ export class Move {
 
   output(): string {
     if (this.isEmpty()) {
-      return " . "
+      return ' . ';
     }
 
     const emptyPlaceholder = '';
@@ -107,7 +107,7 @@ export class Move {
     this.clear();
     const stringPieces = moveString.split('');
     if (stringPieces.length <= 2) {
-      stringPieces.unshift("")
+      stringPieces.unshift('');
     }
     this.piece = stringPieces[0];
     this.column = stringPieces[1];
@@ -120,11 +120,11 @@ export class Move {
     this.piece = piece;
     this.castle = null;
   }
-  setSource(source: string, location: "row" | "column" = "column"): void {
+  setSource(source: string, location: 'row' | 'column' = 'column'): void {
     this.storeMove();
-    if(location == "column") {
+    if (location == 'column') {
       this.sourceColumn = source;
-    } else if(location == "row") {
+    } else if (location == 'row') {
       this.sourceRow = source;
     }
     this.castle = null;
