@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+@use "./app/_theme" as theme;
+
+@include mat.core();
+
+@include mat.core-theme(theme.$my-theme);
+@include mat.button-theme(theme.$my-theme);
+@include mat.toolbar-theme(theme.$my-theme);
