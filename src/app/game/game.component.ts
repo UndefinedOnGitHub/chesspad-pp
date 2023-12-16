@@ -31,7 +31,7 @@ export class GameComponent {
   }
 
   onFinish() {
-    const txt = this.game.exportPGN()
+    const txt = this.game.exportPGN();
     navigator.clipboard.writeText(txt);
 
     const a = this.eloCalculator.getNewRating(1200, 1000, GameResult.Win);

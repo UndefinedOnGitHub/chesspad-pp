@@ -1,9 +1,9 @@
 const PieceMap: { [index: string]: any } = {
-  k: "♚",
-  q: "♛",
-  r: "♜",
-  b: "♝",
-  n: "♞",
+  k: '♚',
+  q: '♛',
+  r: '♜',
+  b: '♝',
+  n: '♞',
   // p: "♙",
 };
 
@@ -76,10 +76,10 @@ export class Move {
 
   output(withSymbols: boolean = false): string {
     if (this.isEmpty()) {
-      return "";
+      return '';
     }
 
-    const emptyPlaceholder = "";
+    const emptyPlaceholder = '';
     if (this.castle) {
       return this.castle;
     }
@@ -87,21 +87,23 @@ export class Move {
     let promotionPiece;
     if (withSymbols) {
       piece =
-        PieceMap[(this.piece || "").toLowerCase()] ||
+        PieceMap[(this.piece || '').toLowerCase()] ||
         this.piece ||
         emptyPlaceholder;
-      const promotionTry = PieceMap[(this.promotionPiece || "").toLowerCase()] || this.promotionPiece
-      promotionPiece = promotionTry ? `=${promotionTry}` : "";
+      const promotionTry =
+        PieceMap[(this.promotionPiece || '').toLowerCase()] ||
+        this.promotionPiece;
+      promotionPiece = promotionTry ? `=${promotionTry}` : '';
     } else {
       piece = this.piece || emptyPlaceholder;
-      promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : "";
+      promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : '';
     }
     const sourceColumn = this.sourceColumn || emptyPlaceholder;
     const sourceRow = this.sourceRow || emptyPlaceholder;
-    const take = this.take ? "x" : "";
+    const take = this.take ? 'x' : '';
     const column = this.column || emptyPlaceholder;
     const row = this.row || emptyPlaceholder;
-    const check = this.check ? "+" : "";
+    const check = this.check ? '+' : '';
     return `${piece}${sourceColumn}${sourceRow}${take}${column}${row}${check}${promotionPiece}`;
   }
 
@@ -130,8 +132,8 @@ export class Move {
 
   extractFromString(moveString: string): Move {
     const breakdown = moveString
-      .replace(this.breakdownRegex, "$1-$2-$3-$4-$5-$6-$7-$8")
-      .split("-");
+      .replace(this.breakdownRegex, '$1-$2-$3-$4-$5-$6-$7-$8')
+      .split('-');
 
     const [
       piece,
@@ -148,10 +150,10 @@ export class Move {
     this.piece = piece;
     this.sourceColumn = sourceColumn;
     this.sourceRow = sourceRow;
-    this.take = take == "x";
+    this.take = take == 'x';
     this.column = column;
     this.row = row;
-    this.promotionPiece = promotionPiece.replace("=", "");
+    this.promotionPiece = promotionPiece.replace('=', '');
     return this;
   }
 
@@ -160,11 +162,11 @@ export class Move {
     this.piece = piece;
     this.castle = null;
   }
-  setSource(source: string, location: "row" | "column" = "column"): void {
+  setSource(source: string, location: 'row' | 'column' = 'column'): void {
     this.storeMove();
-    if (location == "column") {
+    if (location == 'column') {
       this.sourceColumn = source;
-    } else if (location == "row") {
+    } else if (location == 'row') {
       this.sourceRow = source;
     }
     this.castle = null;
@@ -188,7 +190,7 @@ export class Move {
     this.storeMove();
     this.check = !this.check;
   }
-  setCastle(direction: "O-O" | "O-O-O"): void {
+  setCastle(direction: 'O-O' | 'O-O-O'): void {
     this.storeMove();
     this.clear(true);
     this.castle = direction;

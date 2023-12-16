@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Move } from "./move";
-import { chunk } from "lodash";
+import { Injectable } from '@angular/core';
+import { Move } from './move';
+import { chunk } from 'lodash';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GameService {
   onChageCallbacks: Function[] = [];
@@ -47,11 +47,11 @@ export class GameService {
       moveRows.push(
         [`${midx + 1}.`, chuncked[midx][0], chuncked[midx][1]]
           .filter((i) => i)
-          .join(" "),
+          .join(' '),
       );
     }
-    const pgnMoves = moveRows.join(" ");
-    const result = "0-1";
+    const pgnMoves = moveRows.join(' ');
+    const result = '0-1';
     const pgn = `
 [Event "Chesspad ++ PGN"]
 [Site "Online"]
