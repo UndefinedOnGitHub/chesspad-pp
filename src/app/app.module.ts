@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MoveDisplayComponent } from './move-display/move-display.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MoveDisplayComponent } from './move-display/move-display.component';
     KeyboardButtonComponent,
     NotepadComponent,
     MoveDisplayComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,

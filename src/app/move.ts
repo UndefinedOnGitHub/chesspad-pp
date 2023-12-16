@@ -18,6 +18,9 @@ export class Move {
 
   take: boolean = false;
   check: boolean = false;
+
+  active: boolean = false;
+
   history: Move[] = [];
   constructor() {
     this.history = [];
@@ -70,7 +73,7 @@ export class Move {
 
   output(): string {
     if (this.isEmpty()) {
-      return ' . ';
+      return '';
     }
 
     const emptyPlaceholder = '';

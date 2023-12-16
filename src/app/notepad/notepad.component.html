@@ -1,17 +1,3 @@
-<!-- <div class="p-3">
-  <div class="d-flex flex-column">
-    <div class="d-flex" *ngFor="let moveRow of movesToRows(); let i = index">
-      <div class="notepad-row-index">{{ i + 1 }}.</div>
-      <app-move-display
-        [ngClass]="{ 'with-padding-right': e }"
-        *ngFor="let move of moveRow; let e = even"
-        [move]="move"
-      >
-      </app-move-display>
-    </div>
-  </div>
-</div>
- -->
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -22,11 +8,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let moveRow of movesToRows(); let i = index">
-      <th scope="row">{{ i + 1 }}.</th>
-      <td>
+      <th scope="row" class="align-middle">{{ i + 1 }}.</th>
+      <td (click)="onMoveClick(moveRow[0])">
         <app-move-display [move]="moveRow[0]"> </app-move-display>
       </td>
-      <td>
+      <td (click)="onMoveClick(moveRow[1])">
         <app-move-display [move]="moveRow[1]"> </app-move-display>
       </td>
     </tr>

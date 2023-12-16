@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Move } from './move';
+import { Move } from '../move';
+import { GameService } from '../game.service';
 import {
   faBars,
   faHeart,
@@ -7,33 +8,30 @@ import {
   faCircleStop,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
-import { EloCalculatorService, GameResult } from './elo-calculator.service';
+import { EloCalculatorService, GameResult } from '../elo-calculator.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss']
 })
-export class AppComponent {
-  title = 'chesspad.pp';
+export class GameComponent {
+
+title = 'chesspad.pp';
   output_text = '';
-  moves: Move[] = [];
   faBars: IconDefinition = faBars;
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
   faCircleStop: IconDefinition = faCircleStop;
   eloCalculator: EloCalculatorService;
+  game: GameService;
 
-  constructor(eloCalculator: EloCalculatorService) {
+  constructor(eloCalculator: EloCalculatorService, game: GameService) {
     this.eloCalculator = eloCalculator;
-  }
-
-  onKeyboardSubmit(move: Move) {
-    this.moves.push(move);
+    this.game = game;
   }
 
   onFinish() {
-    // TODO Calculate Elo Change
     const a = this.eloCalculator.getNewRating(1200, 1000, GameResult.Win);
     const b = this.eloCalculator.getNewRating(1000, 1200, GameResult.Lose);
   }

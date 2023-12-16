@@ -22,7 +22,6 @@ export class KeyboardButton {
     this.key = params.key;
     this.symbol = params.symbol || '';
     this.icon = params.icon;
-    // this.action = params.action;
     this.type = params.type || 'base';
     this.class = params.class || '';
     this.onTrigger = params.onTrigger || this.toggleActive;

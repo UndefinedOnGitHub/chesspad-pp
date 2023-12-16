@@ -2,9 +2,6 @@
   .example-spacer {
     flex: 1 1 auto;
   }
-  .container {
-    max-width: 500px;
-  }
 </style>
 <div class="" style="width: 100%; height: 100%">
   <mat-toolbar color="primary">
@@ -25,28 +22,7 @@
     <mat-sidenav-content>Main content</mat-sidenav-content>
   </mat-sidenav-container> -->
 
-  <div
-    class="d-flex flex-column flex-lg-row flex-xl-row flex-xs-column flex-sm-column flex-md-row keyboard-notepad-container p-2"
-  >
-    <div class="flex-grow-1 p-1 mb-2" style="overflow: auto">
-      <mat-card>
-        <mat-card-content>
-          <app-notepad [moves]="moves"></app-notepad>
-        </mat-card-content>
-        <mat-card-actions align="end" class="d-flex justify-content-between">
-          <button mat-raised-button color="accent">Finish</button>
-          <button mat-raised-button color="accent">Export</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="d-flex p-1 justify-content-center">
-      <!-- Add width change based on width row vs col -->
-      <!-- <div class="w-50 p-1"> -->
-      <app-keyboard
-        [(output)]="output_text"
-        (onSubmit)="onKeyboardSubmit($event)"
-      >
-      </app-keyboard>
-    </div>
+  <div class="keyboard-notepad-container">
+    <app-game></app-game>
   </div>
 </div>

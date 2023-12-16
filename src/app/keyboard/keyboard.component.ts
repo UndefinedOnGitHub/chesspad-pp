@@ -12,6 +12,7 @@ import {
   faDeleteLeft,
   faChess,
 } from '@fortawesome/free-solid-svg-icons';
+import {GameService} from "../game.service"
 
 @Component({
   selector: 'app-keyboard',
@@ -27,6 +28,14 @@ export class KeyboardComponent implements OnInit {
   // For tracking the move
   activeMove: Move = new Move();
   originMoveSelector: boolean = false;
+  game: GameService;
+
+  constructor(game: GameService) {
+    this.game = game;
+    this.game.setMoveClickCallback((m : Move) => {
+      this.activeMove.extractFromString(String(m));
+    })
+  }
 
   ngOnInit() {
     this.setButtons();
@@ -63,8 +72,7 @@ export class KeyboardComponent implements OnInit {
     if (!this.activeMove.valid()) {
       return;
     }
-    // this.onSubmit.emit(this.displayCurrentMove());
-    this.onSubmit.emit(this.activeMove.clone());
+    this.game.makeMove(this.activeMove.clone());
     this.keyboard.clearKeyboard();
   }
 }

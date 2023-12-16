@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Move } from '../move';
+import { GameService } from '../game.service';
 import { chunk } from 'lodash';
 
 @Component({
@@ -8,11 +9,21 @@ import { chunk } from 'lodash';
   styleUrls: ['./notepad.component.scss'],
 })
 export class NotepadComponent {
-  @Input() moves: Move[] = [];
+  game: GameService;
+
+  constructor(game: GameService) {
+    this.game = game;
+  }
+
+  onMoveClick(move: Move) {
+    move.active = !move.active;
+    this.game.onMoveClick(move)
+  }
 
   movesToRows(): Move[][] {
-    const chunked = chunk(this.moves, 2);
-    if (this.moves.length % 2 == 0) {
+    const moves = this.game.moves;
+    const chunked = chunk(moves, 2);
+    if (moves.length % 2 == 0) {
       chunked.push([new Move(), new Move()]);
     }
     return chunked;
