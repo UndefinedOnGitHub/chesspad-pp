@@ -19,13 +19,13 @@ describe('Move', () => {
 
     it('should extract a pawn moves', () => {
       expectFromString('e4', {
-        piece: '',
+        piece: undefined,
         column: 'e',
         row: '4',
       });
 
       expectFromString('e5', {
-        piece: '',
+        piece: undefined,
         column: 'e',
         row: '5',
       });

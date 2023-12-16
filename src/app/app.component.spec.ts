@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { NotepadComponent } from './notepad/notepad.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
+import { GameComponent } from './game/game.component';
 import { MoveDisplayComponent } from './move-display/move-display.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -18,6 +19,7 @@ describe('AppComponent', () => {
         KeyboardComponent,
         MoveDisplayComponent,
         KeyboardButtonComponent,
+        GameComponent
       ],
       imports: [
         MatToolbarModule,
