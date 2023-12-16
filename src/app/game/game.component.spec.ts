@@ -14,8 +14,14 @@ describe('GameComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GameComponent, NotepadComponent, KeyboardComponent, MoveDisplayComponent, KeyboardButtonComponent],
-      imports: [MatCardModule, FontAwesomeModule]
+      declarations: [
+        GameComponent,
+        NotepadComponent,
+        KeyboardComponent,
+        MoveDisplayComponent,
+        KeyboardButtonComponent,
+      ],
+      imports: [MatCardModule, FontAwesomeModule],
     });
     fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;

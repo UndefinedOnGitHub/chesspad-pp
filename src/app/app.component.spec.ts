@@ -19,7 +19,7 @@ describe('AppComponent', () => {
         KeyboardComponent,
         MoveDisplayComponent,
         KeyboardButtonComponent,
-        GameComponent
+        GameComponent,
       ],
       imports: [
         MatToolbarModule,
