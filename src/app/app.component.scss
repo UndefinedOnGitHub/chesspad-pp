@@ -1,11 +1,10 @@
-// @use '@angular/material' as mat;
-@use "./theme" as theme;
+@use "./_theme" as theme;
 
-// @include mat.core();
 
-// @include mat.core-theme(theme.$my-theme);
-// @include mat.button-theme(theme.$my-theme);
-// @include mat.toolbar-theme(theme.$my-theme);
+.chesspad-pp-title {
+  font-family: 'PermanentMarker';
+  font-size: 28px;
+}
 
 .keyboard-notepad-container {
   width: 100%;
