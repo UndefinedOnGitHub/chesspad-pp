@@ -6,3 +6,4 @@
 @include mat.core-theme(theme.$my-theme);
 @include mat.button-theme(theme.$my-theme);
 @include mat.toolbar-theme(theme.$my-theme);
+@include mat.card-theme(theme.$my-theme);
