@@ -7,7 +7,7 @@
         <app-notepad></app-notepad>
       </mat-card-content>
       <mat-card-actions align="end" class="d-flex justify-content-between">
-        <button mat-raised-button color="accent">Finish</button>
+        <button (click)="onFinish()" mat-raised-button color="accent">Finish</button>
         <button mat-raised-button color="accent">Export</button>
       </mat-card-actions>
     </mat-card>

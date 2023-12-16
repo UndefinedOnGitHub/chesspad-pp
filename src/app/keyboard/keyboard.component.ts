@@ -65,7 +65,7 @@ export class KeyboardComponent implements OnInit {
   }
 
   displayCurrentMove(): string {
-    return this.activeMove.toString();
+    return this.activeMove.toString(true);
   }
 
   submit(event: any): void {
