@@ -1,7 +1,11 @@
 <div
   class="d-flex flex-column flex-lg-row flex-xl-row flex-xs-column flex-sm-column flex-md-row keyboard-notepad-container p-2"
 >
-  <div class="flex-grow-1 p-1 mb-2" style="overflow: auto">
+  <div
+    class="flex-grow-1 p-1 mb-2"
+    id="notepad-content-container"
+    style="overflow: auto"
+  >
     <mat-card>
       <mat-card-content>
         <app-notepad></app-notepad>
@@ -10,7 +14,9 @@
         <button (click)="onFinish()" mat-raised-button color="accent">
           Finish
         </button>
-        <button mat-raised-button color="accent">Export</button>
+        <button (click)="onSave()" mat-raised-button color="accent">
+          {{ saveButtonText() }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

@@ -30,11 +30,27 @@ export class GameComponent {
     this.game = game;
   }
 
+  saveButtonText(): string {
+    const loadGame = this.game.isGameStored() && this.game.moves.length == 0;
+    if (loadGame) {
+      return 'Load';
+    }
+    return 'Save';
+  }
+
   onFinish() {
     const txt = this.game.exportPGN();
     navigator.clipboard.writeText(txt);
 
     const a = this.eloCalculator.getNewRating(1200, 1000, GameResult.Win);
     const b = this.eloCalculator.getNewRating(1000, 1200, GameResult.Lose);
+  }
+
+  onSave() {
+    if (this.game.moves.length > 0) {
+      this.game.storeGame();
+    } else {
+      this.game.fetchGame();
+    }
   }
 }

@@ -236,7 +236,6 @@ export class Keyboard {
     if (!this.activeMove.valid()) {
       return;
     }
-    // this.onSubmit.emit(this.displayCurrentMove());
     this.clearKeyboard();
   }
 }

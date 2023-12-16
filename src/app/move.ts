@@ -1,15 +1,17 @@
 const PieceMap: { [index: string]: any } = {
-  k: '♚',
-  q: '♛',
-  r: '♜',
-  b: '♝',
-  n: '♞',
+  K: '♚',
+  Q: '♛',
+  R: '♜',
+  B: '♝',
+  N: '♞',
   // p: "♙",
 };
 
 export class Move {
-  breakdownRegex =
+  #breakdownRegex =
     /^([NBRQK])?([a-h])?([1-8])?(x)?([a-h])([1-8])(=?[NBRQK])?([+#])?$/i;
+  #breakdownCaptureRegex =
+    /^(?<piece>[NBRQK])?(?<sourceColumn>[a-h])?(?<sourceRow>[1-8])?(?<take>x)?(?<column>[a-h])(?<row>[1-8])(?<promotionPiece>=?[NBRQK])?(?<additional>[+#])?$/i;
 
   piece: string | null = null;
   sourceColumn: string | null = null;
@@ -25,7 +27,10 @@ export class Move {
   active: boolean = false;
 
   history: Move[] = [];
-  constructor() {
+  constructor(moveString: string | null = null) {
+    if (moveString) {
+      this.extractFromString(moveString);
+    }
     this.history = [];
   }
 
@@ -86,13 +91,9 @@ export class Move {
     let piece;
     let promotionPiece;
     if (withSymbols) {
-      piece =
-        PieceMap[(this.piece || '').toLowerCase()] ||
-        this.piece ||
-        emptyPlaceholder;
+      piece = PieceMap[this.piece || ''] || this.piece || emptyPlaceholder;
       const promotionTry =
-        PieceMap[(this.promotionPiece || '').toLowerCase()] ||
-        this.promotionPiece;
+        PieceMap[this.promotionPiece || ''] || this.promotionPiece;
       promotionPiece = promotionTry ? `=${promotionTry}` : '';
     } else {
       piece = this.piece || emptyPlaceholder;
@@ -131,9 +132,12 @@ export class Move {
   }
 
   extractFromString(moveString: string): Move {
-    const breakdown = moveString
-      .replace(this.breakdownRegex, '$1-$2-$3-$4-$5-$6-$7-$8')
-      .split('-');
+    this.clear();
+
+    if (moveString.includes('O-O') || moveString.includes('O-O-O')) {
+      this.castle = moveString;
+      return this;
+    }
 
     const [
       piece,
@@ -144,16 +148,17 @@ export class Move {
       row,
       promotionPiece,
       additional,
-    ] = breakdown;
+    ]: string[] | undefined[] =
+      this.#breakdownRegex.exec(moveString)?.slice(1, 9) || [];
 
-    this.clear();
     this.piece = piece;
     this.sourceColumn = sourceColumn;
     this.sourceRow = sourceRow;
     this.take = take == 'x';
     this.column = column;
     this.row = row;
-    this.promotionPiece = promotionPiece.replace('=', '');
+    this.promotionPiece = promotionPiece?.replace('=', '');
+
     return this;
   }
 
