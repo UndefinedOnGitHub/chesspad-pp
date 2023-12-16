@@ -6,9 +6,9 @@
   padding: 4px;
 }
 .active {
-	.move-cell {
+  .move-cell {
     box-shadow: 0 0 4px 0px #aaa;
     border-radius: 5px;
     @include theme.primary-color;
-	}
+  }
 }

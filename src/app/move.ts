@@ -1,11 +1,11 @@
-const PieceMap: {[index: string]:any} = {
-  k: "♚",
-  q: "♛",
-  r: "♜",
-  b: "♝",
-  n: "♞",
+const PieceMap: { [index: string]: any } = {
+  k: '♚',
+  q: '♛',
+  r: '♜',
+  b: '♝',
+  n: '♞',
   // p: "♙",
-}
+};
 
 export class Move {
   piece: string | null = null;
@@ -80,7 +80,10 @@ export class Move {
     if (this.castle) {
       return this.castle;
     }
-    const piece = PieceMap[(this.piece || "").toLowerCase()] || this.piece || emptyPlaceholder;
+    const piece =
+      PieceMap[(this.piece || '').toLowerCase()] ||
+      this.piece ||
+      emptyPlaceholder;
     const sourceColumn = this.sourceColumn || emptyPlaceholder;
     const sourceRow = this.sourceRow || emptyPlaceholder;
     const take = this.take ? 'x' : '';

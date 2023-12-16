@@ -17,7 +17,7 @@ export class NotepadComponent {
 
   onMoveClick(move: Move) {
     move.active = !move.active;
-    this.game.onMoveClick(move)
+    this.game.onMoveClick(move);
   }
 
   movesToRows(): Move[][] {

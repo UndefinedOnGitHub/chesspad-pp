@@ -13,11 +13,10 @@ import { EloCalculatorService, GameResult } from '../elo-calculator.service';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-
-title = 'chesspad.pp';
+  title = 'chesspad.pp';
   output_text = '';
   faBars: IconDefinition = faBars;
   faHeart: IconDefinition = faHeart;
