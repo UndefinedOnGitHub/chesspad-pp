@@ -5,6 +5,8 @@ import { KeyboardComponent } from '../keyboard/keyboard.component';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 import { MoveDisplayComponent } from '../move-display/move-display.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { GameComponent } from './game.component';
 
@@ -21,7 +23,12 @@ describe('GameComponent', () => {
         MoveDisplayComponent,
         KeyboardButtonComponent,
       ],
-      imports: [MatCardModule, FontAwesomeModule],
+      imports: [
+        MatCardModule,
+        FontAwesomeModule,
+        MatSnackBarModule,
+        MatDialogModule,
+      ],
     });
     fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;

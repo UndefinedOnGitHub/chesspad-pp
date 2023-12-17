@@ -85,7 +85,7 @@ export class GameService {
 [BlackElo "?"]
 ${pgnMoves} ${this.gameResult}
 `;
-    console.log(pgn);
+    // console.log(pgn);
     return pgn;
   }
 

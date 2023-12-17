@@ -9,6 +9,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -26,6 +28,8 @@ describe('AppComponent', () => {
         FontAwesomeModule,
         MatCardModule,
         MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule,
       ],
     }),
   );
