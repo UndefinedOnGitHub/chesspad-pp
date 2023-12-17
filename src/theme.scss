@@ -7,3 +7,6 @@
 @include mat.button-theme(theme.$my-theme);
 @include mat.toolbar-theme(theme.$my-theme);
 @include mat.card-theme(theme.$my-theme);
+@include mat.snack-bar-theme(theme.$my-theme);
+@include mat.dialog-theme(theme.$my-theme);
+@include mat.button-toggle-theme(theme.$my-theme);

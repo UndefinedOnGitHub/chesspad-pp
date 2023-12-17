@@ -12,8 +12,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MoveDisplayComponent } from './move-display/move-display.component';
 import { GameComponent } from './game/game.component';
+import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +29,7 @@ import { GameComponent } from './game/game.component';
     NotepadComponent,
     MoveDisplayComponent,
     GameComponent,
+    FinishGameDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +42,11 @@ import { GameComponent } from './game/game.component';
     MatListModule,
     MatToolbarModule,
     MatCardModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

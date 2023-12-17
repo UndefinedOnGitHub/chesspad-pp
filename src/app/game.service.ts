@@ -10,6 +10,7 @@ export class GameService {
   onMoveClickCallbacks: Function[] = [];
   activeMoveIdx: number = -1;
   moves: Move[] = [];
+  gameResult: '1-0' | '1/2-1/2' | '0-1' = '1/2-1/2';
 
   constructor() {}
 
@@ -26,7 +27,7 @@ export class GameService {
     this.moves.push(move);
     this.scrollToLastMove();
     // Save game
-    this.storeGame()
+    this.storeGame();
   }
 
   scrollToLastMove() {
@@ -72,19 +73,17 @@ export class GameService {
 
   exportPGN(): string {
     const pgnMoves = this.pgnMoves();
-    const result = '0-1';
-    const pgn = `
-[Event "Chesspad ++ PGN"]
+    const pgn = `[Event "Chesspad ++ PGN"]
 [Site "Online"]
 [Date "${this.formatDate()}"]
 [EventDate "${this.formatDate()}"]
 [Round "-"]
-[Result "${result}"]
+[Result "${this.gameResult}"]
 [White "White Name"]
 [Black "Black Name"]
 [WhiteElo "?"]
 [BlackElo "?"]
-${pgnMoves} ${result}
+${pgnMoves} ${this.gameResult}
 `;
     console.log(pgn);
     return pgn;

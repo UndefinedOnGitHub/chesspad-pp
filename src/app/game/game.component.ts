@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Move } from '../move';
 import { GameService } from '../game.service';
+import { NotifyService } from '../notify.service';
 import {
   faBars,
   faHeart,
@@ -8,7 +9,8 @@ import {
   faCircleStop,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
-import { EloCalculatorService, GameResult } from '../elo-calculator.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FinishGameDialogComponent } from '../finish-game-dialog/finish-game-dialog.component';
 
 @Component({
   selector: 'app-game',
@@ -22,34 +24,32 @@ export class GameComponent {
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
   faCircleStop: IconDefinition = faCircleStop;
-  eloCalculator: EloCalculatorService;
   game: GameService;
+  notify: NotifyService;
 
-  constructor(eloCalculator: EloCalculatorService, game: GameService) {
-    this.eloCalculator = eloCalculator;
+  constructor(
+    notify: NotifyService,
+    game: GameService,
+    public dialog: MatDialog,
+  ) {
+    this.notify = notify;
     this.game = game;
-    if(this.game.isGameStored()) {
+    if (this.game.isGameStored()) {
       this.game.fetchGame();
     }
   }
 
-  saveButtonText(): string {
-    const loadGame = this.game.isGameStored() && this.game.moves.length == 0;
-    if (loadGame) {
-      return 'Load';
-    }
-    return 'Save';
-  }
-
   onFinish() {
-    const txt = this.game.exportPGN();
-    navigator.clipboard.writeText(txt);
-
-    const a = this.eloCalculator.getNewRating(1200, 1000, GameResult.Win);
-    const b = this.eloCalculator.getNewRating(1000, 1200, GameResult.Lose);
+    const dialogRef = this.dialog.open(FinishGameDialogComponent, {
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 
   onClear() {
-    this.game.clearGame()
+    this.game.clearGame();
+    this.notify.warn('Game Cleared');
   }
 }

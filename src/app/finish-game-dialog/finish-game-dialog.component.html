@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Game Results</h1>
+<div mat-dialog-content>
+  <mat-button-toggle-group
+    [(value)]="gameWinner"
+    (change)="onGameWinnerChange($event)"
+    name="gameWinner"
+    aria-label="Game Winner"
+  >
+    <mat-button-toggle value="1-0">White Won</mat-button-toggle>
+    <mat-button-toggle value="1/2-1/2">Draw</mat-button-toggle>
+    <mat-button-toggle value="0-1">Black Won</mat-button-toggle>
+  </mat-button-toggle-group>
+  <mat-form-field class="game-moves-input-container">
+    <textarea disabled matInput [value]="gameString"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-between">
+  <button mat-button (click)="close()">New Game</button>
+  <button mat-button (click)="copy()">Copy</button>
+</div>
