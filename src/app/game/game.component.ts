@@ -28,6 +28,9 @@ export class GameComponent {
   constructor(eloCalculator: EloCalculatorService, game: GameService) {
     this.eloCalculator = eloCalculator;
     this.game = game;
+    if(this.game.isGameStored()) {
+      this.game.fetchGame();
+    }
   }
 
   saveButtonText(): string {
@@ -46,11 +49,7 @@ export class GameComponent {
     const b = this.eloCalculator.getNewRating(1000, 1200, GameResult.Lose);
   }
 
-  onSave() {
-    if (this.game.moves.length > 0) {
-      this.game.storeGame();
-    } else {
-      this.game.fetchGame();
-    }
+  onClear() {
+    this.game.clearGame()
   }
 }

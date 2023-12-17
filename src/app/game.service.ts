@@ -25,6 +25,8 @@ export class GameService {
     }
     this.moves.push(move);
     this.scrollToLastMove();
+    // Save game
+    this.storeGame()
   }
 
   scrollToLastMove() {
@@ -111,6 +113,8 @@ ${pgnMoves} ${result}
     return moves;
   }
   clearGame(): void {
+    this.moves = [];
+    this.activeMoveIdx = -1;
     localStorage.removeItem('local_game');
   }
   isGameStored(): boolean {
