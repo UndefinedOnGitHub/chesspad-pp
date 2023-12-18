@@ -12,53 +12,73 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
+export enum PieceSymbol {
+  King = "K",
+  Queen = "Q",
+  Rook = "R",
+  Bishop = "B",
+  Knight = "N",
+  Pawn = ""
+}
+
 export interface Piece {
   key: 'king' | 'queen' | 'rook' | 'knight' | 'bishop' | 'pawn';
   type: 'piece';
   icon?: IconDefinition;
-  symbol: 'K' | 'Q' | 'R' | 'N' | 'B' | '';
+  symbol: PieceSymbol;
 }
 export const King: Piece = {
   type: 'piece',
   key: 'king',
   icon: faChessKing,
-  symbol: 'K',
+  symbol: PieceSymbol.King,
 };
 export const Queen: Piece = {
   type: 'piece',
   key: 'queen',
   icon: faChessQueen,
-  symbol: 'Q',
+  symbol: PieceSymbol.Queen,
 };
 export const Rook: Piece = {
   type: 'piece',
   key: 'rook',
   icon: faChessRook,
-  symbol: 'R',
+  symbol: PieceSymbol.Rook,
 };
 export const Knight: Piece = {
   type: 'piece',
   key: 'knight',
   icon: faChessKnight,
-  symbol: 'N',
+  symbol: PieceSymbol.Knight,
 };
 export const Bishop: Piece = {
   type: 'piece',
   key: 'bishop',
   icon: faChessBishop,
-  symbol: 'B',
+  symbol: PieceSymbol.Bishop,
 };
 export const Pawn: Piece = {
   type: 'piece',
   key: 'pawn',
   icon: faChessPawn,
-  symbol: '',
+  symbol: PieceSymbol.Pawn,
 };
 export const Pieces: Piece[] = [King, Queen, Rook, Knight, Bishop, Pawn];
 
 //
 // Rows: Definitions of the rows
 //
+
+export enum RowSymbol {
+  One = "1",
+  Two = "2",
+  Three = "3",
+  Four = "4",
+  Five = "5",
+  Six = "6",
+  Seven = "7",
+  Eight = "8",
+}
 
 export interface Row {
   key:
@@ -71,23 +91,34 @@ export interface Row {
     | 'row_7'
     | 'row_8';
   type: 'row';
-  symbol: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
+  symbol: RowSymbol;
 }
 
-export const Row1: Row = { type: 'row', key: 'row_1', symbol: '1' };
-export const Row2: Row = { type: 'row', key: 'row_2', symbol: '2' };
-export const Row3: Row = { type: 'row', key: 'row_3', symbol: '3' };
-export const Row4: Row = { type: 'row', key: 'row_4', symbol: '4' };
-export const Row5: Row = { type: 'row', key: 'row_5', symbol: '5' };
-export const Row6: Row = { type: 'row', key: 'row_6', symbol: '6' };
-export const Row7: Row = { type: 'row', key: 'row_7', symbol: '7' };
-export const Row8: Row = { type: 'row', key: 'row_8', symbol: '8' };
+export const Row1: Row = { type: 'row', key: 'row_1', symbol: RowSymbol.One };
+export const Row2: Row = { type: 'row', key: 'row_2', symbol: RowSymbol.Two };
+export const Row3: Row = { type: 'row', key: 'row_3', symbol: RowSymbol.Three };
+export const Row4: Row = { type: 'row', key: 'row_4', symbol: RowSymbol.Four };
+export const Row5: Row = { type: 'row', key: 'row_5', symbol: RowSymbol.Five };
+export const Row6: Row = { type: 'row', key: 'row_6', symbol: RowSymbol.Six };
+export const Row7: Row = { type: 'row', key: 'row_7', symbol: RowSymbol.Seven };
+export const Row8: Row = { type: 'row', key: 'row_8', symbol: RowSymbol.Eight };
 
 export const Rows: Row[] = [Row1, Row2, Row3, Row4, Row5, Row6, Row7, Row8];
 
 //
 // Columns: Definitions of the rows
 //
+
+export enum ColumnSymbol {
+  A = "a",
+  B = "b",
+  C = "c",
+  D = "d",
+  E = "e",
+  F = "f",
+  G = "g",
+  H = "h",
+}
 
 export interface Column {
   key:
@@ -100,17 +131,17 @@ export interface Column {
     | 'col_g'
     | 'col_h';
   type: 'column';
-  symbol: 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h';
+  symbol: ColumnSymbol;
 }
 
-export const Column1: Column = { type: 'column', key: 'col_a', symbol: 'a' };
-export const Column2: Column = { type: 'column', key: 'col_b', symbol: 'b' };
-export const Column3: Column = { type: 'column', key: 'col_c', symbol: 'c' };
-export const Column4: Column = { type: 'column', key: 'col_d', symbol: 'd' };
-export const Column5: Column = { type: 'column', key: 'col_e', symbol: 'e' };
-export const Column6: Column = { type: 'column', key: 'col_f', symbol: 'f' };
-export const Column7: Column = { type: 'column', key: 'col_g', symbol: 'g' };
-export const Column8: Column = { type: 'column', key: 'col_h', symbol: 'h' };
+export const Column1: Column = { type: 'column', key: 'col_a', symbol: ColumnSymbol.A };
+export const Column2: Column = { type: 'column', key: 'col_b', symbol: ColumnSymbol.B };
+export const Column3: Column = { type: 'column', key: 'col_c', symbol: ColumnSymbol.C };
+export const Column4: Column = { type: 'column', key: 'col_d', symbol: ColumnSymbol.D };
+export const Column5: Column = { type: 'column', key: 'col_e', symbol: ColumnSymbol.E };
+export const Column6: Column = { type: 'column', key: 'col_f', symbol: ColumnSymbol.F };
+export const Column7: Column = { type: 'column', key: 'col_g', symbol: ColumnSymbol.G };
+export const Column8: Column = { type: 'column', key: 'col_h', symbol: ColumnSymbol.H };
 
 export const Columns: Column[] = [
   Column1,

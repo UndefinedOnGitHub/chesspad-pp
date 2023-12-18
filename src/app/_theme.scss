@@ -85,6 +85,16 @@ $my-theme: mat.define-light-theme(
   )
 );
 
+$dark-theme: mat.define-dark-theme((
+ color: (
+   primary: $primary,
+   accent: $secondary,
+   warn: $error,
+ ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
 @mixin primary-color($primaryValue: 600) {
   background: mat.get-color-from-palette($primary, $primaryValue);
   color: mat.get-color-from-palette($on-primary, $primaryValue);
@@ -92,6 +102,12 @@ $my-theme: mat.define-light-theme(
 @mixin secondary-color($primaryValue: 600) {
   background: mat.get-color-from-palette($secondary, $primaryValue);
   color: mat.get-color-from-palette($on-secondary, $primaryValue);
+}
+@mixin light-mode-background() {
+  background-color: #ffffff;
+}
+@mixin dark-mode-background() {
+  background-color: #0e0e10;
 }
 
 @font-face {

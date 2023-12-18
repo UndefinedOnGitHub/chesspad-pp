@@ -7,7 +7,6 @@ import {
   faCircleStop,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
-import { EloCalculatorService, GameResult } from './elo-calculator.service';
 
 @Component({
   selector: 'app-root',
@@ -16,25 +15,10 @@ import { EloCalculatorService, GameResult } from './elo-calculator.service';
 })
 export class AppComponent {
   title = 'chesspad.pp';
-  output_text = '';
-  moves: Move[] = [];
   faBars: IconDefinition = faBars;
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
   faCircleStop: IconDefinition = faCircleStop;
-  eloCalculator: EloCalculatorService;
 
-  constructor(eloCalculator: EloCalculatorService) {
-    this.eloCalculator = eloCalculator;
-  }
-
-  onKeyboardSubmit(move: Move) {
-    this.moves.push(move);
-  }
-
-  onFinish() {
-    // TODO Calculate Elo Change
-    const a = this.eloCalculator.getNewRating(1200, 1000, GameResult.Win);
-    const b = this.eloCalculator.getNewRating(1000, 1200, GameResult.Lose);
-  }
+  constructor() {}
 }

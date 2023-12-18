@@ -24,12 +24,12 @@ import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dial
 @NgModule({
   declarations: [
     AppComponent,
-    KeyboardComponent,
-    KeyboardButtonComponent,
-    NotepadComponent,
-    MoveDisplayComponent,
-    GameComponent,
     FinishGameDialogComponent,
+    GameComponent,
+    KeyboardButtonComponent,
+    KeyboardComponent,
+    MoveDisplayComponent,
+    NotepadComponent,
   ],
   imports: [
     BrowserModule,

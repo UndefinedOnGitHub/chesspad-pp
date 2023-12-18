@@ -20,20 +20,14 @@ import { GameService } from '../game.service';
   styleUrls: ['./keyboard.component.scss'],
 })
 export class KeyboardComponent implements OnInit {
-  // String of key presses
-  @Input() output = '';
-  @Output() outputChange = new EventEmitter<string>();
   // Let the editor know the move
   @Output() onSubmit = new EventEmitter<Move>();
   // For tracking the move
-  activeMove: Move = new Move();
-  originMoveSelector: boolean = false;
-  game: GameService;
+  moveManager: Move = new Move();
 
-  constructor(game: GameService) {
-    this.game = game;
+  constructor(public game: GameService) {
     this.game.setMoveClickCallback((m: Move) => {
-      this.activeMove.extractFromString(String(m));
+      this.moveManager.fromString(String(m));
     });
   }
 
@@ -41,12 +35,8 @@ export class KeyboardComponent implements OnInit {
     this.setButtons();
   }
 
-  onKeyboardChange() {
-    this.setButtons();
-  }
-
-  keyboard: Keyboard = new Keyboard(this.activeMove, () =>
-    this.onKeyboardChange(),
+  keyboard: Keyboard = new Keyboard(this.moveManager, () =>
+    this.ngOnInit(),
   );
   leftColumn: KeyboardButton[] = [];
   middleColumn: KeyboardButton[] = [];
@@ -57,7 +47,12 @@ export class KeyboardComponent implements OnInit {
       .slice(0, 3)
       .concat([this.keyboard.clearButton]);
     this.middleColumn = this.keyboard.coordinateButtons.concat(
-      this.keyboard.mainSection,
+      [
+        this.keyboard.switchButton,
+        this.keyboard.multiMoveButton,
+        this.keyboard.castleButton,
+        this.keyboard.captureButton,
+      ]
     );
     this.rightColumn = this.keyboard.pieceButtons
       .slice(3, 6)
@@ -65,14 +60,15 @@ export class KeyboardComponent implements OnInit {
   }
 
   displayCurrentMove(): string {
-    return this.activeMove.toString(true);
+    return this.moveManager.toString(true);
   }
 
   submit(event: any): void {
-    if (!this.activeMove.valid()) {
+    if (!this.moveManager.valid()) {
       return;
     }
-    this.game.makeMove(this.activeMove.clone());
+    this.game.makeMove(this.moveManager.clone());
+    this.onSubmit.emit(this.moveManager.clone());
     this.keyboard.clearKeyboard();
   }
 }
