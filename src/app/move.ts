@@ -8,12 +8,12 @@ const PieceMap: { [index: string]: any } = {
 };
 
 enum MovePiece {
-  King = "K",
-  Queen = "Q",
-  Rook = "R",
-  Bishop = "B",
-  Knight = "N",
-  Pawn = ""
+  King = 'K',
+  Queen = 'Q',
+  Rook = 'R',
+  Bishop = 'B',
+  Knight = 'N',
+  Pawn = '',
 }
 
 export class Move {

@@ -7,9 +7,7 @@ describe('Move', () => {
 
   describe('fromString', () => {
     const expectFromString = (moveString: string, obj: any) => {
-      expect(new Move(moveString)).toEqual(
-        jasmine.objectContaining(obj),
-      );
+      expect(new Move(moveString)).toEqual(jasmine.objectContaining(obj));
     };
 
     it('should extract a Pawn move', () => {
@@ -32,7 +30,7 @@ describe('Move', () => {
         column: 'e',
         sourceColumn: 'f',
         row: '4',
-        take: true
+        take: true,
       });
 
       expectFromString('hxg5', {
@@ -40,7 +38,7 @@ describe('Move', () => {
         column: 'g',
         sourceColumn: 'h',
         row: '5',
-        take: true
+        take: true,
       });
     });
 
@@ -49,14 +47,14 @@ describe('Move', () => {
         piece: undefined,
         column: 'e',
         row: '8',
-        promotionPiece: "Q"
+        promotionPiece: 'Q',
       });
 
       expectFromString('h1=R', {
         piece: undefined,
         column: 'h',
         row: '1',
-        promotionPiece: "R"
+        promotionPiece: 'R',
       });
     });
 
@@ -98,7 +96,7 @@ describe('Move', () => {
         piece: 'N',
         column: 'h',
         row: '4',
-        take: true
+        take: true,
       });
 
       expectFromString('Ncxd4', {
@@ -106,22 +104,22 @@ describe('Move', () => {
         column: 'd',
         row: '4',
         sourceColumn: 'c',
-        take: true
+        take: true,
       });
 
       expectFromString('N3xd4', {
         piece: 'N',
         column: 'd',
         row: '4',
-        sourceRow: "3",
-        take: true
+        sourceRow: '3',
+        take: true,
       });
 
       expectFromString('Ned4', {
         piece: 'N',
         column: 'd',
         row: '4',
-        sourceColumn: "e"
+        sourceColumn: 'e',
       });
     });
 
@@ -149,7 +147,7 @@ describe('Move', () => {
         piece: 'R',
         column: 'e',
         row: '5',
-        sourceColumn:"a",
+        sourceColumn: 'a',
         take: true,
       });
 
@@ -157,7 +155,7 @@ describe('Move', () => {
         piece: 'R',
         column: 'e',
         row: '5',
-        sourceRow: "3",
+        sourceRow: '3',
         take: true,
       });
     });
@@ -186,7 +184,7 @@ describe('Move', () => {
         piece: 'Q',
         column: 'e',
         row: '5',
-        sourceColumn: "a",
+        sourceColumn: 'a',
         take: true,
       });
 
@@ -194,7 +192,7 @@ describe('Move', () => {
         piece: 'Q',
         column: 'e',
         row: '5',
-        sourceRow: "4",
+        sourceRow: '4',
         take: true,
       });
     });
@@ -215,11 +213,11 @@ describe('Move', () => {
 
     it('should extract a Castle move', () => {
       expectFromString('O-O', {
-        castle: "O-O"
+        castle: 'O-O',
       });
 
       expectFromString('O-O-O', {
-        castle: "O-O-O"
+        castle: 'O-O-O',
       });
     });
   });

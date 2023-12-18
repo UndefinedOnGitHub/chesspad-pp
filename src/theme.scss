@@ -13,19 +13,19 @@
 @include mat.button-toggle-color(theme.$dark-theme);
 @include mat.table-color(theme.$dark-theme);
 body {
-	@include theme.dark-mode-background();
+  @include theme.dark-mode-background();
 }
 
 @media (prefers-color-scheme: light) {
-	@include mat.core-color(theme.$my-theme);
-	@include mat.button-color(theme.$my-theme);
-	@include mat.toolbar-color(theme.$my-theme);
-	@include mat.card-color(theme.$my-theme);
-	@include mat.snack-bar-color(theme.$my-theme);
-	@include mat.dialog-color(theme.$my-theme);
-	@include mat.button-toggle-color(theme.$my-theme);
-	@include mat.table-color(theme.$dark-theme);
-	body {
-		@include theme.light-mode-background();
-	}
+  @include mat.core-color(theme.$my-theme);
+  @include mat.button-color(theme.$my-theme);
+  @include mat.toolbar-color(theme.$my-theme);
+  @include mat.card-color(theme.$my-theme);
+  @include mat.snack-bar-color(theme.$my-theme);
+  @include mat.dialog-color(theme.$my-theme);
+  @include mat.button-toggle-color(theme.$my-theme);
+  @include mat.table-color(theme.$dark-theme);
+  body {
+    @include theme.light-mode-background();
+  }
 }

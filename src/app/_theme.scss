@@ -85,15 +85,17 @@ $my-theme: mat.define-light-theme(
   )
 );
 
-$dark-theme: mat.define-dark-theme((
- color: (
-   primary: $primary,
-   accent: $secondary,
-   warn: $error,
- ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $secondary,
+      warn: $error,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
 @mixin primary-color($primaryValue: 600) {
   background: mat.get-color-from-palette($primary, $primaryValue);

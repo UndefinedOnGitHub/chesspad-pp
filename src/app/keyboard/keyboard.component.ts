@@ -35,9 +35,7 @@ export class KeyboardComponent implements OnInit {
     this.setButtons();
   }
 
-  keyboard: Keyboard = new Keyboard(this.moveManager, () =>
-    this.ngOnInit(),
-  );
+  keyboard: Keyboard = new Keyboard(this.moveManager, () => this.ngOnInit());
   leftColumn: KeyboardButton[] = [];
   middleColumn: KeyboardButton[] = [];
   rightColumn: KeyboardButton[] = [];
@@ -46,14 +44,12 @@ export class KeyboardComponent implements OnInit {
     this.leftColumn = this.keyboard.pieceButtons
       .slice(0, 3)
       .concat([this.keyboard.clearButton]);
-    this.middleColumn = this.keyboard.coordinateButtons.concat(
-      [
-        this.keyboard.switchButton,
-        this.keyboard.multiMoveButton,
-        this.keyboard.castleButton,
-        this.keyboard.captureButton,
-      ]
-    );
+    this.middleColumn = this.keyboard.coordinateButtons.concat([
+      this.keyboard.switchButton,
+      this.keyboard.multiMoveButton,
+      this.keyboard.castleButton,
+      this.keyboard.captureButton,
+    ]);
     this.rightColumn = this.keyboard.pieceButtons
       .slice(3, 6)
       .concat([this.keyboard.promotionButton]);
