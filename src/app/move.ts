@@ -1,3 +1,5 @@
+import { KeyboardButton } from './button';
+
 const PieceMap: { [index: string]: any } = {
   K: '♚',
   Q: '♛',
@@ -14,6 +16,17 @@ enum MovePiece {
   Bishop = 'B',
   Knight = 'N',
   Pawn = '',
+}
+
+class MoveHistory {
+  move : Move;
+  moveAttribute : string;
+  button : KeyboardButton | undefined;
+  constructor(move: Move, moveAttribute : string, button : KeyboardButton | undefined = undefined) {
+    this.move = move;
+    this.moveAttribute = moveAttribute;
+    this.button = button;
+  }
 }
 
 export class Move {
@@ -39,7 +52,7 @@ export class Move {
 
   // Array for holding the history of the move construction
   // this allows for stepping back through the changes
-  history: Move[] = [];
+  history: MoveHistory[] = [];
 
   constructor(moveString: string | null = null) {
     if (moveString) {
@@ -90,8 +103,18 @@ export class Move {
     return cloneObj;
   }
 
-  storeMove() {
-    this.history.push(this.clone());
+  storeMove(moveAttribute : string, moveButton : KeyboardButton | undefined = undefined) {
+    this.history.push(
+      new MoveHistory(
+        this.clone(),
+        moveAttribute,
+        moveButton
+      )
+    );
+  }
+
+  lastMove(backIdx : number = 0) : MoveHistory | undefined {
+    return this.history[this.history.length - 1 - backIdx]
   }
 
   valid(): boolean {
@@ -117,47 +140,47 @@ export class Move {
     }
   }
 
-  setPiece(piece: string): void {
-    this.storeMove();
-    this.piece = piece;
+  setPiece(pieceBtn: KeyboardButton): void {
+    this.storeMove("piece", pieceBtn);
+    this.piece = pieceBtn.symbol;
     this.castle = null;
   }
-  setSource(source: string, location: 'row' | 'column' = 'column'): void {
-    this.storeMove();
+  setSource(sourceBtn: KeyboardButton, location: 'row' | 'column' = 'column'): void {
+    this.storeMove(location == "row" ? "sourceRow" : "sourceColumn", sourceBtn);
     if (location == 'column') {
-      this.sourceColumn = source;
+      this.sourceColumn = sourceBtn.symbol;
     } else if (location == 'row') {
-      this.sourceRow = source;
+      this.sourceRow = sourceBtn.symbol;
     }
     this.castle = null;
   }
-  setCol(col: string): void {
-    this.storeMove();
-    this.column = col;
+  setCol(colBtn: KeyboardButton): void {
+    this.storeMove("column", colBtn);
+    this.column = colBtn.symbol;
     this.castle = null;
   }
-  setRow(row: string): void {
-    this.storeMove();
-    this.row = row;
+  setRow(rowBtn: KeyboardButton): void {
+    this.storeMove("row", rowBtn);
+    this.row = rowBtn.symbol;
     this.castle = null;
   }
   setTake(): void {
-    this.storeMove();
+    this.storeMove("take");
     this.take = !this.take;
     this.castle = null;
   }
   setCheck(): void {
-    this.storeMove();
+    this.storeMove("check");
     this.check = !this.check;
   }
   setCastle(direction: 'O-O' | 'O-O-O'): void {
-    this.storeMove();
+    this.storeMove("castle");
     this.clear(true);
     this.castle = direction;
   }
-  setPromotion(piece: string): void {
-    this.storeMove();
-    this.promotionPiece = piece;
+  setPromotion(pieceBtn: KeyboardButton): void {
+    this.storeMove("promotionPiece", pieceBtn);
+    this.promotionPiece = pieceBtn.symbol;
     this.castle = null;
   }
 
@@ -192,23 +215,35 @@ export class Move {
     return this;
   }
 
+  toPieceString(withSymbols : boolean) : string | undefined {
+    let piece;
+    if (withSymbols) {
+      piece = PieceMap[this.piece || ''] || this.piece;
+    } else {
+      piece = this.piece;
+    }
+    return piece;
+  }
+
+  toPromotionPieceString(withSymbols : boolean) : string | undefined {
+    let promotionPiece;
+    if (withSymbols) {
+      const pp = PieceMap[this.promotionPiece || ''] || this.promotionPiece;
+      promotionPiece = pp ? `=${pp}` : undefined;
+    } else {
+      promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : undefined;
+    }
+    return promotionPiece
+  }
+
   toString(withSymbols: boolean = false): string {
     if (this.isEmpty()) return '';
     if (this.castle) return this.castle;
 
     const emptyPlaceholder = '';
-    let piece;
-    let promotionPiece;
-    if (withSymbols) {
-      piece = PieceMap[this.piece || ''] || this.piece || emptyPlaceholder;
-      const promotionTry =
-        PieceMap[this.promotionPiece || ''] || this.promotionPiece;
-      promotionPiece = promotionTry ? `=${promotionTry}` : '';
-    } else {
-      piece = this.piece || emptyPlaceholder;
-      promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : '';
-    }
 
+    const piece = this.toPieceString(withSymbols) || emptyPlaceholder;
+    const promotionPiece = this.toPromotionPieceString(withSymbols) || emptyPlaceholder;
     const sourceColumn = this.sourceColumn || emptyPlaceholder;
     const sourceRow = this.sourceRow || emptyPlaceholder;
     const take = this.take ? 'x' : '';

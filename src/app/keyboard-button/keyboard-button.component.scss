@@ -11,7 +11,7 @@ button.mdc-button {
   height: 100%;
   &.active {
     @include theme.primary-color;
-    &.blue-active {
+    &.secondary-active {
       @include theme.secondary-color;
     }
   }
