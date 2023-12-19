@@ -31,3 +31,12 @@ $key-width: calc($keyboard-width / 5);
     min-width: initial;
   }
 }
+.current-move-display {
+  @include theme.on-background;
+  span {
+    font-weight: bold;
+    font-size: 17px;
+    padding-right: 8px;
+    padding-left: 4px;
+  }
+}

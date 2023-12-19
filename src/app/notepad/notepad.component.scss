@@ -5,3 +5,24 @@
   min-width: 30px;
   padding-right: 10px;
 }
+
+@media (prefers-color-scheme: dark) {
+  // Not sure how else to do it.
+  // Mocking the table-dark bs class
+  .mock-table-dark {
+    --bs-table-color: #fff;
+    --bs-table-bg: #212529;
+    --bs-table-border-color: #4d5154;
+    --bs-table-striped-bg: #2c3034;
+    --bs-table-striped-color: #fff;
+    --bs-table-active-bg: #373b3e;
+    --bs-table-active-color: #fff;
+    --bs-table-hover-bg: #323539;
+    --bs-table-hover-color: #fff;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+  }
+  .table {
+    @extend .mock-table-dark;
+  }
+}

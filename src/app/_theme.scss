@@ -105,11 +105,21 @@ $dark-theme: mat.define-dark-theme(
   background: mat.get-color-from-palette($secondary, $primaryValue);
   color: mat.get-color-from-palette($on-secondary, $primaryValue);
 }
-@mixin light-mode-background() {
-  background-color: #ffffff;
-}
-@mixin dark-mode-background() {
+
+@mixin background-color() {
   background-color: #0e0e10;
+  @media (prefers-color-scheme: light) {
+    background-color: #ffffff;
+  }
+}
+
+@mixin on-background() {
+  background-color: #0e0e10;
+  color: mat.get-color-from-palette($primary, 600);
+  @media (prefers-color-scheme: light) {
+    background-color: #ffffff;
+    color: black;
+  }
 }
 
 @font-face {
