@@ -19,10 +19,14 @@ enum MovePiece {
 }
 
 class MoveHistory {
-  move : Move;
-  moveAttribute : string;
-  button : KeyboardButton | undefined;
-  constructor(move: Move, moveAttribute : string, button : KeyboardButton | undefined = undefined) {
+  move: Move;
+  moveAttribute: string;
+  button: KeyboardButton | undefined;
+  constructor(
+    move: Move,
+    moveAttribute: string,
+    button: KeyboardButton | undefined = undefined,
+  ) {
     this.move = move;
     this.moveAttribute = moveAttribute;
     this.button = button;
@@ -103,18 +107,15 @@ export class Move {
     return cloneObj;
   }
 
-  storeMove(moveAttribute : string, moveButton : KeyboardButton | undefined = undefined) {
-    this.history.push(
-      new MoveHistory(
-        this.clone(),
-        moveAttribute,
-        moveButton
-      )
-    );
+  storeMove(
+    moveAttribute: string,
+    moveButton: KeyboardButton | undefined = undefined,
+  ) {
+    this.history.push(new MoveHistory(this.clone(), moveAttribute, moveButton));
   }
 
-  lastMove(backIdx : number = 0) : MoveHistory | undefined {
-    return this.history[this.history.length - 1 - backIdx]
+  lastMove(backIdx: number = 0): MoveHistory | undefined {
+    return this.history[this.history.length - 1 - backIdx];
   }
 
   valid(): boolean {
@@ -141,12 +142,15 @@ export class Move {
   }
 
   setPiece(pieceBtn: KeyboardButton): void {
-    this.storeMove("piece", pieceBtn);
+    this.storeMove('piece', pieceBtn);
     this.piece = pieceBtn.symbol;
     this.castle = null;
   }
-  setSource(sourceBtn: KeyboardButton, location: 'row' | 'column' = 'column'): void {
-    this.storeMove(location == "row" ? "sourceRow" : "sourceColumn", sourceBtn);
+  setSource(
+    sourceBtn: KeyboardButton,
+    location: 'row' | 'column' = 'column',
+  ): void {
+    this.storeMove(location == 'row' ? 'sourceRow' : 'sourceColumn', sourceBtn);
     if (location == 'column') {
       this.sourceColumn = sourceBtn.symbol;
     } else if (location == 'row') {
@@ -155,31 +159,31 @@ export class Move {
     this.castle = null;
   }
   setCol(colBtn: KeyboardButton): void {
-    this.storeMove("column", colBtn);
+    this.storeMove('column', colBtn);
     this.column = colBtn.symbol;
     this.castle = null;
   }
   setRow(rowBtn: KeyboardButton): void {
-    this.storeMove("row", rowBtn);
+    this.storeMove('row', rowBtn);
     this.row = rowBtn.symbol;
     this.castle = null;
   }
   setTake(): void {
-    this.storeMove("take");
+    this.storeMove('take');
     this.take = !this.take;
     this.castle = null;
   }
   setCheck(): void {
-    this.storeMove("check");
+    this.storeMove('check');
     this.check = !this.check;
   }
   setCastle(direction: 'O-O' | 'O-O-O'): void {
-    this.storeMove("castle");
+    this.storeMove('castle');
     this.clear(true);
     this.castle = direction;
   }
   setPromotion(pieceBtn: KeyboardButton): void {
-    this.storeMove("promotionPiece", pieceBtn);
+    this.storeMove('promotionPiece', pieceBtn);
     this.promotionPiece = pieceBtn.symbol;
     this.castle = null;
   }
@@ -215,7 +219,7 @@ export class Move {
     return this;
   }
 
-  toPieceString(withSymbols : boolean) : string | undefined {
+  toPieceString(withSymbols: boolean): string | undefined {
     let piece;
     if (withSymbols) {
       piece = PieceMap[this.piece || ''] || this.piece;
@@ -225,15 +229,17 @@ export class Move {
     return piece;
   }
 
-  toPromotionPieceString(withSymbols : boolean) : string | undefined {
+  toPromotionPieceString(withSymbols: boolean): string | undefined {
     let promotionPiece;
     if (withSymbols) {
       const pp = PieceMap[this.promotionPiece || ''] || this.promotionPiece;
       promotionPiece = pp ? `=${pp}` : undefined;
     } else {
-      promotionPiece = this.promotionPiece ? `=${this.promotionPiece}` : undefined;
+      promotionPiece = this.promotionPiece
+        ? `=${this.promotionPiece}`
+        : undefined;
     }
-    return promotionPiece
+    return promotionPiece;
   }
 
   toString(withSymbols: boolean = false): string {
@@ -243,7 +249,8 @@ export class Move {
     const emptyPlaceholder = '';
 
     const piece = this.toPieceString(withSymbols) || emptyPlaceholder;
-    const promotionPiece = this.toPromotionPieceString(withSymbols) || emptyPlaceholder;
+    const promotionPiece =
+      this.toPromotionPieceString(withSymbols) || emptyPlaceholder;
     const sourceColumn = this.sourceColumn || emptyPlaceholder;
     const sourceRow = this.sourceRow || emptyPlaceholder;
     const take = this.take ? 'x' : '';

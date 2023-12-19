@@ -31,26 +31,26 @@ export class KeyboardButton {
     this.onTrigger(self);
   }
 
-  toggleActive(manualValue : boolean | undefined = undefined): void {
-    this.active = (manualValue == undefined) ? !this.active : manualValue;
+  toggleActive(manualValue: boolean | undefined = undefined): void {
+    this.active = manualValue == undefined ? !this.active : manualValue;
   }
 
-  toggleSecondaryActive(manualValue : boolean | undefined = undefined) {
-    this.class = "secondary-active"
+  toggleSecondaryActive(manualValue: boolean | undefined = undefined) {
+    this.class = 'secondary-active';
     this.toggleActive(manualValue);
   }
 
-  isActive() : boolean {
-    return this.class != "secondary-active" && this.active;
+  isActive(): boolean {
+    return this.class != 'secondary-active' && this.active;
   }
 
-  isSecondaryActive() : boolean {
-    return this.class == "secondary-active" && this.active;
+  isSecondaryActive(): boolean {
+    return this.class == 'secondary-active' && this.active;
   }
 
   deactivate() {
     this.active = false;
-    this.class = ""
+    this.class = '';
   }
 
   get value(): string {

@@ -53,7 +53,9 @@ export class Keyboard {
     btn: KeyboardButton,
     location: 'column' | 'row',
   ): void {
-    buttons.filter(kb => kb.isSecondaryActive()).forEach(kb => kb.deactivate())
+    buttons
+      .filter((kb) => kb.isSecondaryActive())
+      .forEach((kb) => kb.deactivate());
 
     this.moveManager.setSource(btn, location);
     btn.toggleSecondaryActive();
@@ -65,19 +67,21 @@ export class Keyboard {
   // A move to allow clicking col series to set source
   // Click e, Click take, Click d --> exd
   sourceMoveTrick(btn: KeyboardButton) {
-    const lm = this.moveManager.lastMove()
-    const llm = this.moveManager.lastMove(1)
+    const lm = this.moveManager.lastMove();
+    const llm = this.moveManager.lastMove(1);
 
-    if (lm?.moveAttribute == "take" && llm?.moveAttribute == "column") {
-      this.letterButtons.filter(kb => kb.isSecondaryActive()).forEach(kb => kb.deactivate())
-      this.moveManager.setCol(btn)
+    if (lm?.moveAttribute == 'take' && llm?.moveAttribute == 'column') {
+      this.letterButtons
+        .filter((kb) => kb.isSecondaryActive())
+        .forEach((kb) => kb.deactivate());
+      this.moveManager.setCol(btn);
       if (llm.button) {
-        this.moveManager.setSource(llm.button, "column")
+        this.moveManager.setSource(llm.button, 'column');
       }
-      llm.button?.toggleSecondaryActive(true)
-      btn.toggleActive(true)
+      llm.button?.toggleSecondaryActive(true);
+      btn.toggleActive(true);
       // Hack to prevent rest of code from running
-      throw "Esacpe"
+      throw 'Esacpe';
     }
   }
 
@@ -88,8 +92,8 @@ export class Keyboard {
       this.onSourceMove(this.letterButtons, btn, 'column');
     } else {
       this.letterButtons
-        .filter(kb => !kb.isSecondaryActive())
-        .forEach(kb => kb.deactivate());
+        .filter((kb) => !kb.isSecondaryActive())
+        .forEach((kb) => kb.deactivate());
       this.moveManager.setCol(btn);
       btn.toggleActive();
     }
@@ -100,8 +104,8 @@ export class Keyboard {
       this.onSourceMove(this.numberButtons, btn, 'row');
     } else {
       this.numberButtons
-        .filter(kb => !kb.isSecondaryActive())
-        .forEach(kb => kb.deactivate());
+        .filter((kb) => !kb.isSecondaryActive())
+        .forEach((kb) => kb.deactivate());
       this.moveManager.setRow(btn);
       btn.toggleActive();
     }
