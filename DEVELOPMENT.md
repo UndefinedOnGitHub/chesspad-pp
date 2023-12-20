@@ -1,7 +1,7 @@
 # Chesspad++ Development
 
-* Node v20.5.0
-* Angular v16.1.0
+- Node v20.5.0
+- Angular v16.1.0
 
 ### Development server
 
@@ -34,6 +34,7 @@ npm run deploy
 ```
 
 ### Running end-to-end tests
+
 #### Tests need to be built
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.

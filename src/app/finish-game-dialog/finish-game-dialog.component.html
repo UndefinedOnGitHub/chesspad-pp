@@ -14,7 +14,16 @@
     <textarea disabled matInput [value]="gameString"></textarea>
   </mat-form-field>
 </div>
-<div mat-dialog-actions class="d-flex justify-content-between">
+<div mat-dialog-actions class="d-flex justify-content-around">
   <button mat-button (click)="close()">New Game</button>
   <button mat-button (click)="copy()">Copy</button>
+  <button mat-button (click)="copyAndGo('https://lichess.org/analysis')">
+    Copy & lichess.com
+  </button>
+  <button
+    mat-button
+    (click)="copyAndGo('https://www.chess.com/analysis?tab=analysis')"
+  >
+    Copy & chess.com
+  </button>
 </div>

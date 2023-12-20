@@ -39,9 +39,19 @@ export class FinishGameDialogComponent {
     this.game.clearGame();
     this.dialogRef.close();
   }
+
   copy() {
     const txt = this.game.exportPGN();
     navigator.clipboard.writeText(txt);
     this.notify.warn('PGN Copied');
+  }
+
+  copyAndGo(href: string): void {
+    const txt = this.game.exportPGN();
+    navigator.clipboard.writeText(txt);
+    // Allow keyboard to get the copy before opening the tab
+    setTimeout(() => {
+      window.open(href, '_blank');
+    });
   }
 }
