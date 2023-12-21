@@ -289,4 +289,46 @@ export class Keyboard {
     this.switchCoordinateButtons();
     this.onKeyboardChange();
   }
+
+  extractFromMove(move: Move) {
+    this.clearKeyboard();
+    this.moveManager.fromString(String(move));
+
+    const activateButtons: KeyboardButton[] = [];
+    if (move.piece) {
+      const foundButton = this.pieceButtons.find((b) => b.symbol == move.piece);
+      if (foundButton) foundButton.active = true;
+    }
+    if (move.sourceColumn) {
+      const foundButton = this.letterButtons.find(
+        (b) => b.symbol == move.sourceColumn,
+      );
+      if (foundButton) foundButton.toggleSecondaryActive();
+    }
+    if (move.column) {
+      const foundButton = this.letterButtons.find(
+        (b) => b.symbol == move.column,
+      );
+      if (foundButton) foundButton.active = true;
+    }
+    if (move.sourceRow) {
+      const foundButton = this.numberButtons.find(
+        (b) => b.symbol == move.sourceRow,
+      );
+      if (foundButton) foundButton.toggleSecondaryActive();
+    }
+    if (move.row) {
+      const foundButton = this.numberButtons.find((b) => b.symbol == move.row);
+      if (foundButton) foundButton.active = true;
+    }
+    if (move.promotionPiece) {
+      const foundButton = this.pieceButtons.find(
+        (b) => b.symbol == move.promotionPiece,
+      );
+      if (foundButton) foundButton.active = true;
+    }
+    if (move.take) {
+      activateButtons.push(this.captureButton);
+    }
+  }
 }
