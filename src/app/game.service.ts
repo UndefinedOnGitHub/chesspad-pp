@@ -6,7 +6,6 @@ import { chunk } from 'lodash';
   providedIn: 'root',
 })
 export class GameService {
-  onChageCallbacks: Function[] = [];
   onMoveClickCallbacks: Function[] = [];
   activeMoveIdx: number = -1;
   moves: Move[] = [];

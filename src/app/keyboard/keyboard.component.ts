@@ -28,6 +28,7 @@ export class KeyboardComponent implements OnInit {
   constructor(public game: GameService) {
     this.game.setMoveClickCallback((m: Move) => {
       this.moveManager.fromString(String(m));
+      this.keyboard.extractFromMove(m);
     });
   }
 

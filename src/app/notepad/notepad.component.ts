@@ -15,14 +15,18 @@ export class NotepadComponent {
     this.game = game;
   }
 
-  onMoveClick(move: Move) {
-    move.active = !move.active;
-    this.game.onMoveClick(move);
+  onMoveClick(move: Move | undefined) {
+    if (move && !move.isEmpty()) {
+      move.active = !move.active;
+      this.game.onMoveClick(move);
+    }
   }
 
   movesToRows(): Move[][] {
     const moves = this.game.moves;
     const chunked = chunk(moves, 2);
+
+    // If the previous line is full insert new line
     if (moves.length % 2 == 0) {
       chunked.push([new Move(), new Move()]);
     }

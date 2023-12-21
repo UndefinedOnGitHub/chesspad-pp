@@ -4,6 +4,12 @@
 }
 .move-cell {
   padding: 4px;
+  cursor: pointer;
+  // Prevent selecting of text in the cell
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 .active {
   .move-cell {

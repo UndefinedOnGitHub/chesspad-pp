@@ -99,7 +99,7 @@ export class Move {
     return !this.allPositions().some((i) => !!i);
   }
 
-  clone() {
+  clone(): Move {
     var cloneObj = new Move() as any;
     for (var attribut in this) {
       cloneObj[attribut] = this[attribut];
@@ -110,7 +110,7 @@ export class Move {
   storeMove(
     moveAttribute: string,
     moveButton: KeyboardButton | undefined = undefined,
-  ) {
+  ): void {
     this.history.push(new MoveHistory(this.clone(), moveAttribute, moveButton));
   }
 
@@ -123,7 +123,7 @@ export class Move {
     return !!this.column && !!this.row;
   }
 
-  subtractMove() {
+  subtractMove(): void {
     if (this.check) {
       this.check = false;
     } else if (this.row) {
