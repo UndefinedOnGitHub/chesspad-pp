@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Move } from './move';
 import { chunk } from 'lodash';
+import { ChessInterfaceService } from './chess-interface.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,20 +12,21 @@ export class GameService {
   moves: Move[] = [];
   gameResult: '1-0' | '1/2-1/2' | '0-1' = '1/2-1/2';
 
-  constructor() {}
+  constructor(public chess: ChessInterfaceService) {}
 
   setMoveClickCallback(func: Function): void {
     this.onMoveClickCallbacks.push(func);
   }
 
   makeMove(move: Move): void {
+    this.chess.test()
     if (this.activeMoveIdx >= 0) {
       this.moves[this.activeMoveIdx] = move;
       this.activeMoveIdx = -1;
-      return;
+    } else {
+      this.moves.push(move);
+      this.scrollToLastMove();
     }
-    this.moves.push(move);
-    this.scrollToLastMove();
     // Save game
     this.storeGame();
   }

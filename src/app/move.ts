@@ -9,14 +9,14 @@ const PieceMap: { [index: string]: any } = {
   // p: "♙",
 };
 
-enum MovePiece {
-  King = 'K',
-  Queen = 'Q',
-  Rook = 'R',
-  Bishop = 'B',
-  Knight = 'N',
-  Pawn = '',
-}
+// enum MovePiece {
+//   King = 'K',
+//   Queen = 'Q',
+//   Rook = 'R',
+//   Bishop = 'B',
+//   Knight = 'N',
+//   Pawn = '',
+// }
 
 class MoveHistory {
   move: Move;
