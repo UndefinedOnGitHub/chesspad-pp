@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Move } from './move';
 import { chunk } from 'lodash';
 import { ChessInterfaceService } from './chess-interface.service';
+import { Chess } from 'chess.js';
 
 @Injectable({
   providedIn: 'root',
@@ -11,24 +12,42 @@ export class GameService {
   activeMoveIdx: number = -1;
   moves: Move[] = [];
   gameResult: '1-0' | '1/2-1/2' | '0-1' = '1/2-1/2';
+  game: Chess;
 
-  constructor(public chess: ChessInterfaceService) {}
+  constructor(public chessGame: ChessInterfaceService) {
+    this.game = new Chess();
+  }
 
   setMoveClickCallback(func: Function): void {
     this.onMoveClickCallbacks.push(func);
   }
 
-  makeMove(move: Move): void {
-    this.chess.test()
-    if (this.activeMoveIdx >= 0) {
-      this.moves[this.activeMoveIdx] = move;
-      this.activeMoveIdx = -1;
-    } else {
-      this.moves.push(move);
-      this.scrollToLastMove();
+  makeNextMove(move: Move) {
+    this.game.move(move.toString());
+    console.log(this.game.ascii());
+    this.moves.push(move);
+    this.scrollToLastMove();
+  }
+
+  makeHistoricalMove(move: Move) {
+    this.moves[this.activeMoveIdx] = move;
+    this.activeMoveIdx = -1;
+  }
+
+  makeMove(move: Move): { sucess: boolean } {
+    try {
+      if (this.activeMoveIdx >= 0) {
+        this.makeHistoricalMove(move);
+      } else {
+        this.makeNextMove(move);
+      }
+    } catch (err) {
+      console.error(err);
+      return { sucess: false };
     }
     // Save game
     this.storeGame();
+    return { sucess: true };
   }
 
   scrollToLastMove() {
@@ -45,7 +64,7 @@ export class GameService {
     }
   }
 
-  onMoveClick(move: Move) {
+  onMoveClick(move: Move): void {
     if (move.active) {
       this.activeMoveIdx = this.moves.findIndex((f) => f == move);
       this.onMoveClickCallbacks.forEach((f) => f(move));
@@ -59,35 +78,15 @@ export class GameService {
     return `${now.getFullYear()}.${now.getMonth()}.${now.getDate()}`;
   }
 
-  pgnMoves(): string {
-    const chuncked = chunk(this.moves, 2);
-    const moveRows = [];
-    for (let midx = 0; midx < chuncked.length; midx++) {
-      moveRows.push(
-        [`${midx + 1}.`, chuncked[midx][0], chuncked[midx][1]]
-          .filter((i) => i)
-          .join(' '),
-      );
-    }
-    return moveRows.join(' ');
-  }
-
   exportPGN(): string {
-    const pgnMoves = this.pgnMoves();
-    const pgn = `[Event "Chesspad ++ PGN"]
-[Site "Online"]
-[Date "${this.formatDate()}"]
-[EventDate "${this.formatDate()}"]
-[Round "-"]
-[Result "${this.gameResult}"]
-[White "White Name"]
-[Black "Black Name"]
-[WhiteElo "?"]
-[BlackElo "?"]
-${pgnMoves} ${this.gameResult}
-`;
-    // console.log(pgn);
-    return pgn;
+    this.game.header('Site', 'Chesspadd ++');
+    this.game.header('Date', this.formatDate());
+    this.game.header('Result', this.gameResult);
+    this.game.header('White', 'White Player');
+    this.game.header('Black', 'Black Player');
+    this.game.header('WhiteElo', '500');
+    this.game.header('BlackElo', '500');
+    return this.game.pgn();
   }
 
   toString(): string {
@@ -95,24 +94,24 @@ ${pgnMoves} ${this.gameResult}
   }
 
   storeGame(): void {
-    const pgnMoves = this.pgnMoves();
+    const pgnMoves = this.game.pgn();
     localStorage.setItem('local_game', pgnMoves);
   }
   fetchGame(): Move[] {
-    const pgn = localStorage.getItem('local_game') || '';
-    const moves: Move[] = pgn
-      .replaceAll('\n', ' ')
-      .replaceAll('\t', '')
-      .split(/\d+\./)
-      .filter((i) => i.length > 0)
-      .map((i) => i.trim().split(' '))
-      .flat()
-      .map((i) => new Move(i));
-    this.moves = moves;
-    this.scrollToLastMove();
-    return moves;
+    try {
+      const pgn = localStorage.getItem('local_game') || '';
+      this.game.loadPgn(pgn);
+      console.log(this.game.ascii());
+      this.moves = this.game.history().map((h) => new Move(h));
+      this.scrollToLastMove();
+    } catch (err) {
+      console.error(err);
+    }
+
+    return this.moves;
   }
   clearGame(): void {
+    this.game.reset();
     this.moves = [];
     this.activeMoveIdx = -1;
     localStorage.removeItem('local_game');

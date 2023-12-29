@@ -1,18 +1,33 @@
+// SHOULD BE DELETED
+// DO NOT USE DO NOT KEEP
+
 import { Injectable } from '@angular/core';
-import { Chess } from 'chess.js'
+import { Chess } from 'chess.js';
 // https://github.com/jhlywa/chess.js/blob/master/README.md
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChessInterfaceService {
   chess: Chess;
   constructor() {
-    this.chess = new Chess()
+    this.chess = new Chess();
+  }
+
+  makeMove(move: string): void {
+    this.chess.move(move);
+  }
+
+  loadPgn(pgn: string) {
+    this.chess.loadPgn(pgn);
+  }
+
+  toString(): string {
+    return this.chess.ascii();
   }
 
   test() {
-    const chess = new Chess()
+    const chess = new Chess();
     // chess.move(move)
     // chess.ascii()
     // chess.clear()
@@ -38,6 +53,6 @@ export class ChessInterfaceService {
     // chess.undo()
     // import { validateFen } from 'chess.js'
     // validateFen('4r3/8/X12XPk/1p6/pP2p1R1/P1B5/2P2K2/3r4 w - - 1 45')
-    debugger
+    debugger;
   }
 }
