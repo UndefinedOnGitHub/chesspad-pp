@@ -60,12 +60,26 @@ export class KeyboardComponent implements OnInit {
     return this.moveManager.toString(true);
   }
 
+  triggerErrorAnimation(): void {
+    const ele = document.getElementById('currentMoveDisplay');
+    if (ele) {
+      ele.className = 'error-animation';
+      setTimeout(() => {
+        ele.className = '';
+      }, 1000);
+    }
+  }
+
   submit(event: any): void {
     if (!this.moveManager.valid()) {
       return;
     }
-    this.game.makeMove(this.moveManager.clone());
-    this.onSubmit.emit(this.moveManager.clone());
-    this.keyboard.clearKeyboard();
+    const result = this.game.makeMove(this.moveManager.clone());
+    if (result.sucess) {
+      this.onSubmit.emit(this.moveManager.clone());
+      this.keyboard.clearKeyboard();
+    } else {
+      this.triggerErrorAnimation();
+    }
   }
 }

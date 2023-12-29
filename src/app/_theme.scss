@@ -97,11 +97,27 @@ $dark-theme: mat.define-dark-theme(
   )
 );
 
+@mixin standard-color($primaryValue: 600) {
+  color: #fff;
+  @media (prefers-color-scheme: light) {
+    color: #000;
+  }
+  &[class^="error"] {
+    color: #e70909;
+  }
+}
 @mixin primary-color($primaryValue: 600) {
+  color: mat.get-color-from-palette($primary, $primaryValue);
+}
+@mixin secondary-color($primaryValue: 600) {
+  color: mat.get-color-from-palette($secondary, $primaryValue);
+}
+
+@mixin primary-background-color($primaryValue: 600) {
   background: mat.get-color-from-palette($primary, $primaryValue);
   color: mat.get-color-from-palette($on-primary, $primaryValue);
 }
-@mixin secondary-color($primaryValue: 600) {
+@mixin secondary-background-color($primaryValue: 600) {
   background: mat.get-color-from-palette($secondary, $primaryValue);
   color: mat.get-color-from-palette($on-secondary, $primaryValue);
 }
@@ -109,7 +125,7 @@ $dark-theme: mat.define-dark-theme(
 @mixin background-color() {
   background-color: #0e0e10;
   @media (prefers-color-scheme: light) {
-    background-color: #ffffff;
+    background-color: #fff;
   }
 }
 
@@ -117,7 +133,7 @@ $dark-theme: mat.define-dark-theme(
   background-color: #0e0e10;
   color: mat.get-color-from-palette($primary, 600);
   @media (prefers-color-scheme: light) {
-    background-color: #ffffff;
+    background-color: #fff;
     color: black;
   }
 }

@@ -10,9 +10,9 @@ button.mdc-button {
   width: 100%;
   height: 100%;
   &.active {
-    @include theme.primary-color;
+    @include theme.primary-background-color;
     &.secondary-active {
-      @include theme.secondary-color;
+      @include theme.secondary-background-color;
     }
   }
 }
