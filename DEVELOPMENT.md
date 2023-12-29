@@ -38,3 +38,9 @@ npm run deploy
 #### Tests need to be built
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+### Chess Game Engine
+
+In order to keep track of the moves and only allow legal moves we use chess.js
+
+Documentation can be found [https://github.com/jhlywa/chess.js/tree/master](https://github.com/jhlywa/chess.js/tree/master)

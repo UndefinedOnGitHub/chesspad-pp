@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Move } from './move';
 import { chunk } from 'lodash';
-import { ChessInterfaceService } from './chess-interface.service';
 import { Chess } from 'chess.js';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class GameService {
   gameResult: '1-0' | '1/2-1/2' | '0-1' = '1/2-1/2';
   game: Chess;
 
-  constructor(public chessGame: ChessInterfaceService) {
+  constructor() {
     this.game = new Chess();
   }
 
@@ -22,14 +21,27 @@ export class GameService {
     this.onMoveClickCallbacks.push(func);
   }
 
-  makeNextMove(move: Move) {
+  makeNextMove(move: Move): void {
     this.game.move(move.toString());
-    console.log(this.game.ascii());
+    // console.log(this.game.ascii());
     this.moves.push(move);
     this.scrollToLastMove();
   }
 
-  makeHistoricalMove(move: Move) {
+  makeHistoricalMove(move: Move): void {
+    const newGame = new Chess();
+    const beforeMoves = this.game.history().slice(0, this.activeMoveIdx);
+    const afterMoves = this.game
+      .history()
+      .slice(this.activeMoveIdx + 1, this.game.history().length);
+    // Construct Game
+    beforeMoves.forEach((m) => newGame.move(m.toString()));
+    newGame.move(move.toString());
+    afterMoves.forEach((m) => newGame.move(m.toString()));
+    // Set Game
+    this.game = newGame;
+    // console.log(this.game.ascii());
+
     this.moves[this.activeMoveIdx] = move;
     this.activeMoveIdx = -1;
   }
@@ -50,7 +62,7 @@ export class GameService {
     return { sucess: true };
   }
 
-  scrollToLastMove() {
+  scrollToLastMove(): void {
     // Scroll to last move
     // Keep slight delay to force render first
     try {
@@ -73,7 +85,7 @@ export class GameService {
     }
   }
 
-  formatDate() {
+  formatDate(): string {
     const now = new Date();
     return `${now.getFullYear()}.${now.getMonth()}.${now.getDate()}`;
   }
@@ -82,10 +94,10 @@ export class GameService {
     this.game.header('Site', 'Chesspadd ++');
     this.game.header('Date', this.formatDate());
     this.game.header('Result', this.gameResult);
-    this.game.header('White', 'White Player');
-    this.game.header('Black', 'Black Player');
-    this.game.header('WhiteElo', '500');
-    this.game.header('BlackElo', '500');
+    // this.game.header('White', 'White Player');
+    // this.game.header('Black', 'Black Player');
+    // this.game.header('WhiteElo', '500');
+    // this.game.header('BlackElo', '500');
     return this.game.pgn();
   }
 
@@ -97,11 +109,12 @@ export class GameService {
     const pgnMoves = this.game.pgn();
     localStorage.setItem('local_game', pgnMoves);
   }
+
   fetchGame(): Move[] {
     try {
       const pgn = localStorage.getItem('local_game') || '';
       this.game.loadPgn(pgn);
-      console.log(this.game.ascii());
+      // console.log(this.game.ascii());
       this.moves = this.game.history().map((h) => new Move(h));
       this.scrollToLastMove();
     } catch (err) {
@@ -110,12 +123,14 @@ export class GameService {
 
     return this.moves;
   }
+
   clearGame(): void {
     this.game.reset();
     this.moves = [];
     this.activeMoveIdx = -1;
     localStorage.removeItem('local_game');
   }
+
   isGameStored(): boolean {
     return (localStorage.getItem('local_game') || '').length > 0;
   }
