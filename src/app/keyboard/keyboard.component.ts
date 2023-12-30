@@ -71,9 +71,6 @@ export class KeyboardComponent implements OnInit {
   }
 
   submit(event: any): void {
-    if (!this.moveManager.valid()) {
-      return;
-    }
     const result = this.game.makeMove(this.moveManager.clone());
     if (result.sucess) {
       this.onSubmit.emit(this.moveManager.clone());

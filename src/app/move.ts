@@ -34,7 +34,7 @@ class MoveHistory {
 }
 
 export class Move {
-  // Move Extraction Regular Expression
+  // Move Extraction Regular Expressions
   #breakdownRegex =
     /^([NBRQK])?([a-h])?([1-8])?(x)?([a-h])([1-8])(=?[NBRQK])?([+#])?$/i;
   #breakdownCaptureRegex =
@@ -59,23 +59,7 @@ export class Move {
   history: MoveHistory[] = [];
 
   constructor(moveString: string | null = null) {
-    if (moveString) {
-      this.fromString(moveString);
-    }
-  }
-
-  allPositions(): any[] {
-    return [
-      this.piece,
-      this.sourceColumn,
-      this.sourceRow,
-      this.column,
-      this.row,
-      this.castle,
-      this.promotionPiece,
-      this.take,
-      this.check,
-    ];
+    if (moveString) this.fromString(moveString);
   }
 
   clear(excludeHistory: boolean = false): void {
@@ -96,7 +80,7 @@ export class Move {
   }
 
   isEmpty(): boolean {
-    return !this.allPositions().some((i) => !!i);
+    return !this.#allPositions().some((i) => !!i);
   }
 
   clone(): Move {
@@ -105,13 +89,6 @@ export class Move {
       cloneObj[attribut] = this[attribut];
     }
     return cloneObj;
-  }
-
-  storeMove(
-    moveAttribute: string,
-    moveButton: KeyboardButton | undefined = undefined,
-  ): void {
-    this.history.push(new MoveHistory(this.clone(), moveAttribute, moveButton));
   }
 
   lastMove(backIdx: number = 0): MoveHistory | undefined {
@@ -123,6 +100,7 @@ export class Move {
     return !!this.column && !!this.row;
   }
 
+  // Function to step back through the move components
   subtractMove(): void {
     if (this.check) {
       this.check = false;
@@ -141,8 +119,9 @@ export class Move {
     }
   }
 
+  // Functions to set the move components
   setPiece(pieceBtn: KeyboardButton): void {
-    this.storeMove('piece', pieceBtn);
+    this.#storeMove('piece', pieceBtn);
     this.piece = pieceBtn.symbol;
     this.castle = null;
   }
@@ -150,7 +129,10 @@ export class Move {
     sourceBtn: KeyboardButton,
     location: 'row' | 'column' = 'column',
   ): void {
-    this.storeMove(location == 'row' ? 'sourceRow' : 'sourceColumn', sourceBtn);
+    this.#storeMove(
+      location == 'row' ? 'sourceRow' : 'sourceColumn',
+      sourceBtn,
+    );
     if (location == 'column') {
       this.sourceColumn = sourceBtn.symbol;
     } else if (location == 'row') {
@@ -159,35 +141,36 @@ export class Move {
     this.castle = null;
   }
   setCol(colBtn: KeyboardButton): void {
-    this.storeMove('column', colBtn);
+    this.#storeMove('column', colBtn);
     this.column = colBtn.symbol;
     this.castle = null;
   }
   setRow(rowBtn: KeyboardButton): void {
-    this.storeMove('row', rowBtn);
+    this.#storeMove('row', rowBtn);
     this.row = rowBtn.symbol;
     this.castle = null;
   }
   setTake(): void {
-    this.storeMove('take');
+    this.#storeMove('take');
     this.take = !this.take;
     this.castle = null;
   }
   setCheck(): void {
-    this.storeMove('check');
+    this.#storeMove('check');
     this.check = !this.check;
   }
   setCastle(direction: 'O-O' | 'O-O-O'): void {
-    this.storeMove('castle');
+    this.#storeMove('castle');
     this.clear(true);
     this.castle = direction;
   }
   setPromotion(pieceBtn: KeyboardButton): void {
-    this.storeMove('promotionPiece', pieceBtn);
+    this.#storeMove('promotionPiece', pieceBtn);
     this.promotionPiece = pieceBtn.symbol;
     this.castle = null;
   }
 
+  // Functions to convert between move and strings
   fromString(moveString: string): Move {
     this.clear();
 
@@ -219,7 +202,26 @@ export class Move {
     return this;
   }
 
-  toPieceString(withSymbols: boolean): string | undefined {
+  toString(withSymbols: boolean = false): string {
+    if (this.isEmpty()) return '';
+    if (this.castle) return this.castle;
+
+    const emptyPlaceholder = '';
+
+    const piece = this.#toPieceString(withSymbols) || emptyPlaceholder;
+    const promotionPiece =
+      this.#toPromotionPieceString(withSymbols) || emptyPlaceholder;
+    const sourceColumn = this.sourceColumn || emptyPlaceholder;
+    const sourceRow = this.sourceRow || emptyPlaceholder;
+    const take = this.take ? 'x' : '';
+    const column = this.column || emptyPlaceholder;
+    const row = this.row || emptyPlaceholder;
+    const check = this.check ? '+' : '';
+
+    return `${piece}${sourceColumn}${sourceRow}${take}${column}${row}${check}${promotionPiece}`;
+  }
+
+  #toPieceString(withSymbols: boolean): string | undefined {
     let piece;
     if (withSymbols) {
       piece = PieceMap[this.piece || ''] || this.piece;
@@ -229,7 +231,7 @@ export class Move {
     return piece;
   }
 
-  toPromotionPieceString(withSymbols: boolean): string | undefined {
+  #toPromotionPieceString(withSymbols: boolean): string | undefined {
     let promotionPiece;
     if (withSymbols) {
       const pp = PieceMap[this.promotionPiece || ''] || this.promotionPiece;
@@ -242,22 +244,24 @@ export class Move {
     return promotionPiece;
   }
 
-  toString(withSymbols: boolean = false): string {
-    if (this.isEmpty()) return '';
-    if (this.castle) return this.castle;
+  #allPositions(): any[] {
+    return [
+      this.piece,
+      this.sourceColumn,
+      this.sourceRow,
+      this.column,
+      this.row,
+      this.castle,
+      this.promotionPiece,
+      this.take,
+      this.check,
+    ];
+  }
 
-    const emptyPlaceholder = '';
-
-    const piece = this.toPieceString(withSymbols) || emptyPlaceholder;
-    const promotionPiece =
-      this.toPromotionPieceString(withSymbols) || emptyPlaceholder;
-    const sourceColumn = this.sourceColumn || emptyPlaceholder;
-    const sourceRow = this.sourceRow || emptyPlaceholder;
-    const take = this.take ? 'x' : '';
-    const column = this.column || emptyPlaceholder;
-    const row = this.row || emptyPlaceholder;
-    const check = this.check ? '+' : '';
-
-    return `${piece}${sourceColumn}${sourceRow}${take}${column}${row}${check}${promotionPiece}`;
+  #storeMove(
+    moveAttribute: string,
+    moveButton: KeyboardButton | undefined = undefined,
+  ): void {
+    this.history.push(new MoveHistory(this.clone(), moveAttribute, moveButton));
   }
 }
