@@ -22,6 +22,8 @@ export class NotepadComponent {
     }
   }
 
+  // Convert a list of moves to a double set of moves
+  // to represent white and black
   movesToRows(): Move[][] {
     const moves = this.game.moves;
     const chunked = chunk(moves, 2);

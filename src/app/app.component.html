@@ -1,9 +1,4 @@
-<style type="text/css">
-  .header-spacer {
-    flex: 1 1 auto;
-  }
-</style>
-<div class="" style="width: 100%; height: 100%">
+<div class="app-container">
   <mat-toolbar color="primary">
     <button mat-icon-button disabled class="" aria-label="">
       <fa-icon [icon]="faBars"></fa-icon>
@@ -14,7 +9,7 @@
       mat-icon-button
       class="github-icon"
       aria-label=""
-      href="https://github.com/UndefinedOnGitHub/chesspad-pp"
+      [href]="githubUrl"
       target="_blank"
     >
       <svg
@@ -29,17 +24,7 @@
         />
       </svg>
     </a>
-    <!-- <button mat-icon-button disabled class="favorite-icon" aria-label="">
-      <fa-icon [icon]="faCircleStop"></fa-icon>
-    </button>
-    <button mat-icon-button disabled class="" aria-label="">
-      <fa-icon [icon]="faShare"></fa-icon>
-    </button> -->
   </mat-toolbar>
-  <!-- <mat-sidenav-container class="example-container" *ngIf="shouldRun">
-    <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
-    <mat-sidenav-content>Main content</mat-sidenav-content>
-  </mat-sidenav-container> -->
 
   <div class="keyboard-notepad-container">
     <app-game></app-game>

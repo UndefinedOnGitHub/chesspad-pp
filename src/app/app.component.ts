@@ -20,5 +20,7 @@ export class AppComponent {
   faShare: IconDefinition = faShare;
   faCircleStop: IconDefinition = faCircleStop;
 
+  githubUrl: string = 'https://github.com/UndefinedOnGitHub/chesspad-pp';
+
   constructor() {}
 }

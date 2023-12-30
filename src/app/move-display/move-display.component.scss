@@ -1,7 +1,9 @@
 @use "../_theme" as theme;
 
 .move-container {
+  font-size: 1rem;
 }
+
 .move-cell {
   padding: 4px;
   cursor: pointer;

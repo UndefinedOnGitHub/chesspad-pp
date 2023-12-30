@@ -9,6 +9,13 @@ export enum GameResult {
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+ * CURRENTLY UNUSED
+ *
+ * This will be used as a service for quick elo change calculations.
+ * I found how to do the calculation online and wanted to jot down the funtions.
+ */
 export class EloCalculatorService {
   getRatingDelta(
     activePlayerElo: number,
