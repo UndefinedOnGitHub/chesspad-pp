@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // App Components
 import { AppComponent } from './app.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
@@ -24,6 +25,7 @@ import { NotepadComponent } from './notepad/notepad.component';
 import { MoveDisplayComponent } from './move-display/move-display.component';
 import { GameComponent } from './game/game.component';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
+import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog/keyboard-settings-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dial
     KeyboardComponent,
     MoveDisplayComponent,
     NotepadComponent,
+    KeyboardSettingsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dial
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

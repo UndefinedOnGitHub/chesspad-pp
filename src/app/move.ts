@@ -18,6 +18,7 @@ const PieceMap: { [index: string]: any } = {
 //   Pawn = '',
 // }
 
+// Class to track the history of the move creation
 class MoveHistory {
   move: Move;
   moveAttribute: string;

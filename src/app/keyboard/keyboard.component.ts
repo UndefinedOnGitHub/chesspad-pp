@@ -3,16 +3,14 @@ import { KeyboardButton } from '../button';
 import { Pieces, Columns, Rows } from '../constants';
 import { Move } from '../move';
 import { Keyboard } from '../keyboard';
-import {
-  faHashtag,
-  faRotateRight,
-  faStarOfLife,
-  faXmark,
-  faPlus,
-  faDeleteLeft,
-  faChess,
-} from '@fortawesome/free-solid-svg-icons';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from '../game.service';
+import { MatDialog } from '@angular/material/dialog';
+import { KeyboardSettingsDialogComponent } from '../keyboard-settings-dialog/keyboard-settings-dialog.component';
+
+export interface KeyboardSettings {
+  allowSuggestions: boolean;
+}
 
 @Component({
   selector: 'app-keyboard',
@@ -20,12 +18,19 @@ import { GameService } from '../game.service';
   styleUrls: ['./keyboard.component.scss'],
 })
 export class KeyboardComponent implements OnInit {
+  // Settings gear
+  faGear = faGear;
   // Let the editor know the move
   @Output() onSubmit = new EventEmitter<Move>();
   // For tracking the move
   moveManager: Move = new Move();
+  // Keyboard Settings
+  keyboardSettings: KeyboardSettings = { allowSuggestions: false };
 
-  constructor(public game: GameService) {
+  constructor(
+    public game: GameService,
+    public dialog: MatDialog,
+  ) {
     this.game.setMoveClickCallback((m: Move) => {
       this.moveManager.fromString(String(m));
       this.keyboard.extractFromMove(m);
@@ -68,6 +73,41 @@ export class KeyboardComponent implements OnInit {
         ele.className = '';
       }, 1000);
     }
+  }
+
+  possibleMoves(): Move[] {
+    if (!this.keyboardSettings.allowSuggestions) {
+      return [];
+    }
+    const possibleMoves = this.game.game
+      .moves()
+      .filter((m) => m.includes(String(this.moveManager)))
+      .slice(0, 3)
+      .map((m) => new Move(m));
+
+    if (
+      possibleMoves.length == 1 &&
+      possibleMoves[0].toString() == this.moveManager.toString()
+    ) {
+      return [];
+    }
+    return possibleMoves;
+  }
+
+  selectPossibleMove(move: Move): void {
+    this.moveManager.fromString(String(move));
+    this.keyboard.extractFromMove(move);
+  }
+
+  openKeyboardSettings() {
+    const dialogRef = this.dialog.open(KeyboardSettingsDialogComponent, {
+      data: this.keyboardSettings,
+    });
+    dialogRef.afterClosed().subscribe((result: KeyboardSettings | null) => {
+      if (result) {
+        this.keyboardSettings = result;
+      }
+    });
   }
 
   submit(event: any): void {
