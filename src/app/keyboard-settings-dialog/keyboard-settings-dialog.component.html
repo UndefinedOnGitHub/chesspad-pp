@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Keyboard Settings</h1>
+<div mat-dialog-content>
+  <section class="example-section">
+    <mat-slide-toggle
+      (change)="onChange('allowSuggestions', $event)"
+      [checked]="settings.allowSuggestions"
+    >
+      Allow Suggestions
+    </mat-slide-toggle>
+  </section>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-around">
+  <button mat-button (click)="submit()">Submit</button>
+</div>
