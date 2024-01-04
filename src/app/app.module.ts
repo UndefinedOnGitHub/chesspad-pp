@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 // Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,6 +27,7 @@ import { MoveDisplayComponent } from './move-display/move-display.component';
 import { GameComponent } from './game/game.component';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog/keyboard-settings-dialog.component';
+import { PuzzlesComponent } from './puzzles/puzzles.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +39,12 @@ import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog/keyb
     MoveDisplayComponent,
     NotepadComponent,
     KeyboardSettingsDialogComponent,
+    PuzzlesComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     // Fonts / Icons
     FontAwesomeModule,
     // Angular Material Modules

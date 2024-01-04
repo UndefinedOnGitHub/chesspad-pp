@@ -152,7 +152,7 @@ export class GameService {
     try {
       const pgn = localStorage.getItem('local_game') || '';
       this.game.loadPgn(pgn);
-      this.#logGame();
+      this.#logGame('Game Loaded');
       this.moves = this.game.history().map((h) => new Move(h));
       this.#scrollToLastMove();
     } catch (err) {
@@ -165,17 +165,23 @@ export class GameService {
   clearGame(): void {
     this.game.reset();
     this.moves = [];
+
+    this.#logGame('Game Cleared!');
     this.activeMoveIdx = -1;
     localStorage.removeItem('local_game');
   }
 
-  isGameStored(): boolean {
+  #isGameStored(): boolean {
     return (localStorage.getItem('local_game') || '').length > 0;
   }
 
   // Log Game for Debugging
 
-  #logGame(): void {
-    console.log(this.game.ascii());
+  #logGame(logLabel: string | undefined = undefined): void {
+    let printString = this.game.ascii();
+    if (logLabel) {
+      printString = `${logLabel}\n\n${printString}`;
+    }
+    console.log(printString);
   }
 }

@@ -5,6 +5,7 @@ import { Move } from '../move';
 import { Keyboard } from '../keyboard';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from '../game.service';
+import { PuzzleService } from '../puzzle.service';
 import { MatDialog } from '@angular/material/dialog';
 import { KeyboardSettingsDialogComponent } from '../keyboard-settings-dialog/keyboard-settings-dialog.component';
 
@@ -26,12 +27,10 @@ export class KeyboardComponent implements OnInit {
   moveManager: Move = new Move();
   // Keyboard Settings
   keyboardSettings: KeyboardSettings = { allowSuggestions: false };
+  @Input() game: GameService | PuzzleService | undefined;
 
-  constructor(
-    public game: GameService,
-    public dialog: MatDialog,
-  ) {
-    this.game.setMoveClickCallback((m: Move) => {
+  constructor(public dialog: MatDialog) {
+    this.game?.setMoveClickCallback((m: Move) => {
       this.moveManager.fromString(String(m));
       this.keyboard.extractFromMove(m);
     });
@@ -76,7 +75,7 @@ export class KeyboardComponent implements OnInit {
   }
 
   possibleMoves(): Move[] {
-    if (!this.keyboardSettings.allowSuggestions) {
+    if (!this.keyboardSettings.allowSuggestions || !this.game) {
       return [];
     }
     const possibleMoves = this.game.game
@@ -111,8 +110,8 @@ export class KeyboardComponent implements OnInit {
   }
 
   submit(event: any): void {
-    const result = this.game.makeMove(this.moveManager.clone());
-    if (result.sucess) {
+    const result = this.game?.makeMove(this.moveManager.clone());
+    if (result?.sucess) {
       this.onSubmit.emit(this.moveManager.clone());
       this.keyboard.clearKeyboard();
     } else {
