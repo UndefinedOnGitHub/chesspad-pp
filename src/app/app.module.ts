@@ -35,7 +35,6 @@ const routes: Routes = [
   { path: 'puzzles', component: PuzzlesComponent },
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +65,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
   providers: [],
