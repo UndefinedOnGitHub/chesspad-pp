@@ -28,6 +28,13 @@ import { GameComponent } from './game/game.component';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog/keyboard-settings-dialog.component';
 import { PuzzlesComponent } from './puzzles/puzzles.component';
+// Routing
+import { RouterModule, Routes } from '@angular/router';
+const routes: Routes = [
+  { path: '', component: GameComponent },
+  { path: 'puzzles', component: PuzzlesComponent },
+];
+
 
 @NgModule({
   declarations: [
@@ -59,7 +66,9 @@ import { PuzzlesComponent } from './puzzles/puzzles.component';
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent],
 })
