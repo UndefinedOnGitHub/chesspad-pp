@@ -34,9 +34,7 @@ export class GameComponent {
   ) {
     this.notify = notify;
     this.game = game;
-    if (this.game.isGameStored()) {
-      this.game.fetchGame();
-    }
+    this.game.fetchGame();
   }
 
   onFinish() {
