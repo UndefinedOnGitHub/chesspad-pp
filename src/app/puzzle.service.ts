@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Chess } from 'chess.js';
-import { HttpClient } from '@angular/common/http';
+import {
+  ChessWebsiteApiService,
+  PuzzleResponse,
+} from './chess-website-api.service';
 import { Chessground } from 'chessground';
 import { Move } from './move';
-import { map } from 'rxjs';
-
-interface PuzzleResponse {
-  gamePgn: string;
-  puzzleSolution: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -19,39 +16,11 @@ export class PuzzleService {
   solution: string[] = [];
   element: HTMLElement | undefined | null;
 
-  constructor(public http: HttpClient) {}
-
-  loadLichessPuzzle() {
-    return this.http.get('https://lichess.org/api/puzzle/daily').pipe(
-      map((response: any) => {
-        console.log(response);
-        return {
-          gamePgn: response.game.pgn,
-          puzzleSolution: response.puzzle.solution,
-        };
-      }),
-    );
-  }
-
-  loadChessComPuzzle() {
-    return this.http.get('https://api.chess.com/pub/puzzle/random').pipe(
-      map((response: any) => {
-        console.log(response);
-        const chess = new Chess();
-        chess.loadPgn(response.pgn);
-
-        return {
-          gamePgn: new Chess(response.fen).pgn(),
-          puzzleSolution: chess.history(),
-        };
-      }),
-    );
-  }
+  constructor(public api: ChessWebsiteApiService) {}
 
   loadPuzzle(element: HTMLElement | null = null): void {
     this.element ||= element;
-    const promise = this.loadChessComPuzzle();
-    // const promise = this.loadLichessPuzzle();
+    const promise = this.api.fetchChessPuzzle();
     promise.subscribe((response: any) => {
       this.setGameFromResponse(response);
     });
@@ -63,21 +32,26 @@ export class PuzzleService {
     })[this.game.history().length - 1];
   }
 
-  initiateGame(response: PuzzleResponse): void {
-    // Set Game
-    this.game.loadPgn(response.gamePgn);
-    console.log(this.game.ascii());
-
+  constructConfig() {
     const orientation: 'white' | 'black' =
       this.game.turn() == 'w' ? 'white' : 'black';
     const lastMove = this.lastMoveOfGame();
-    const config = {
+
+    return {
       coordinates: false,
       orientation,
       fen: this.game.fen(),
       viewOnly: true,
       lastMove: lastMove ? [lastMove.from, lastMove.to] : undefined,
     };
+  }
+
+  initiateGame(response: PuzzleResponse): void {
+    // Set Game
+    this.game.loadPgn(response.gamePgn);
+    console.log(this.game.ascii());
+
+    const config = this.constructConfig();
     // Set Digital Board
     if (this.element) {
       this.groundboard = Chessground(this.element, config);
@@ -121,7 +95,9 @@ export class PuzzleService {
           fen: this.game.fen(),
           lastMove: [gameMove.from, gameMove.to],
         });
+        // Remove move from solution
         this.solution.shift();
+        // Wait then make opponent move
         setTimeout(() => this.makeOpponentMove(), 500);
         return { sucess: true };
       }
