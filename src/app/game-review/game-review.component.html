@@ -1,0 +1,45 @@
+<div
+  class="d-flex flex-column flex-lg-row flex-xl-row flex-xs-column flex-sm-column flex-md-row keyboard-game-container p-2"
+>
+  <div class="flex-grow-1 p-1 mb-2 notepad-content-container">
+    <div class="p-2">
+      <mat-select
+        (selectionChange)="usernameChange($event)"
+        [(value)]="activeUsername"
+      >
+        <mat-option
+          *ngFor="let username of usernames"
+          [value]="username.username"
+        >
+          {{ username.name }}
+        </mat-option>
+      </mat-select>
+    </div>
+    <mat-card>
+      <mat-card-content class="d-flex justify-content-center">
+        <div id="chessboard"></div>
+      </mat-card-content>
+      <!-- <mat-card-actions align="end" class="d-flex justify-content-between">
+        <button (click)="onFinish()" mat-raised-button color="accent">
+          Finish
+        </button>
+        <button (click)="onClear()" mat-raised-button color="accent">
+          Clear
+        </button>
+      </mat-card-actions> -->
+    </mat-card>
+    <div class="d-flex flex-column display-results p-2">
+      <div
+        class="d-flex display-results-move-row"
+        *ngFor="let moveRow of currentMoves(); let idx = index"
+      >
+        <div class="flex-25">{{ idx + 1 }}.</div>
+        <div class="flex-25">{{ moveRow[0] }}</div>
+        <div class="flex-25">{{ moveRow[1] }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex p-1 justify-content-center">
+    <app-keyboard [game]="gameReview"> </app-keyboard>
+  </div>
+</div>
