@@ -12,7 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
-import { RouterTestingModule } from "@angular/router/testing";
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -33,7 +33,7 @@ describe('AppComponent', () => {
         MatSnackBarModule,
         MatDialogModule,
         RouterModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
     }),
   );

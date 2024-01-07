@@ -18,6 +18,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 // App Components
 import { AppComponent } from './app.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
@@ -28,11 +29,13 @@ import { GameComponent } from './game/game.component';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog/keyboard-settings-dialog.component';
 import { PuzzlesComponent } from './puzzles/puzzles.component';
+import { GameReviewComponent } from './game-review/game-review.component';
 // Routing
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: GameComponent },
   { path: 'puzzles', component: PuzzlesComponent },
+  { path: 'games', component: GameReviewComponent },
 ];
 
 @NgModule({
@@ -46,6 +49,7 @@ const routes: Routes = [
     NotepadComponent,
     KeyboardSettingsDialogComponent,
     PuzzlesComponent,
+    GameReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatSelectModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
