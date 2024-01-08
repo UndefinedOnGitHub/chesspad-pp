@@ -1,15 +1,10 @@
 <div class="app-container">
   <mat-toolbar color="primary">
-    <button mat-icon-button
-      class=""
-      aria-label=""
-      (click)="drawer.toggle()">
+    <button mat-icon-button class="" aria-label="" (click)="drawer.toggle()">
       <fa-icon [icon]="faBars"></fa-icon>
     </button>
-    <span routerLink="/"
-      id="chesspad-pp-title"
-      class="chesspad-pp-title">
-        Chesspad ++
+    <span routerLink="/" id="chesspad-pp-title" class="chesspad-pp-title">
+      Chesspad ++
     </span>
     <span class="header-spacer"></span>
     <a
@@ -36,21 +31,24 @@
   <mat-drawer-container class="mat-drawer-container">
     <mat-drawer #drawer mode="over" class="mat-drawer">
       <div class="d-flex flex-column p-3 navigation-menu">
-        <div class="d-flex align-content-center"
+        <div
+          class="d-flex align-content-center"
           routerLink="/"
           (click)="drawer.close()"
         >
           <fa-icon [icon]="faBars"></fa-icon>
           <span>Home</span>
         </div>
-        <div class="d-flex align-content-center"
+        <div
+          class="d-flex align-content-center"
           routerLink="/puzzles"
           (click)="drawer.close()"
         >
           <fa-icon [icon]="faBars"></fa-icon>
           <span>Puzzle</span>
         </div>
-        <div class="d-flex align-content-center"
+        <div
+          class="d-flex align-content-center"
           routerLink="/games"
           (click)="drawer.close()"
         >

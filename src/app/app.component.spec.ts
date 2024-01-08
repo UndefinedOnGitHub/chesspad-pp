@@ -13,6 +13,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -34,6 +36,8 @@ describe('AppComponent', () => {
         MatDialogModule,
         RouterModule,
         RouterTestingModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
       ],
     }),
   );

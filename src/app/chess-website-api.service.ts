@@ -56,7 +56,7 @@ export class ChessWebsiteApiService {
       .pipe(
         map((response: any) => {
           console.log(response);
-          const games = response.games.filter((g : any) => g.rules == "chess");
+          const games = response.games.filter((g: any) => g.rules == 'chess');
           const randGame = Math.floor(Math.random() * games.length);
           const game = games[randGame];
           console.log(game);

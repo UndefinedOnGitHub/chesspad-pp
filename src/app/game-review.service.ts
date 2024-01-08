@@ -77,7 +77,7 @@ export class GameReviewService {
           });
         }
       }, 500);
-      this.#scrollToLastMove()
+      this.#scrollToLastMove();
       return { sucess: true };
     }
     return { sucess: false };
@@ -88,7 +88,9 @@ export class GameReviewService {
     // Keep slight delay to force the render of the move before animation
     try {
       setTimeout(() => {
-        const dispays = document.getElementsByClassName('display-results-move-row');
+        const dispays = document.getElementsByClassName(
+          'display-results-move-row',
+        );
         const e = dispays[dispays.length - 1];
         e.scrollIntoView({ behavior: 'smooth' });
       }, 500);
