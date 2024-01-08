@@ -19,7 +19,9 @@ export class PuzzleService {
   constructor(public api: ChessWebsiteApiService) {}
 
   loadPuzzle(element: HTMLElement | null = null): void {
-    this.element ||= element;
+    if (element) {
+      this.element = element;
+    }
     const promise = this.api.fetchChessPuzzle();
     promise.subscribe((response: any) => {
       this.setGameFromResponse(response);

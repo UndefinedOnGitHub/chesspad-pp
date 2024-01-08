@@ -20,7 +20,9 @@ export class GameReviewService {
   constructor(public api: ChessWebsiteApiService) {}
 
   loadGame(element: HTMLElement | null = null, username: string): void {
-    this.element ||= element;
+    if (element) {
+      this.element = element;
+    }
     this.game = new Chess();
     const promise = this.api.fetchChessGame(username);
     promise.subscribe((response: GameResponse) => {
@@ -75,8 +77,23 @@ export class GameReviewService {
           });
         }
       }, 500);
+      this.#scrollToLastMove()
       return { sucess: true };
     }
     return { sucess: false };
+  }
+
+  #scrollToLastMove(): void {
+    // Scroll to last move
+    // Keep slight delay to force the render of the move before animation
+    try {
+      setTimeout(() => {
+        const dispays = document.getElementsByClassName('display-results-move-row');
+        const e = dispays[dispays.length - 1];
+        e.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    } catch {
+      // Prevent from issues here causeing bigger problems
+    }
   }
 }

@@ -7,7 +7,27 @@
 
 .keyboard-notepad-container {
   width: 100%;
-  height: calc(100% - 56px);
+  height: 100%;
+}
+
+.mat-drawer-container {
+  height: calc(100% - 48px);
+}
+
+.mat-drawer {
+  width: 85%;
+  @include theme.on-background;
+  .navigation-menu {
+    div {
+      min-height: 32px;
+      border-bottom: 1px solid;
+      border-color: lightgrey;
+      margin-bottom: 8px;
+    }
+    fa-icon {
+      margin-right: 8px;
+    }
+  }
 }
 
 .app-container {

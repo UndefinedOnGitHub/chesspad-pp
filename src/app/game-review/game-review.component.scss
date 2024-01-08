@@ -1,3 +1,5 @@
+@use "../_theme" as theme;
+
 .keyboard-game-container {
   height: 100%;
 }
@@ -6,9 +8,10 @@
   height: 300px;
 }
 .display-results {
-  margin-top: 15px;
+  @include theme.on-background;
+  margin-top: 5px;
   overflow: auto;
-  max-height: 100px;
+  max-height: 56px;
 }
 .display-results-move-row {
   div:nth-child(0) {
