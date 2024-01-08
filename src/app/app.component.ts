@@ -5,6 +5,9 @@ import {
   faHeart,
   faShare,
   faCircleStop,
+  faFilePen,
+  faPuzzlePiece,
+  faChessBoard,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,6 +21,9 @@ export class AppComponent {
   faBars: IconDefinition = faBars;
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
+  faFilePen: IconDefinition = faFilePen;
+  faPuzzlePiece: IconDefinition = faPuzzlePiece;
+  faChessBoard: IconDefinition = faChessBoard;
   faCircleStop: IconDefinition = faCircleStop;
 
   githubUrl: string = 'https://github.com/UndefinedOnGitHub/chesspad-pp';
