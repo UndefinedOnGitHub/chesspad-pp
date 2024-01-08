@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import {MatSidenavModule} from '@angular/material/sidenav';
 // App Components
 import { AppComponent } from './app.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
@@ -70,6 +71,7 @@ const routes: Routes = [
     MatInputModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatSidenavModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],

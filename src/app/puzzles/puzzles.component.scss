@@ -1,30 +1,30 @@
 .keyboard-puzzle-container {
   height: 100%;
 }
-#chessboard {
+#puzzle-chessboard {
   width: 300px;
   height: 300px;
 }
 @media (min-width: 576px) {
-  #chessboard {
+  #puzzle-chessboard {
     width: 300px;
     height: 300px;
   }
 }
 @media (min-width: 768px) {
-  #chessboard {
+  #puzzle-chessboard {
     width: 400px;
     height: 400px;
   }
 }
 @media (min-width: 992px) {
-  #chessboard {
+  #puzzle-chessboard {
     width: 500px;
     height: 500px;
   }
 }
 @media (min-width: 1200px) {
-  #chessboard {
+  #puzzle-chessboard {
     width: 600px;
     height: 600px;
   }

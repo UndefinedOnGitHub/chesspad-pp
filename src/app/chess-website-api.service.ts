@@ -56,8 +56,9 @@ export class ChessWebsiteApiService {
       .pipe(
         map((response: any) => {
           console.log(response);
-          const randGame = Math.floor(Math.random() * response.games.length);
-          const game = response.games[randGame];
+          const games = response.games.filter((g : any) => g.rules == "chess");
+          const randGame = Math.floor(Math.random() * games.length);
+          const game = games[randGame];
           console.log(game);
           const chess = new Chess();
           chess.loadPgn(game.pgn);
