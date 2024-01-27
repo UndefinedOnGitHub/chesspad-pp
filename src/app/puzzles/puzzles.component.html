@@ -3,7 +3,14 @@
 >
   <div class="flex-grow-1 p-1 mb-2 notepad-content-container">
     <mat-card>
-      <mat-card-content class="d-flex justify-content-center">
+      <mat-card-content class="d-flex flex-column align-items-center">
+        <div
+          class="p-2 d-flex justify-content-center align-content-center"
+          *ngIf="firstMove()"
+        >
+          <div class="first-move-display-color {{ puzzle.firstMove }}"></div>
+          <div>{{ firstMove() }} to Move</div>
+        </div>
         <div id="puzzle-chessboard"></div>
       </mat-card-content>
       <!-- <mat-card-actions align="end" class="d-flex justify-content-between">

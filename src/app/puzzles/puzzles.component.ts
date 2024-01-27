@@ -13,4 +13,11 @@ export class PuzzlesComponent implements OnInit {
   ngOnInit() {
     this.puzzle.loadPuzzle(document.getElementById('puzzle-chessboard'));
   }
+
+  firstMove(): string | null {
+    if (this.puzzle.firstMove) {
+      return this.puzzle.firstMove == 'w' ? 'White' : 'Black';
+    }
+    return null;
+  }
 }

@@ -15,6 +15,7 @@ export class PuzzleService {
   game: Chess = new Chess();
   solution: string[] = [];
   element: HTMLElement | undefined | null;
+  firstMove: string | undefined;
 
   constructor(public api: ChessWebsiteApiService) {}
 
@@ -54,6 +55,7 @@ export class PuzzleService {
     console.log(this.game.ascii());
 
     const config = this.constructConfig();
+    this.firstMove = response.orientation;
     // Set Digital Board
     if (this.element) {
       this.groundboard = Chessground(this.element, config);

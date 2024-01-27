@@ -29,3 +29,15 @@
     height: 600px;
   }
 }
+.first-move-display-color {
+  width: 20px;
+  height: 20px;
+  border: 2px solid lightgrey;
+  margin-right: 10px;
+  &.w {
+    background-color: white;
+  }
+  &.b {
+    background-color: black;
+  }
+}

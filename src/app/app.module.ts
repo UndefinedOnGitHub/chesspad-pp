@@ -33,6 +33,7 @@ import { PuzzlesComponent } from './puzzles/puzzles.component';
 import { GameReviewComponent } from './game-review/game-review.component';
 // Routing
 import { RouterModule, Routes } from '@angular/router';
+import { GameReviewSelectorDialogComponent } from './game-review-selector-dialog/game-review-selector-dialog.component';
 const routes: Routes = [
   { path: '', component: GameComponent },
   { path: 'puzzles', component: PuzzlesComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
     KeyboardSettingsDialogComponent,
     PuzzlesComponent,
     GameReviewComponent,
+    GameReviewSelectorDialogComponent,
   ],
   imports: [
     BrowserModule,
