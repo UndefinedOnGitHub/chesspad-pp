@@ -27,7 +27,7 @@ describe('GameReviewComponent', () => {
         MatDialogModule,
         FontAwesomeModule,
       ],
-      teardown: {destroyAfterEach: false}
+      teardown: { destroyAfterEach: false },
     });
     fixture = TestBed.createComponent(GameReviewComponent);
     component = fixture.componentInstance;
@@ -35,8 +35,8 @@ describe('GameReviewComponent', () => {
   });
 
   afterEach(() => {
-    fixture.componentInstance.gameReview.dialog.closeAll()
-  })
+    fixture.componentInstance.gameReview.dialog.closeAll();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
