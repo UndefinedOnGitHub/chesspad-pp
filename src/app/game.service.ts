@@ -93,7 +93,7 @@ export class GameService {
       setTimeout(() => {
         const dispays = document.getElementsByTagName('app-move-display');
         const e = dispays[dispays.length - 1];
-        e.scrollIntoView({ behavior: 'smooth' });
+        e?.scrollIntoView({ behavior: 'smooth' });
       }, 500);
     } catch {
       // Prevent from issues here causeing bigger problems

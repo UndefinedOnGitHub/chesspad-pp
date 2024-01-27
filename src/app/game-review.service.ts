@@ -6,6 +6,8 @@ import {
 } from './chess-website-api.service';
 import { Chessground } from 'chessground';
 import { Move } from './move';
+import { MatDialog } from '@angular/material/dialog';
+import { GameReviewSelectorDialogComponent } from './game-review-selector-dialog/game-review-selector-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -17,16 +19,24 @@ export class GameReviewService {
   history: string[] = [];
   currentMove: string | undefined | null;
 
-  constructor(public api: ChessWebsiteApiService) {}
+  constructor(
+    public api: ChessWebsiteApiService,
+    public dialog: MatDialog,
+  ) {}
 
-  loadGame(element: HTMLElement | null = null, username: string): void {
-    if (element) {
-      this.element = element;
-    }
-    this.game = new Chess();
-    const promise = this.api.fetchChessGame(username);
-    promise.subscribe((response: GameResponse) => {
-      this.setGameFromResponse(response);
+  loadGame(element: HTMLElement | null = null): void {
+    const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (element) {
+        this.element = element;
+      }
+      this.game = new Chess();
+      const promise = this.api.fetchChessGame(result);
+      promise.subscribe((response: GameResponse) => {
+        this.setGameFromResponse(response);
+      });
     });
   }
 
@@ -92,7 +102,7 @@ export class GameReviewService {
           'display-results-move-row',
         );
         const e = dispays[dispays.length - 1];
-        e.scrollIntoView({ behavior: 'smooth' });
+        e?.scrollIntoView({ behavior: 'smooth' });
       }, 500);
     } catch {
       // Prevent from issues here causeing bigger problems

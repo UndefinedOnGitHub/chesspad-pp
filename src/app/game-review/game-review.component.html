@@ -2,19 +2,6 @@
   class="d-flex flex-column flex-lg-row flex-xl-row flex-xs-column flex-sm-column flex-md-row keyboard-game-container p-2"
 >
   <div class="flex-grow-1 p-1 mb-2 notepad-content-container">
-    <div class="p-2">
-      <mat-select
-        (selectionChange)="usernameChange($event)"
-        [(value)]="activeUsername"
-      >
-        <mat-option
-          *ngFor="let username of usernames"
-          [value]="username.username"
-        >
-          {{ username.name }}
-        </mat-option>
-      </mat-select>
-    </div>
     <mat-card>
       <mat-card-content class="d-flex justify-content-center">
         <div id="chessboard"></div>

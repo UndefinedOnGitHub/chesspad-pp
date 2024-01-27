@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Select Game Source</h1>
+<div mat-dialog-content class="mat-typography">
+  <mat-select
+    (selectionChange)="usernameChange($event)"
+    [(value)]="activeUsername"
+  >
+    <mat-option *ngFor="let username of usernames" [value]="username.username">
+      {{ username.name }}
+    </mat-option>
+  </mat-select>
+</div>
+<!-- <div mat-dialog-actions></div> -->

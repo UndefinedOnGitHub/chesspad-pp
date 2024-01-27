@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export interface PuzzleResponse {
   gamePgn: string;
   puzzleSolution: string[];
+  orientation: 'b' | 'w';
 }
 export interface GameResponse {
   gamePgn: string;
@@ -28,6 +29,7 @@ export class ChessWebsiteApiService {
         return {
           gamePgn: response.game.pgn,
           puzzleSolution: response.puzzle.solution,
+          orientation: 'w',
         };
       }),
     );
@@ -37,12 +39,14 @@ export class ChessWebsiteApiService {
     return this.http.get('https://api.chess.com/pub/puzzle/random').pipe(
       map((response: any) => {
         console.log(response);
-        const chess = new Chess();
-        chess.loadPgn(response.pgn);
+        const chessHistory = new Chess();
+        chessHistory.loadPgn(response.pgn);
 
+        const resultChess = new Chess(response.fen);
         return {
-          gamePgn: new Chess(response.fen).pgn(),
-          puzzleSolution: chess.history(),
+          gamePgn: resultChess.pgn(),
+          puzzleSolution: chessHistory.history(),
+          orientation: resultChess.turn(),
         };
       }),
     );
