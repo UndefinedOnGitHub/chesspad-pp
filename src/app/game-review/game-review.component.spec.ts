@@ -13,8 +13,8 @@ describe('GameReviewComponent', () => {
   let component: GameReviewComponent;
   let fixture: ComponentFixture<GameReviewComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [
         GameReviewComponent,
         KeyboardComponent,
@@ -27,11 +27,16 @@ describe('GameReviewComponent', () => {
         MatDialogModule,
         FontAwesomeModule,
       ],
+      teardown: {destroyAfterEach: false}
     });
     fixture = TestBed.createComponent(GameReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => {
+    fixture.componentInstance.gameReview.dialog.closeAll()
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();
