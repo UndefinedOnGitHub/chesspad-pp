@@ -4,6 +4,7 @@ import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Observable } from 'rxjs';
+import * as moment from "moment";
 
 export interface PuzzleResponse {
   gamePgn: string;
@@ -53,7 +54,7 @@ export class ChessWebsiteApiService {
   }
 
   loadChessComGame(username: string): Observable<GameResponse> {
-    const date = formatDate(new Date(), 'YYYY/MM', 'en-US');
+    const date = moment().subtract(1, "month").format("YYYY/MM")
 
     return this.http
       .get(`https://api.chess.com/pub/player/${username}/games/${date}`)

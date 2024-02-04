@@ -76,7 +76,7 @@ export class GameReviewService {
   setMoveClickCallback() {}
 
   makeMove(move: Move): { sucess: boolean } {
-    if (this.currentMove == String(move)) {
+    if (this.currentMove?.replace("+", "") == String(move)) {
       this.currentMove = this.history.shift();
       setTimeout(() => {
         if (this.currentMove) {
