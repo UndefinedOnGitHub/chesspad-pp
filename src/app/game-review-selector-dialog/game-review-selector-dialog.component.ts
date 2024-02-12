@@ -9,6 +9,10 @@ import {
 } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 export interface DialogData {}
+export interface DialogCloseResponse {
+  username: string;
+  color: "white" | "black" | "";
+}
 
 @Component({
   selector: 'app-game-review-selector-dialog',
@@ -21,7 +25,8 @@ export class GameReviewSelectorDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
-  activeUsername: string = '';
+  activeColor: "white" | "black" | "" = '';
+  activeUsername: string = 'hikaru';
   usernames = [
     { username: 'hikaru', name: 'Hikaru Nakamura' },
     { username: 'magnuscarlsen', name: 'Magnus Carlsen' },
@@ -39,7 +44,10 @@ export class GameReviewSelectorDialogComponent {
     { username: 'bigfish1995', name: 'Vladimir Fedoseev' },
   ];
 
-  usernameChange(event: MatSelectChange) {
-    this.dialogRef.close(this.activeUsername);
+  submit() {
+    this.dialogRef.close({
+      username: this.activeUsername,
+      color: this.activeColor
+    });
   }
 }

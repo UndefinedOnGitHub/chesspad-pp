@@ -9,7 +9,9 @@ import {
 } from '@angular/material/dialog';
 import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';
-export interface DialogData {}
+export interface DialogData {
+  pgn: string;
+}
 
 @Component({
   selector: 'app-finish-game-dialog',
@@ -25,7 +27,7 @@ export class FinishGameDialogComponent {
     public game: GameService,
     public notify: NotifyService,
   ) {
-    this.gameString = this.game.exportPGN();
+    this.gameString = data.pgn || this.game.exportPGN();
   }
 
   gameWinner: '0-1' | '1/2-1/2' | '1-0' = '1/2-1/2';
@@ -41,14 +43,12 @@ export class FinishGameDialogComponent {
   }
 
   copy() {
-    const txt = this.game.exportPGN();
-    navigator.clipboard.writeText(txt);
+    navigator.clipboard.writeText(this.gameString);
     this.notify.warn('PGN Copied');
   }
 
   copyAndGo(href: string): void {
-    const txt = this.game.exportPGN();
-    navigator.clipboard.writeText(txt);
+    navigator.clipboard.writeText(this.gameString);
     // Allow keyboard to get the copy before opening the tab
     setTimeout(() => {
       window.open(href, '_blank');

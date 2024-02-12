@@ -53,15 +53,18 @@ export class ChessWebsiteApiService {
     );
   }
 
-  loadChessComGame(username: string): Observable<GameResponse> {
-    const date = moment().subtract(1, "month").format("YYYY/MM")
+  loadChessComGame(username: string, color: "white" | "black" | "" = ""): Observable<GameResponse> {
+    const date = moment().subtract(1, "month").format("YYYY/MM");
 
     return this.http
       .get(`https://api.chess.com/pub/player/${username}/games/${date}`)
       .pipe(
         map((response: any) => {
           console.log(response);
-          const games = response.games.filter((g: any) => g.rules == 'chess');
+          let games = response.games.filter((g: any) => g.rules == 'chess');
+          if (color) {
+            games = games.filter((g: any) => g[color].username.toLowerCase() == username.toLowerCase())
+          }
           const randGame = Math.floor(Math.random() * games.length);
           const game = games[randGame];
           console.log(game);
@@ -117,7 +120,7 @@ export class ChessWebsiteApiService {
     return this.loadChessComPuzzle();
   }
 
-  fetchChessGame(username: string) {
-    return this.loadChessComGame(username);
+  fetchChessGame(username: string, color: "white" | "black" | "" = "") {
+    return this.loadChessComGame(username, color);
   }
 }
