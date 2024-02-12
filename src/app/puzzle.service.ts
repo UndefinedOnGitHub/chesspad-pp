@@ -6,7 +6,7 @@ import {
 } from './chess-website-api.service';
 import { Chessground } from 'chessground';
 import { Move } from './move';
-import {FinishGameDialogComponent} from "./finish-game-dialog/finish-game-dialog.component";
+import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
@@ -19,7 +19,10 @@ export class PuzzleService {
   element: HTMLElement | undefined | null;
   firstMove: string | undefined;
 
-  constructor(public api: ChessWebsiteApiService, public dialog: MatDialog) {}
+  constructor(
+    public api: ChessWebsiteApiService,
+    public dialog: MatDialog,
+  ) {}
 
   loadPuzzle(element: HTMLElement | null = null): void {
     if (element) {
@@ -81,12 +84,15 @@ export class PuzzleService {
         lastMove: [m.from, m.to],
       });
     } else {
-      this.dialog.open(FinishGameDialogComponent, {
-        data: {pgn: this.game.pgn()}
-      }).afterClosed().subscribe(() => {
-        console.log('FINISHED');
-        this.loadPuzzle()
-      })
+      this.dialog
+        .open(FinishGameDialogComponent, {
+          data: { pgn: this.game.pgn() },
+        })
+        .afterClosed()
+        .subscribe(() => {
+          console.log('FINISHED');
+          this.loadPuzzle();
+        });
     }
   }
 

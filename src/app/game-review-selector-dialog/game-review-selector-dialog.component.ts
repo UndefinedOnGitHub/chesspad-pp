@@ -11,7 +11,7 @@ import { MatSelectChange } from '@angular/material/select';
 export interface DialogData {}
 export interface DialogCloseResponse {
   username: string;
-  color: "white" | "black" | "";
+  color: 'white' | 'black' | '';
 }
 
 @Component({
@@ -25,7 +25,7 @@ export class GameReviewSelectorDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
-  activeColor: "white" | "black" | "" = '';
+  activeColor: 'white' | 'black' | '' = '';
   activeUsername: string = 'hikaru';
   usernames = [
     { username: 'hikaru', name: 'Hikaru Nakamura' },
@@ -47,7 +47,7 @@ export class GameReviewSelectorDialogComponent {
   submit() {
     this.dialogRef.close({
       username: this.activeUsername,
-      color: this.activeColor
+      color: this.activeColor,
     });
   }
 }

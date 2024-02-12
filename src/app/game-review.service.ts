@@ -7,7 +7,10 @@ import {
 import { Chessground } from 'chessground';
 import { Move } from './move';
 import { MatDialog } from '@angular/material/dialog';
-import { GameReviewSelectorDialogComponent, DialogCloseResponse } from './game-review-selector-dialog/game-review-selector-dialog.component';
+import {
+  GameReviewSelectorDialogComponent,
+  DialogCloseResponse,
+} from './game-review-selector-dialog/game-review-selector-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -25,26 +28,33 @@ export class GameReviewService {
   ) {}
 
   // Not in use. May be needed if board loading takes a long time.
-  startBoardLoading(board: ReturnType<typeof Chessground>): ReturnType<typeof setTimeout> {
-    let peices = [["c4", null, "white"], ["d4", null, "white"], ["e4", null, "white"], ["f4", null, "white"]]
+  startBoardLoading(
+    board: ReturnType<typeof Chessground>,
+  ): ReturnType<typeof setTimeout> {
+    let peices = [
+      ['c4', null, 'white'],
+      ['d4', null, 'white'],
+      ['e4', null, 'white'],
+      ['f4', null, 'white'],
+    ];
     return setInterval(() => {
       const peice = peices.shift() || [];
-      if(peice[1]) {
+      if (peice[1]) {
         this.groundboard.setPieces([
-          [peice[0], {role: peice[1], color: peice[2]}]
-        ])
-        peices.push([peice[0], null, peice[2] == "black" ? "white": "black"])
+          [peice[0], { role: peice[1], color: peice[2] }],
+        ]);
+        peices.push([peice[0], null, peice[2] == 'black' ? 'white' : 'black']);
       } else {
-        this.groundboard.setPieces([[peice[0], null]])
-        peices.push([peice[0], "king", peice[2]])
+        this.groundboard.setPieces([[peice[0], null]]);
+        peices.push([peice[0], 'king', peice[2]]);
       }
-    }, 200)
+    }, 200);
   }
 
   loadGame(element: HTMLElement | null = null): void {
     if (element) {
       this.element = element;
-      this.groundboard = Chessground(element)
+      this.groundboard = Chessground(element);
     }
     const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
       data: {},
@@ -94,7 +104,7 @@ export class GameReviewService {
   setMoveClickCallback() {}
 
   makeMove(move: Move): { sucess: boolean } {
-    if (this.currentMove?.replace("+", "") == String(move)) {
+    if (this.currentMove?.replace('+', '') == String(move)) {
       this.currentMove = this.history.shift();
       setTimeout(() => {
         if (this.currentMove) {
