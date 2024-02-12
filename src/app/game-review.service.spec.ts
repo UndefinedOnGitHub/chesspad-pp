@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GameReviewService } from './game-review.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 
 describe('GameReviewService', () => {
@@ -9,7 +10,7 @@ describe('GameReviewService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, MatDialogModule],
+      imports: [HttpClientTestingModule, MatDialogModule],
     });
     service = TestBed.inject(GameReviewService);
   });

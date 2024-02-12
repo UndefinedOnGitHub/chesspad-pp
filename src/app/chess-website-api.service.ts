@@ -4,6 +4,7 @@ import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 export interface PuzzleResponse {
   gamePgn: string;
@@ -52,15 +53,24 @@ export class ChessWebsiteApiService {
     );
   }
 
-  loadChessComGame(username: string): Observable<GameResponse> {
-    const date = formatDate(new Date(), 'YYYY/MM', 'en-US');
+  loadChessComGame(
+    username: string,
+    color: 'white' | 'black' | '' = '',
+  ): Observable<GameResponse> {
+    const date = moment().subtract(1, 'month').format('YYYY/MM');
 
     return this.http
       .get(`https://api.chess.com/pub/player/${username}/games/${date}`)
       .pipe(
         map((response: any) => {
           console.log(response);
-          const games = response.games.filter((g: any) => g.rules == 'chess');
+          let games = response.games.filter((g: any) => g.rules == 'chess');
+          if (color) {
+            games = games.filter(
+              (g: any) =>
+                g[color].username.toLowerCase() == username.toLowerCase(),
+            );
+          }
           const randGame = Math.floor(Math.random() * games.length);
           const game = games[randGame];
           console.log(game);
@@ -116,7 +126,7 @@ export class ChessWebsiteApiService {
     return this.loadChessComPuzzle();
   }
 
-  fetchChessGame(username: string) {
-    return this.loadChessComGame(username);
+  fetchChessGame(username: string, color: 'white' | 'black' | '' = '') {
+    return this.loadChessComGame(username, color);
   }
 }
