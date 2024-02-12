@@ -9,10 +9,6 @@ describe('GameReviewService', () => {
   let service: GameReviewService;
 
   beforeEach(() => {
-    // const restService = TestBed.inject(GameReviewService);
-    // spyOn(restService, 'loadGame').and.returnValue();
-    // const valueServiceSpy = jasmine.createSpyObj('GameReviewService', ['loadGame']);
-    // valueServiceSpy.getValue.and.returnValue(null);
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule],
     });
