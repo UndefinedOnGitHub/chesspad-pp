@@ -171,6 +171,10 @@ export class GameService {
     localStorage.removeItem('local_game');
   }
 
+  getAdditionalButton() {
+    return null;
+  }
+
   #isGameStored(): boolean {
     return (localStorage.getItem('local_game') || '').length > 0;
   }

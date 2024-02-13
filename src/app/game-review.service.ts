@@ -11,6 +11,8 @@ import {
   GameReviewSelectorDialogComponent,
   DialogCloseResponse,
 } from './game-review-selector-dialog/game-review-selector-dialog.component';
+import { KeyboardButton } from './button';
+import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +23,23 @@ export class GameReviewService {
   element: HTMLElement | undefined | null;
   history: string[] = [];
   currentMove: string | undefined | null;
+  additionalButton: KeyboardButton = new KeyboardButton({
+    key: 'switch_keyboard',
+    icon: faNotesMedical,
+    symbol: '',
+    onTrigger: () => {
+      this.loadGame();
+    },
+  });
 
   constructor(
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
   ) {}
+
+  getAdditionalButton() {
+    return this.additionalButton;
+  }
 
   // Not in use. May be needed if board loading takes a long time.
   startBoardLoading(
@@ -54,17 +68,22 @@ export class GameReviewService {
   loadGame(element: HTMLElement | null = null): void {
     if (element) {
       this.element = element;
-      this.groundboard = Chessground(element);
+      this.groundboard = Chessground(this.element, { coordinates: false });
     }
     const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
       data: {},
     });
     dialogRef.afterClosed().subscribe((result: DialogCloseResponse) => {
-      this.game = new Chess();
-      const promise = this.api.fetchChessGame(result.username, result.color);
-      promise.subscribe((response: GameResponse) => {
-        this.setGameFromResponse(response);
-      });
+      if (result) {
+        if (this.element) {
+          this.groundboard = Chessground(this.element, { coordinates: false });
+        }
+        this.game = new Chess();
+        const promise = this.api.fetchChessGame(result.username, result.color);
+        promise.subscribe((response: GameResponse) => {
+          this.setGameFromResponse(response);
+        });
+      }
     });
   }
 

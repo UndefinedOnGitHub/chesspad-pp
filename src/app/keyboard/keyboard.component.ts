@@ -3,7 +3,7 @@ import { KeyboardButton } from '../button';
 import { Pieces, Columns, Rows } from '../constants';
 import { Move } from '../move';
 import { Keyboard } from '../keyboard';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from '../game.service';
 import { PuzzleService } from '../puzzle.service';
 import { GameReviewService } from '../game-review.service';
@@ -22,6 +22,7 @@ export interface KeyboardSettings {
 export class KeyboardComponent implements OnInit {
   // Settings gear
   faGear = faGear;
+  faQuestionCircle = faQuestionCircle;
   // Let the editor know the move
   @Output() onSubmit = new EventEmitter<Move>();
   // For tracking the move
@@ -45,6 +46,7 @@ export class KeyboardComponent implements OnInit {
   leftColumn: KeyboardButton[] = [];
   middleColumn: KeyboardButton[] = [];
   rightColumn: KeyboardButton[] = [];
+  additionalButton: KeyboardButton | null = null;
 
   setButtons() {
     this.leftColumn = this.keyboard.pieceButtons
@@ -59,6 +61,10 @@ export class KeyboardComponent implements OnInit {
     this.rightColumn = this.keyboard.pieceButtons
       .slice(3, 6)
       .concat([this.keyboard.promotionButton]);
+    // this.game
+    if (this.game) {
+      this.additionalButton = this.game.getAdditionalButton();
+    }
   }
 
   displayCurrentMove(): string {
