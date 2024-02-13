@@ -40,7 +40,12 @@
       </div>
     </div>
   </div>
-  <div class="return-key">
-    <button mat-raised-button (click)="submit($event)">||</button>
+  <div class="return-key d-flex flex-column">
+    <div *ngIf="additionalButton" class="flex-grow-2 additional-button">
+      <app-keyboard-button [button]="additionalButton"> </app-keyboard-button>
+    </div>
+    <button class="flex-grow-1" mat-raised-button (click)="submit($event)">
+      ||
+    </button>
   </div>
 </div>

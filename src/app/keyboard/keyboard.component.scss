@@ -31,9 +31,12 @@ $key-width: calc($keyboard-width / 5);
 .return-key {
   padding: 2px 2px 2px 8px;
   min-width: $key-width;
+  & .additional-button {
+    height: $key-width - 4px;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
   & button {
-    height: 100%;
-    width: 100%;
     border-radius: 5px;
     min-width: initial;
   }

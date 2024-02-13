@@ -17,11 +17,7 @@ export class GameReviewComponent implements OnInit {
     return chunk(cmoves, 2);
   }
 
-  onNewGame() {
-    this.gameReview.loadGame(document.getElementById('chessboard'));
-  }
-
   ngOnInit() {
-    this.onNewGame();
+    this.gameReview.loadGame(document.getElementById('chessboard'));
   }
 }

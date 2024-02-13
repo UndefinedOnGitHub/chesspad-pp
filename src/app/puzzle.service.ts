@@ -8,6 +8,8 @@ import { Chessground } from 'chessground';
 import { Move } from './move';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { KeyboardButton } from './button';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,14 @@ export class PuzzleService {
   solution: string[] = [];
   element: HTMLElement | undefined | null;
   firstMove: string | undefined;
+  additionalButton: KeyboardButton = new KeyboardButton({
+    key: 'switch_keyboard',
+    icon: faLightbulb,
+    symbol: '',
+    onTrigger: () => {
+      this.makeMove(new Move(this.solution[0]));
+    },
+  });
 
   constructor(
     public api: ChessWebsiteApiService,
@@ -122,5 +132,9 @@ export class PuzzleService {
     } catch (err) {
       return { sucess: false };
     }
+  }
+
+  getAdditionalButton() {
+    return this.additionalButton;
   }
 }

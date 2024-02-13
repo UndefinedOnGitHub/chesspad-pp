@@ -45,6 +45,7 @@ export class KeyboardComponent implements OnInit {
   leftColumn: KeyboardButton[] = [];
   middleColumn: KeyboardButton[] = [];
   rightColumn: KeyboardButton[] = [];
+  additionalButton: KeyboardButton | null = null;
 
   setButtons() {
     this.leftColumn = this.keyboard.pieceButtons
@@ -59,6 +60,10 @@ export class KeyboardComponent implements OnInit {
     this.rightColumn = this.keyboard.pieceButtons
       .slice(3, 6)
       .concat([this.keyboard.promotionButton]);
+
+    if (this.game) {
+      this.additionalButton = this.game.getAdditionalButton();
+    }
   }
 
   displayCurrentMove(): string {
