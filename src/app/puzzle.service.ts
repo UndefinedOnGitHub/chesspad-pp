@@ -15,11 +15,11 @@ import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
   providedIn: 'root',
 })
 export class PuzzleService {
-  groundboard: any | undefined;
+  groundboard: ReturnType<typeof Chessground> | undefined;
   game: Chess = new Chess();
   solution: string[] = [];
   element: HTMLElement | undefined | null;
-  firstMove: string | undefined;
+  boardOrientation: string | undefined;
   additionalButton: KeyboardButton = new KeyboardButton({
     key: 'switch_keyboard',
     icon: faLightbulb,
@@ -39,38 +39,30 @@ export class PuzzleService {
       this.element = element;
     }
     const promise = this.api.fetchChessPuzzle();
-    promise.subscribe((response: any) => {
+    promise.subscribe((response: PuzzleResponse) => {
       this.setGameFromResponse(response);
     });
-  }
-
-  lastMoveOfGame() {
-    return this.game.history({
-      verbose: true,
-    })[this.game.history().length - 1];
   }
 
   constructConfig() {
     const orientation: 'white' | 'black' =
       this.game.turn() == 'w' ? 'white' : 'black';
-    const lastMove = this.lastMoveOfGame();
 
     return {
       coordinates: false,
       orientation,
       fen: this.game.fen(),
       viewOnly: true,
-      lastMove: lastMove ? [lastMove.from, lastMove.to] : undefined,
     };
   }
 
   initiateGame(response: PuzzleResponse): void {
     // Set Game
     this.game.loadPgn(response.gamePgn);
-    console.log(this.game.ascii());
+    this.boardOrientation = response.orientation;
+    this.solution = [...response.puzzleSolution] || [];
 
     const config = this.constructConfig();
-    this.firstMove = response.orientation;
     // Set Digital Board
     if (this.element) {
       this.groundboard = Chessground(this.element, config);
@@ -79,7 +71,7 @@ export class PuzzleService {
 
   setGameFromResponse(response: PuzzleResponse): void {
     this.initiateGame(response);
-    this.solution = [...response.puzzleSolution] || [];
+    console.log(this.game.ascii());
     console.log(this.solution);
   }
 
@@ -89,21 +81,27 @@ export class PuzzleService {
     const move = this.solution.shift();
     if (move) {
       const m = this.game.move(move);
-      this.groundboard.set({
-        fen: this.game.fen(),
-        lastMove: [m.from, m.to],
-      });
-    } else {
-      this.dialog
-        .open(FinishGameDialogComponent, {
-          data: { pgn: this.game.pgn() },
-        })
-        .afterClosed()
-        .subscribe(() => {
-          console.log('FINISHED');
-          this.loadPuzzle();
+      if (this.groundboard) {
+        this.groundboard.set({
+          fen: this.game.fen(),
+          lastMove: [m.from, m.to],
         });
+      }
+    } else {
+      this.finishGame();
     }
+  }
+
+  finishGame(): void {
+    this.dialog
+      .open(FinishGameDialogComponent, {
+        data: { pgn: this.game.pgn(), disabled: true },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        console.log('FINISHED');
+        this.loadPuzzle();
+      });
   }
 
   makeMove(move: Move): { sucess: boolean } {
@@ -117,10 +115,12 @@ export class PuzzleService {
 
       if (solutionMove.san == gameMove.san) {
         this.game.move(move.toString());
-        this.groundboard.set({
-          fen: this.game.fen(),
-          lastMove: [gameMove.from, gameMove.to],
-        });
+        if (this.groundboard) {
+          this.groundboard.set({
+            fen: this.game.fen(),
+            lastMove: [gameMove.from, gameMove.to],
+          });
+        }
         // Remove move from solution
         this.solution.shift();
         // Wait then make opponent move

@@ -3,6 +3,7 @@
   <mat-button-toggle-group
     [(value)]="gameWinner"
     (change)="onGameWinnerChange($event)"
+    [disabled]="gameDisabled"
     name="gameWinner"
     aria-label="Game Winner"
   >

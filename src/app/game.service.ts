@@ -86,6 +86,14 @@ export class GameService {
     return { sucess: true };
   }
 
+  isCheckmate(): boolean {
+    return this.game.isCheckmate();
+  }
+
+  currentTurn(): 'w' | 'b' {
+    return this.game.turn();
+  }
+
   #scrollToLastMove(): void {
     // Scroll to last move
     // Keep slight delay to force the render of the move before animation
