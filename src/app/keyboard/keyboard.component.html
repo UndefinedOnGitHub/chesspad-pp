@@ -44,10 +44,12 @@
     <div *ngIf="additionalButton" class="flex-grow-2 additional-button">
       <app-keyboard-button [button]="additionalButton"> </app-keyboard-button>
     </div>
-    <button [disabled]="disableButtons()"
+    <button
+      [disabled]="disableButtons()"
       class="flex-grow-1"
       mat-raised-button
-      (click)="submit($event)">
+      (click)="submit($event)"
+    >
       ||
     </button>
   </div>

@@ -34,7 +34,7 @@ export class FinishGameDialogComponent {
   ) {
     this.gameString = data.pgn || this.game.exportPGN();
     this.gameWinner = this.findGameWinner();
-    this.onGameWinnerChange({value: this.gameWinner});
+    this.onGameWinnerChange({ value: this.gameWinner });
     this.gameDisabled = data.disabled || false;
   }
 
