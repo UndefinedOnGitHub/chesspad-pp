@@ -140,10 +140,8 @@ $dark-theme: mat.define-dark-theme(
 }
 
 @mixin on-background() {
-  background-color: #0e0e10;
-  color: mat.get-color-from-palette($primary, 600);
+  @include primary-color;
   @media (prefers-color-scheme: light) {
-    background-color: #fff;
     color: black;
   }
 }
