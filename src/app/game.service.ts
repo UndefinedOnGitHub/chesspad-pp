@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Move } from './move';
 import { chunk } from 'lodash';
 import { Chess } from 'chess.js';
+import { GameStorageManagerService } from './game-storage-manager.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ export class GameService {
 
   onMoveClickCallbacks: Function[] = [];
 
-  constructor() {
+  constructor(public storage: GameStorageManagerService) {
     this.game = new Chess();
   }
 
@@ -109,19 +110,16 @@ export class GameService {
 
   // Game Storage Functions
   storeGame(): void {
-    const pgnMoves = this.game.pgn();
-    localStorage.setItem('local_game', pgnMoves);
+    this.storage.storeGame("local_game", this.game)
   }
 
   fetchGame(): Move[] {
-    try {
-      const pgn = localStorage.getItem('local_game') || '';
-      this.game.loadPgn(pgn);
+    const storedGame = this.storage.fetchGame("local_game")
+    if (storedGame) {
+      this.game = storedGame
       this.#logGame('Game Loaded');
       this.moves = this.game.history().map((h) => new Move(h));
       this.#scrollToLastMove();
-    } catch (err) {
-      console.error(err);
     }
 
     return this.moves;
@@ -181,11 +179,6 @@ export class GameService {
 
     this.#logGame();
     this.activeMoveIdx = -1;
-  }
-
-  // Check if the local game exists
-  #isGameStored(): boolean {
-    return (localStorage.getItem('local_game') || '').length > 0;
   }
 
   // Log Game for Debugging

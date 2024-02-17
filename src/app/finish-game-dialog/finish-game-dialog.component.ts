@@ -9,9 +9,11 @@ import {
 } from '@angular/material/dialog';
 import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';
+import { Chess } from 'chess.js';
 export interface DialogData {
   pgn: string;
   disabled?: boolean;
+  game?: Chess;
 }
 
 @Component({
@@ -32,12 +34,13 @@ export class FinishGameDialogComponent {
   ) {
     this.gameString = data.pgn || this.game.exportPGN();
     this.gameWinner = this.findGameWinner();
+    this.onGameWinnerChange({value: this.gameWinner});
     this.gameDisabled = data.disabled || false;
   }
 
   findGameWinner(): '1-0' | '1/2-1/2' | '0-1' {
-    if (this.game.isCheckmate()) {
-      return this.game.currentTurn() == 'w' ? '1-0' : '0-1';
+    if (this.data?.game && this.data?.game?.isCheckmate()) {
+      return this.data.game.turn() != 'w' ? '1-0' : '0-1';
     }
     return '1/2-1/2';
   }

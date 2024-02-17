@@ -39,7 +39,7 @@ export class GameComponent {
 
   onFinish() {
     const dialogRef = this.dialog.open(FinishGameDialogComponent, {
-      data: {},
+      data: {pgn: this.game.game.pgn(), game: this.game.game},
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');

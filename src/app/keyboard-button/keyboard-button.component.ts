@@ -8,6 +8,7 @@ import { KeyboardButton } from '../button';
 })
 export class KeyboardButtonComponent {
   @Input() button: KeyboardButton | null = null;
+  @Input() disabled: boolean = false;
 
   onButtonPressed() {
     if (this.button) {
