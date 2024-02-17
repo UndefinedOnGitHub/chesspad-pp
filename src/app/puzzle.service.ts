@@ -18,7 +18,7 @@ import { GameStorageManagerService } from './game-storage-manager.service';
  * The Puzzle Service
  *
  * This service keeps track of the chess puzzle.
- * 
+ *
  * `init` will connect the board, keyboard and initiate the process
  *
  *
@@ -45,7 +45,7 @@ export class PuzzleService {
   constructor(
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
-    public storage: GameStorageManagerService
+    public storage: GameStorageManagerService,
   ) {}
 
   init(element: HTMLElement | null = null): void {
@@ -56,7 +56,7 @@ export class PuzzleService {
     if (element) {
       this.element = element;
     }
-    if (this.storage.isGameStored("local_puzzle")) {
+    if (this.storage.isGameStored('local_puzzle')) {
       this.#fetchGame();
     } else {
       const promise = this.api.fetchChessPuzzle();
@@ -67,21 +67,21 @@ export class PuzzleService {
   }
 
   #storeGame() {
-    const storageGame = new Chess(this.game.fen())
-    this.solution.forEach((s: string) => storageGame.move(s))
-    this.storage.storeGame('local_puzzle', storageGame)
+    const storageGame = new Chess(this.game.fen());
+    this.solution.forEach((s: string) => storageGame.move(s));
+    this.storage.storeGame('local_puzzle', storageGame);
   }
 
   #fetchGame() {
     const puzzle = this.storage.fetchGame('local_puzzle');
     if (puzzle) {
-      const firstMove = puzzle.history({verbose: true})[0];
+      const firstMove = puzzle.history({ verbose: true })[0];
       this.game = new Chess(firstMove?.before);
       this.boardOrientation = firstMove.color;
       this.solution = [...puzzle.history()];
       this.#constructBoard();
     } else {
-      this.storage.clearGame("local_puzzle");
+      this.storage.clearGame('local_puzzle');
     }
   }
 
@@ -147,7 +147,7 @@ export class PuzzleService {
       .afterClosed()
       .subscribe(() => {
         console.log('FINISHED');
-        this.storage.clearGame("local_puzzle");
+        this.storage.clearGame('local_puzzle');
         this.#loadPuzzle();
       });
   }
@@ -188,7 +188,7 @@ export class PuzzleService {
     return this.additionalButton;
   }
 
-  isCheckmate() : boolean {
-    return this.game.isCheckmate()
+  isCheckmate(): boolean {
+    return this.game.isCheckmate();
   }
 }

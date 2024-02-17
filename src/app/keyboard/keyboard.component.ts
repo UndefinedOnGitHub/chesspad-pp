@@ -125,7 +125,7 @@ export class KeyboardComponent implements OnInit {
     }
   }
 
-  disableButtons() : boolean {
+  disableButtons(): boolean {
     // return this?.game?.isCheckmate() || false;
     return false;
   }

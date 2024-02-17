@@ -34,11 +34,11 @@
         <div
           *ngFor="let action of sideBarActions"
           class="d-flex align-content-center"
-          routerLink="{{action.routerLink}}"
+          routerLink="{{ action.routerLink }}"
           (click)="drawer.close()"
         >
           <fa-icon [icon]="action.icon"></fa-icon>
-          <span>{{action.text}}</span>
+          <span>{{ action.text }}</span>
         </div>
       </div>
     </mat-drawer>

@@ -26,11 +26,11 @@ export class AppComponent {
 
   githubUrl: string = 'https://github.com/UndefinedOnGitHub/chesspad-pp';
 
-  sideBarActions : SideBarAction[] = [
-    {routerLink: "/", icon: faFilePen, text: "Notepad"},
-    {routerLink: "/puzzles", icon: faPuzzlePiece, text: "Puzzle"},
-    {routerLink: "/games", icon: faChessBoard, text: "Game"},
-  ]
+  sideBarActions: SideBarAction[] = [
+    { routerLink: '/', icon: faFilePen, text: 'Notepad' },
+    { routerLink: '/puzzles', icon: faPuzzlePiece, text: 'Puzzle' },
+    { routerLink: '/games', icon: faChessBoard, text: 'Game' },
+  ];
 
   constructor() {}
 }

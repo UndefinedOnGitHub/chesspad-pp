@@ -110,13 +110,13 @@ export class GameService {
 
   // Game Storage Functions
   storeGame(): void {
-    this.storage.storeGame("local_game", this.game)
+    this.storage.storeGame('local_game', this.game);
   }
 
   fetchGame(): Move[] {
-    const storedGame = this.storage.fetchGame("local_game")
+    const storedGame = this.storage.fetchGame('local_game');
     if (storedGame) {
-      this.game = storedGame
+      this.game = storedGame;
       this.#logGame('Game Loaded');
       this.moves = this.game.history().map((h) => new Move(h));
       this.#scrollToLastMove();

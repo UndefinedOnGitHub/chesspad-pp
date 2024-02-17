@@ -43,7 +43,7 @@ export class GameReviewService {
     return this.additionalButton;
   }
 
-  init(element: HTMLElement | null = null) : void {
+  init(element: HTMLElement | null = null): void {
     return this.#loadGame(element);
   }
 
@@ -89,21 +89,27 @@ export class GameReviewService {
       });
       this.game = new Chess();
     }
-    const game = this.storage.fetchGame("local_game_review")
+    const game = this.storage.fetchGame('local_game_review');
     if (game) {
-      const moveNumber = parseInt(this.storage.fetch("local_game_review_move_number") || "0") || 0;
+      const moveNumber =
+        parseInt(this.storage.fetch('local_game_review_move_number') || '0') ||
+        0;
       const history = game.history().slice(moveNumber);
-      game.history().slice(0, moveNumber).forEach(m => this.game.move(m));
-      const orientation = this.storage.fetch("local_game_review_orientation") == "b" ? "b" : "w";
+      game
+        .history()
+        .slice(0, moveNumber)
+        .forEach((m) => this.game.move(m));
+      const orientation =
+        this.storage.fetch('local_game_review_orientation') == 'b' ? 'b' : 'w';
 
-      this.#initiateGame({history, orientation, gamePgn: game.pgn()})
+      this.#initiateGame({ history, orientation, gamePgn: game.pgn() });
       this.#scrollToLastMove();
     } else {
       this.#newGamePopup();
     }
   }
 
-  #fetchAndLoadGame(result: DialogCloseResponse) : void {
+  #fetchAndLoadGame(result: DialogCloseResponse): void {
     if (this.element) {
       this.groundboard = Chessground(this.element, {
         coordinates: false,
@@ -133,9 +139,9 @@ export class GameReviewService {
   #storeGame(response: GameResponse) {
     const storageGame = new Chess();
     storageGame.loadPgn(response.gamePgn);
-    this.storage.storeGame("local_game_review", storageGame);
-    this.storage.store("local_game_review_move_number", "0");
-    this.storage.store("local_game_review_orientation", response.orientation);
+    this.storage.storeGame('local_game_review', storageGame);
+    this.storage.store('local_game_review_move_number', '0');
+    this.storage.store('local_game_review_orientation', response.orientation);
   }
 
   #initiateGame(response: GameResponse): void {
@@ -171,7 +177,10 @@ export class GameReviewService {
       setTimeout(() => {
         if (this.currentMove) {
           const gameMove = this.game.move(this.currentMove);
-          this.storage.store("local_game_review_move_number", String(this.game.history().length - 1))
+          this.storage.store(
+            'local_game_review_move_number',
+            String(this.game.history().length - 1),
+          );
           this.groundboard.set({
             fen: this.game.fen(),
             lastMove: [gameMove.from, gameMove.to],
@@ -184,7 +193,7 @@ export class GameReviewService {
     return { sucess: false };
   }
 
-  isCheckmate() : boolean {
+  isCheckmate(): boolean {
     return this.game.isCheckmate();
   }
 
