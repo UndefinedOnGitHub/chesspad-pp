@@ -11,7 +11,7 @@ export class PuzzlesComponent implements OnInit {
   constructor(public puzzle: PuzzleService) {}
 
   ngOnInit() {
-    this.puzzle.loadPuzzle(document.getElementById('puzzle-chessboard'));
+    this.puzzle.init(document.getElementById('puzzle-chessboard'));
   }
 
   boardOrientation(): string | null {

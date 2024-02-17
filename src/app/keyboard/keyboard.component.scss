@@ -28,6 +28,9 @@ $key-width: calc($keyboard-width / 5);
   padding: 0px 15px;
   text-shadow: 2px 3px 5px black;
 }
+.keyboard-settings-gear {
+  @include theme.on-background;
+}
 .return-key {
   padding: 2px 2px 2px 8px;
   min-width: $key-width;

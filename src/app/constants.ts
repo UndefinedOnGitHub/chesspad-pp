@@ -185,3 +185,11 @@ export const Columns: Column[] = [
   Column7,
   Column8,
 ];
+
+// Chessground Constants
+export interface ChessgroundConfig {
+  coordinates: boolean;
+  viewOnly: boolean;
+  orientation?: 'white' | 'black';
+  fen?: string;
+}

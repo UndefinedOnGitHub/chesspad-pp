@@ -48,8 +48,7 @@ export class FinishGameDialogComponent {
   }
 
   close() {
-    this.game.clearGame();
-    this.dialogRef.close();
+    this.dialogRef.close({ new: true });
   }
 
   copy() {

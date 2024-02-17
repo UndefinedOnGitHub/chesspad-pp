@@ -183,6 +183,7 @@ export class GameService {
     this.activeMoveIdx = -1;
   }
 
+  // Check if the local game exists
   #isGameStored(): boolean {
     return (localStorage.getItem('local_game') || '').length > 0;
   }

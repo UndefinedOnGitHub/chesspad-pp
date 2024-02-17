@@ -54,9 +54,7 @@ export class GameReviewService {
     return setInterval(() => {
       const [position, peice, color] = peices.shift() || [];
       if (peice) {
-        this.groundboard.setPieces([
-          [position, { role: peice, color: color }],
-        ]);
+        this.groundboard.setPieces([[position, { role: peice, color: color }]]);
         peices.push([position, null, color == 'black' ? 'white' : 'black']);
       } else {
         this.groundboard.setPieces([[position, null]]);
@@ -68,7 +66,10 @@ export class GameReviewService {
   loadGame(element: HTMLElement | null = null): void {
     if (element) {
       this.element = element;
-      this.groundboard = Chessground(this.element, { coordinates: false, viewOnly: true });
+      this.groundboard = Chessground(this.element, {
+        coordinates: false,
+        viewOnly: true,
+      });
     }
     const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
       data: {},
@@ -76,7 +77,10 @@ export class GameReviewService {
     dialogRef.afterClosed().subscribe((result: DialogCloseResponse) => {
       if (result) {
         if (this.element) {
-          this.groundboard = Chessground(this.element, { coordinates: false, viewOnly: true });
+          this.groundboard = Chessground(this.element, {
+            coordinates: false,
+            viewOnly: true,
+          });
         }
         this.game = new Chess();
         const promise = this.api.fetchChessGame(result.username, result.color);
