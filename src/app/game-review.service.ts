@@ -12,6 +12,7 @@ import {
   DialogCloseResponse,
 } from './game-review-selector-dialog/game-review-selector-dialog.component';
 import { KeyboardButton } from './button';
+import { GameStorageManagerService } from './game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
@@ -28,70 +29,95 @@ export class GameReviewService {
     icon: faNotesMedical,
     symbol: '',
     onTrigger: () => {
-      this.loadGame();
+      this.#newGamePopup();
     },
   });
 
   constructor(
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
+    public storage: GameStorageManagerService,
   ) {}
 
   getAdditionalButton() {
     return this.additionalButton;
   }
 
-  // Not in use. May be needed if board loading takes a long time.
-  startBoardLoading(
-    board: ReturnType<typeof Chessground>,
-  ): ReturnType<typeof setTimeout> {
-    let peices = [
-      ['c4', null, 'white'],
-      ['d4', null, 'white'],
-      ['e4', null, 'white'],
-      ['f4', null, 'white'],
-    ];
-    return setInterval(() => {
-      const [position, peice, color] = peices.shift() || [];
-      if (peice) {
-        this.groundboard.setPieces([[position, { role: peice, color: color }]]);
-        peices.push([position, null, color == 'black' ? 'white' : 'black']);
-      } else {
-        this.groundboard.setPieces([[position, null]]);
-        peices.push([position, 'king', color]);
-      }
-    }, 200);
+  init(element: HTMLElement | null = null) : void {
+    return this.#loadGame(element);
   }
 
-  loadGame(element: HTMLElement | null = null): void {
+  // Not in use. May be needed if board loading takes a long time.
+  // startBoardLoading(
+  //   board: ReturnType<typeof Chessground>,
+  // ): ReturnType<typeof setTimeout> {
+  //   let peices = [
+  //     ['c4', null, 'white'],
+  //     ['d4', null, 'white'],
+  //     ['e4', null, 'white'],
+  //     ['f4', null, 'white'],
+  //   ];
+  //   return setInterval(() => {
+  //     const [position, peice, color] = peices.shift() || [];
+  //     if (peice) {
+  //       this.groundboard.setPieces([[position, { role: peice, color: color }]]);
+  //       peices.push([position, null, color == 'black' ? 'white' : 'black']);
+  //     } else {
+  //       this.groundboard.setPieces([[position, null]]);
+  //       peices.push([position, 'king', color]);
+  //     }
+  //   }, 200);
+  // }
+
+  #newGamePopup() {
+    const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe((result: DialogCloseResponse) => {
+      if (result) {
+        this.#fetchAndLoadGame(result);
+      }
+    });
+  }
+
+  #loadGame(element: HTMLElement | null = null): void {
     if (element) {
       this.element = element;
       this.groundboard = Chessground(this.element, {
         coordinates: false,
         viewOnly: true,
       });
+      this.game = new Chess();
     }
-    const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
-      data: {},
-    });
-    dialogRef.afterClosed().subscribe((result: DialogCloseResponse) => {
-      if (result) {
-        if (this.element) {
-          this.groundboard = Chessground(this.element, {
-            coordinates: false,
-            viewOnly: true,
-          });
-        }
-        this.game = new Chess();
-        const promise = this.api.fetchChessGame(result.username, result.color);
-        promise.subscribe((response: GameResponse) => {
-          this.setGameFromResponse(response);
-        });
-      }
+    const game = this.storage.fetchGame("local_game_review")
+    if (game) {
+      const moveNumber = parseInt(this.storage.fetch("local_game_review_move_number") || "0") || 0;
+      const history = game.history().slice(moveNumber);
+      game.history().slice(0, moveNumber).forEach(m => this.game.move(m));
+      const orientation = this.storage.fetch("local_game_review_orientation") == "b" ? "b" : "w";
+
+      this.#initiateGame({history, orientation, gamePgn: game.pgn()})
+      this.#scrollToLastMove();
+    } else {
+      this.#newGamePopup();
+    }
+  }
+
+  #fetchAndLoadGame(result: DialogCloseResponse) : void {
+    if (this.element) {
+      this.groundboard = Chessground(this.element, {
+        coordinates: false,
+        viewOnly: true,
+      });
+    }
+    this.game = new Chess();
+    const promise = this.api.fetchChessGame(result.username, result.color);
+    promise.subscribe((response: GameResponse) => {
+      this.#setGameFromResponse(response);
     });
   }
 
-  constructConfig(response: GameResponse, firstMove: any) {
+  #constructConfig(response: GameResponse, firstMove: any) {
     const orientation: 'white' | 'black' =
       response.orientation == 'w' ? 'white' : 'black';
 
@@ -104,24 +130,37 @@ export class GameReviewService {
     };
   }
 
-  initiateGame(response: GameResponse): void {
+  #storeGame(response: GameResponse) {
+    const storageGame = new Chess();
+    storageGame.loadPgn(response.gamePgn);
+    this.storage.storeGame("local_game_review", storageGame);
+    this.storage.store("local_game_review_move_number", "0");
+    this.storage.store("local_game_review_orientation", response.orientation);
+  }
+
+  #initiateGame(response: GameResponse): void {
     // Set Game
-    console.log(this.game.ascii());
     this.history = response.history;
-    console.log(this.history);
     this.currentMove = this.history.shift();
     if (this.currentMove) {
       const firstMove = this.game.move(this.currentMove);
-      const config = this.constructConfig(response, firstMove);
+      const config = this.#constructConfig(response, firstMove);
       // Set Digital Board
       if (this.element) {
         this.groundboard = Chessground(this.element, config);
       }
     }
+
+    // Log Game
+    console.log(this.game.ascii());
+    console.log(this.history);
   }
 
-  setGameFromResponse(response: GameResponse): void {
-    this.initiateGame(response);
+  #setGameFromResponse(response: GameResponse): void {
+    // Store Game
+    this.#storeGame(response);
+    // Start Game
+    this.#initiateGame(response);
   }
 
   setMoveClickCallback() {}
@@ -132,6 +171,7 @@ export class GameReviewService {
       setTimeout(() => {
         if (this.currentMove) {
           const gameMove = this.game.move(this.currentMove);
+          this.storage.store("local_game_review_move_number", String(this.game.history().length - 1))
           this.groundboard.set({
             fen: this.game.fen(),
             lastMove: [gameMove.from, gameMove.to],
@@ -142,6 +182,10 @@ export class GameReviewService {
       return { sucess: true };
     }
     return { sucess: false };
+  }
+
+  isCheckmate() : boolean {
+    return this.game.isCheckmate();
   }
 
   #scrollToLastMove(): void {

@@ -124,4 +124,9 @@ export class KeyboardComponent implements OnInit {
       this.triggerErrorAnimation();
     }
   }
+
+  disableButtons() : boolean {
+    // return this?.game?.isCheckmate() || false;
+    return false;
+  }
 }

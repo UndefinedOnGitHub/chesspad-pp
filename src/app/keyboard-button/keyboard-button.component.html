@@ -4,6 +4,7 @@
   [class]="button.class"
   *ngIf="button"
   (click)="onButtonPressed()"
+  [disabled]="disabled"
 >
   <span *ngIf="!button.icon">{{ button.value }}</span>
   <fa-icon *ngIf="button.icon" [icon]="button.icon"></fa-icon>

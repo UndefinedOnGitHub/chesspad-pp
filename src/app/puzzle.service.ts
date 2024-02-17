@@ -11,13 +11,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { KeyboardButton } from './button';
 import { ChessgroundConfig } from './constants';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { GameStorageManagerService } from './game-storage-manager.service';
 
 /**
  *
  * The Puzzle Service
  *
  * This service keeps track of the chess puzzle.
- * We track the current moves and solution.
+ * 
+ * `init` will connect the board, keyboard and initiate the process
  *
  *
  */
@@ -43,6 +45,7 @@ export class PuzzleService {
   constructor(
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
+    public storage: GameStorageManagerService
   ) {}
 
   init(element: HTMLElement | null = null): void {
@@ -53,10 +56,33 @@ export class PuzzleService {
     if (element) {
       this.element = element;
     }
-    const promise = this.api.fetchChessPuzzle();
-    promise.subscribe((response: PuzzleResponse) => {
-      this.#initiateGame(response);
-    });
+    if (this.storage.isGameStored("local_puzzle")) {
+      this.#fetchGame();
+    } else {
+      const promise = this.api.fetchChessPuzzle();
+      promise.subscribe((response: PuzzleResponse) => {
+        this.#initiateGame(response);
+      });
+    }
+  }
+
+  #storeGame() {
+    const storageGame = new Chess(this.game.fen())
+    this.solution.forEach((s: string) => storageGame.move(s))
+    this.storage.storeGame('local_puzzle', storageGame)
+  }
+
+  #fetchGame() {
+    const puzzle = this.storage.fetchGame('local_puzzle');
+    if (puzzle) {
+      const firstMove = puzzle.history({verbose: true})[0];
+      this.game = new Chess(firstMove?.before);
+      this.boardOrientation = firstMove.color;
+      this.solution = [...puzzle.history()];
+      this.#constructBoard();
+    } else {
+      this.storage.clearGame("local_puzzle");
+    }
   }
 
   // Load Initial Values for the puzzle
@@ -65,7 +91,11 @@ export class PuzzleService {
     this.game.loadPgn(response.gamePgn);
     this.boardOrientation = response.orientation;
     this.solution = [...response.puzzleSolution] || [];
+    this.#storeGame();
+    this.#constructBoard();
+  }
 
+  #constructBoard() {
     // Set Digital Board
     if (this.element) {
       const config = this.#constructConfig();
@@ -112,11 +142,12 @@ export class PuzzleService {
   #finishGame(): void {
     this.dialog
       .open(FinishGameDialogComponent, {
-        data: { pgn: this.game.pgn(), disabled: true },
+        data: { pgn: this.game.pgn(), disabled: true, game: this.game },
       })
       .afterClosed()
       .subscribe(() => {
         console.log('FINISHED');
+        this.storage.clearGame("local_puzzle");
         this.#loadPuzzle();
       });
   }
@@ -155,5 +186,9 @@ export class PuzzleService {
   // Provide the solution button to the keyboard
   getAdditionalButton() {
     return this.additionalButton;
+  }
+
+  isCheckmate() : boolean {
+    return this.game.isCheckmate()
   }
 }

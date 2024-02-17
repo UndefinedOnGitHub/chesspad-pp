@@ -18,6 +18,6 @@ export class GameReviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameReview.loadGame(document.getElementById('chessboard'));
+    this.gameReview.init(document.getElementById('chessboard'));
   }
 }

@@ -1,6 +1,6 @@
 <div class="app-container">
   <mat-toolbar color="primary">
-    <button mat-icon-button class="" aria-label="" (click)="drawer.toggle()">
+    <button mat-icon-button class="" (click)="drawer.toggle()">
       <fa-icon [icon]="faBars"></fa-icon>
     </button>
     <span routerLink="/" id="chesspad-pp-title" class="chesspad-pp-title">
@@ -32,28 +32,13 @@
     <mat-drawer #drawer mode="over" class="mat-drawer">
       <div class="d-flex flex-column p-3 navigation-menu">
         <div
+          *ngFor="let action of sideBarActions"
           class="d-flex align-content-center"
-          routerLink="/"
+          routerLink="{{action.routerLink}}"
           (click)="drawer.close()"
         >
-          <fa-icon [icon]="faFilePen"></fa-icon>
-          <span>Notepad</span>
-        </div>
-        <div
-          class="d-flex align-content-center"
-          routerLink="/puzzles"
-          (click)="drawer.close()"
-        >
-          <fa-icon [icon]="faPuzzlePiece"></fa-icon>
-          <span>Puzzle</span>
-        </div>
-        <div
-          class="d-flex align-content-center"
-          routerLink="/games"
-          (click)="drawer.close()"
-        >
-          <fa-icon [icon]="faChessBoard"></fa-icon>
-          <span>Game</span>
+          <fa-icon [icon]="action.icon"></fa-icon>
+          <span>{{action.text}}</span>
         </div>
       </div>
     </mat-drawer>
