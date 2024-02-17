@@ -11,7 +11,7 @@ export class GameStorageManagerService {
   storeGame(key: string, game: Chess): void {
     try {
       const pgn64 = btoa(game.pgn());
-      localStorage.setItem(key, pgn64);
+      this.store(key, pgn64);
     } catch {
       console.error("Failed to store game")
     }
@@ -19,7 +19,7 @@ export class GameStorageManagerService {
 
   fetchGame(key: string) : Chess | undefined {
     try {
-      const pgn64 = localStorage.getItem(key) || '';
+      const pgn64 = this.fetch(key) || '';
       if (pgn64) {
         const pgn = atob(pgn64);
         const game = new Chess();
@@ -38,5 +38,13 @@ export class GameStorageManagerService {
 
   isGameStored(key: string): boolean {
     return (localStorage.getItem(key) || '').length > 0;
+  }
+
+  store(key : string, value : string) {
+    localStorage.setItem(key, value);
+  }
+
+  fetch(key : string) {
+    return localStorage.getItem(key);
   }
 }

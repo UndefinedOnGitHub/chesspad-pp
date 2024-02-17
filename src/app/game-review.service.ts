@@ -12,6 +12,7 @@ import {
   DialogCloseResponse,
 } from './game-review-selector-dialog/game-review-selector-dialog.component';
 import { KeyboardButton } from './button';
+import { GameStorageManagerService } from './game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
@@ -28,13 +29,14 @@ export class GameReviewService {
     icon: faNotesMedical,
     symbol: '',
     onTrigger: () => {
-      this.#loadGame();
+      this.#newGamePopup();
     },
   });
 
   constructor(
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
+    public storage: GameStorageManagerService,
   ) {}
 
   getAdditionalButton() {
@@ -67,14 +69,7 @@ export class GameReviewService {
   //   }, 200);
   // }
 
-  #loadGame(element: HTMLElement | null = null): void {
-    if (element) {
-      this.element = element;
-      this.groundboard = Chessground(this.element, {
-        coordinates: false,
-        viewOnly: true,
-      });
-    }
+  #newGamePopup() {
     const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
       data: {},
     });
@@ -83,6 +78,29 @@ export class GameReviewService {
         this.#fetchAndLoadGame(result);
       }
     });
+  }
+
+  #loadGame(element: HTMLElement | null = null): void {
+    if (element) {
+      this.element = element;
+      this.groundboard = Chessground(this.element, {
+        coordinates: false,
+        viewOnly: true,
+      });
+      this.game = new Chess();
+    }
+    const game = this.storage.fetchGame("local_game_review")
+    if (game) {
+      const moveNumber = parseInt(this.storage.fetch("local_game_review_move_number") || "0") || 0;
+      const history = game.history().slice(moveNumber);
+      game.history().slice(0, moveNumber).forEach(m => this.game.move(m));
+      const orientation = this.storage.fetch("local_game_review_orientation") == "b" ? "b" : "w";
+
+      this.#initiateGame({history, orientation, gamePgn: game.pgn()})
+      this.#scrollToLastMove();
+    } else {
+      this.#newGamePopup();
+    }
   }
 
   #fetchAndLoadGame(result: DialogCloseResponse) : void {
@@ -112,6 +130,14 @@ export class GameReviewService {
     };
   }
 
+  #storeGame(response: GameResponse) {
+    const storageGame = new Chess();
+    storageGame.loadPgn(response.gamePgn);
+    this.storage.storeGame("local_game_review", storageGame);
+    this.storage.store("local_game_review_move_number", "0");
+    this.storage.store("local_game_review_orientation", response.orientation);
+  }
+
   #initiateGame(response: GameResponse): void {
     // Set Game
     this.history = response.history;
@@ -124,12 +150,16 @@ export class GameReviewService {
         this.groundboard = Chessground(this.element, config);
       }
     }
+
     // Log Game
     console.log(this.game.ascii());
     console.log(this.history);
   }
 
   #setGameFromResponse(response: GameResponse): void {
+    // Store Game
+    this.#storeGame(response);
+    // Start Game
     this.#initiateGame(response);
   }
 
@@ -141,6 +171,7 @@ export class GameReviewService {
       setTimeout(() => {
         if (this.currentMove) {
           const gameMove = this.game.move(this.currentMove);
+          this.storage.store("local_game_review_move_number", String(this.game.history().length - 1))
           this.groundboard.set({
             fen: this.game.fen(),
             lastMove: [gameMove.from, gameMove.to],
