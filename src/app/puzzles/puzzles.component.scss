@@ -1,3 +1,5 @@
+@use "../_theme" as theme;
+
 .keyboard-puzzle-container {
   height: 100%;
 }
@@ -40,4 +42,8 @@
   &.b {
     background-color: black;
   }
+}
+.first-move-display-text {
+  @include theme.on-background;
+  font-weight: 500;
 }

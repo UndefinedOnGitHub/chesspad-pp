@@ -11,12 +11,12 @@ export class PuzzlesComponent implements OnInit {
   constructor(public puzzle: PuzzleService) {}
 
   ngOnInit() {
-    this.puzzle.loadPuzzle(document.getElementById('puzzle-chessboard'));
+    this.puzzle.init(document.getElementById('puzzle-chessboard'));
   }
 
-  firstMove(): string | null {
-    if (this.puzzle.firstMove) {
-      return this.puzzle.firstMove == 'w' ? 'White' : 'Black';
+  boardOrientation(): string | null {
+    if (this.puzzle.boardOrientation) {
+      return this.puzzle.boardOrientation == 'w' ? 'White' : 'Black';
     }
     return null;
   }

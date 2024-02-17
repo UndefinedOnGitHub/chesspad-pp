@@ -40,35 +40,6 @@ export class GameService {
     this.onMoveClickCallbacks.push(func);
   }
 
-  // Make move on last position
-  #makeNextMove(move: Move): void {
-    const gameMove = this.game.move(move.toString());
-    this.moves.push(new Move(gameMove.san));
-    this.#logGame();
-    this.#scrollToLastMove();
-  }
-
-  // Make move at a previous position
-  #makeHistoricalMove(move: Move): void {
-    const newGame = new Chess();
-    const beforeChangeMoves = this.game.history().slice(0, this.activeMoveIdx);
-    const afterChangeMoves = this.game
-      .history()
-      .slice(this.activeMoveIdx + 1, this.game.history().length);
-
-    // Reconstruct Game
-    beforeChangeMoves.forEach((m) => newGame.move(m.toString()));
-    newGame.move(move.toString());
-    afterChangeMoves.forEach((m) => newGame.move(m.toString()));
-
-    // Set Game
-    this.game = newGame;
-    this.moves[this.activeMoveIdx] = move;
-
-    this.#logGame();
-    this.activeMoveIdx = -1;
-  }
-
   makeMove(move: Move): { sucess: boolean } {
     try {
       if (this.activeMoveIdx >= 0) {
@@ -86,18 +57,12 @@ export class GameService {
     return { sucess: true };
   }
 
-  #scrollToLastMove(): void {
-    // Scroll to last move
-    // Keep slight delay to force the render of the move before animation
-    try {
-      setTimeout(() => {
-        const dispays = document.getElementsByTagName('app-move-display');
-        const e = dispays[dispays.length - 1];
-        e?.scrollIntoView({ behavior: 'smooth' });
-      }, 500);
-    } catch {
-      // Prevent from issues here causeing bigger problems
-    }
+  isCheckmate(): boolean {
+    return this.game.isCheckmate();
+  }
+
+  currentTurn(): 'w' | 'b' {
+    return this.game.turn();
   }
 
   onMoveClick(move: Move): void {
@@ -175,6 +140,50 @@ export class GameService {
     return null;
   }
 
+  #scrollToLastMove(): void {
+    // Scroll to last move
+    // Keep slight delay to force the render of the move before animation
+    try {
+      setTimeout(() => {
+        const dispays = document.getElementsByTagName('app-move-display');
+        const e = dispays[dispays.length - 1];
+        e?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    } catch {
+      // Prevent from issues here causeing bigger problems
+    }
+  }
+
+  // Make move on last position
+  #makeNextMove(move: Move): void {
+    const gameMove = this.game.move(move.toString());
+    this.moves.push(new Move(gameMove.san));
+    this.#logGame();
+    this.#scrollToLastMove();
+  }
+
+  // Make move at a previous position
+  #makeHistoricalMove(move: Move): void {
+    const newGame = new Chess();
+    const beforeChangeMoves = this.game.history().slice(0, this.activeMoveIdx);
+    const afterChangeMoves = this.game
+      .history()
+      .slice(this.activeMoveIdx + 1, this.game.history().length);
+
+    // Reconstruct Game
+    beforeChangeMoves.forEach((m) => newGame.move(m.toString()));
+    newGame.move(move.toString());
+    afterChangeMoves.forEach((m) => newGame.move(m.toString()));
+
+    // Set Game
+    this.game = newGame;
+    this.moves[this.activeMoveIdx] = move;
+
+    this.#logGame();
+    this.activeMoveIdx = -1;
+  }
+
+  // Check if the local game exists
   #isGameStored(): boolean {
     return (localStorage.getItem('local_game') || '').length > 0;
   }

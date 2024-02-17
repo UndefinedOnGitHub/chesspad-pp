@@ -11,6 +11,7 @@ import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';
 export interface DialogData {
   pgn: string;
+  disabled?: boolean;
 }
 
 @Component({
@@ -20,6 +21,8 @@ export interface DialogData {
 })
 export class FinishGameDialogComponent {
   gameString: string = '';
+  gameDisabled: boolean = false;
+  gameWinner: '0-1' | '1/2-1/2' | '1-0' = '1/2-1/2';
 
   constructor(
     public dialogRef: MatDialogRef<FinishGameDialogComponent>,
@@ -28,9 +31,16 @@ export class FinishGameDialogComponent {
     public notify: NotifyService,
   ) {
     this.gameString = data.pgn || this.game.exportPGN();
+    this.gameWinner = this.findGameWinner();
+    this.gameDisabled = data.disabled || false;
   }
 
-  gameWinner: '0-1' | '1/2-1/2' | '1-0' = '1/2-1/2';
+  findGameWinner(): '1-0' | '1/2-1/2' | '0-1' {
+    if (this.game.isCheckmate()) {
+      return this.game.currentTurn() == 'w' ? '1-0' : '0-1';
+    }
+    return '1/2-1/2';
+  }
 
   onGameWinnerChange(ev: any) {
     this.game.gameResult = ev.value;
@@ -38,8 +48,7 @@ export class FinishGameDialogComponent {
   }
 
   close() {
-    this.game.clearGame();
-    this.dialogRef.close();
+    this.dialogRef.close({ new: true });
   }
 
   copy() {

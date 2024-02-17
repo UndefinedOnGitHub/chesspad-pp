@@ -6,10 +6,14 @@
       <mat-card-content class="d-flex flex-column align-items-center">
         <div
           class="p-2 d-flex justify-content-center align-content-center"
-          *ngIf="firstMove()"
+          *ngIf="boardOrientation()"
         >
-          <div class="first-move-display-color {{ puzzle.firstMove }}"></div>
-          <div>{{ firstMove() }} to Move</div>
+          <div
+            class="first-move-display-color {{ puzzle.boardOrientation }}"
+          ></div>
+          <div class="first-move-display-text">
+            {{ boardOrientation() }} to Move
+          </div>
         </div>
         <div id="puzzle-chessboard"></div>
       </mat-card-content>

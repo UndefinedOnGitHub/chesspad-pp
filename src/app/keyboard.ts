@@ -29,89 +29,6 @@ export class Keyboard {
   onKeyboardChange: Function;
 
   //
-  // Keyboard Button Functions
-  //
-
-  resetKeyboardPieces(btns: KeyboardButton[]): void {
-    btns.forEach((kb) => (kb.active = false));
-  }
-
-  onPieceTrigger(btn: KeyboardButton): void {
-    if (this.promotionMoveActive) {
-      this.moveManager.setPromotion(btn);
-      this.promotionMoveActive = false;
-      this.promotionButton.active = false;
-    } else {
-      this.moveManager.setPiece(btn);
-      this.resetKeyboardPieces(this.pieceButtons);
-      btn.toggleActive();
-    }
-  }
-
-  onSourceMove(
-    buttons: KeyboardButton[],
-    btn: KeyboardButton,
-    location: 'column' | 'row',
-  ): void {
-    buttons
-      .filter((kb) => kb.isSecondaryActive())
-      .forEach((kb) => kb.deactivate());
-
-    this.moveManager.setSource(btn, location);
-    btn.toggleSecondaryActive();
-    // Deactivate the flags now the job is done
-    this.sourceMoveActive = false;
-    this.multiMoveButton.active = false;
-  }
-
-  // A move to allow clicking col series to set source
-  // Click e, Click take, Click d --> exd
-  sourceMoveTrick(btn: KeyboardButton) {
-    const lm = this.moveManager.lastMove();
-    const llm = this.moveManager.lastMove(1);
-
-    if (lm?.moveAttribute == 'take' && llm?.moveAttribute == 'column') {
-      this.letterButtons
-        .filter((kb) => kb.isSecondaryActive())
-        .forEach((kb) => kb.deactivate());
-      this.moveManager.setCol(btn);
-      if (llm.button) {
-        this.moveManager.setSource(llm.button, 'column');
-      }
-      llm.button?.toggleSecondaryActive(true);
-      btn.toggleActive(true);
-      // Hack to prevent rest of code from running
-      throw 'Esacpe';
-    }
-  }
-
-  onColumnTrigger(btn: KeyboardButton): void {
-    this.sourceMoveTrick(btn);
-
-    if (this.sourceMoveActive) {
-      this.onSourceMove(this.letterButtons, btn, 'column');
-    } else {
-      this.letterButtons
-        .filter((kb) => !kb.isSecondaryActive())
-        .forEach((kb) => kb.deactivate());
-      this.moveManager.setCol(btn);
-      btn.toggleActive();
-    }
-  }
-
-  onRowTrigger(btn: KeyboardButton): void {
-    if (this.sourceMoveActive) {
-      this.onSourceMove(this.numberButtons, btn, 'row');
-    } else {
-      this.numberButtons
-        .filter((kb) => !kb.isSecondaryActive())
-        .forEach((kb) => kb.deactivate());
-      this.moveManager.setRow(btn);
-      btn.toggleActive();
-    }
-  }
-
-  //
   // Core Buttons Definitions
   //
 
@@ -255,6 +172,89 @@ export class Keyboard {
     this.captureButton,
   ];
   coordinateButtons: KeyboardButton[] = this.letterButtons;
+
+  //
+  // Keyboard Button Functions
+  //
+
+  resetKeyboardPieces(btns: KeyboardButton[]): void {
+    btns.forEach((kb) => (kb.active = false));
+  }
+
+  onPieceTrigger(btn: KeyboardButton): void {
+    if (this.promotionMoveActive) {
+      this.moveManager.setPromotion(btn);
+      this.promotionMoveActive = false;
+      this.promotionButton.active = false;
+    } else {
+      this.moveManager.setPiece(btn);
+      this.resetKeyboardPieces(this.pieceButtons);
+      btn.toggleActive();
+    }
+  }
+
+  onSourceMove(
+    buttons: KeyboardButton[],
+    btn: KeyboardButton,
+    location: 'column' | 'row',
+  ): void {
+    buttons
+      .filter((kb) => kb.isSecondaryActive())
+      .forEach((kb) => kb.deactivate());
+
+    this.moveManager.setSource(btn, location);
+    btn.toggleSecondaryActive();
+    // Deactivate the flags now the job is done
+    this.sourceMoveActive = false;
+    this.multiMoveButton.active = false;
+  }
+
+  // A move to allow clicking col series to set source
+  // Click e, Click take, Click d --> exd
+  sourceMoveTrick(btn: KeyboardButton) {
+    const lm = this.moveManager.lastMove();
+    const llm = this.moveManager.lastMove(1);
+
+    if (lm?.moveAttribute == 'take' && llm?.moveAttribute == 'column') {
+      this.letterButtons
+        .filter((kb) => kb.isSecondaryActive())
+        .forEach((kb) => kb.deactivate());
+      this.moveManager.setCol(btn);
+      if (llm.button) {
+        this.moveManager.setSource(llm.button, 'column');
+      }
+      llm.button?.toggleSecondaryActive(true);
+      btn.toggleActive(true);
+      // Hack to prevent rest of code from running
+      throw 'Esacpe';
+    }
+  }
+
+  onColumnTrigger(btn: KeyboardButton): void {
+    this.sourceMoveTrick(btn);
+
+    if (this.sourceMoveActive) {
+      this.onSourceMove(this.letterButtons, btn, 'column');
+    } else {
+      this.letterButtons
+        .filter((kb) => !kb.isSecondaryActive())
+        .forEach((kb) => kb.deactivate());
+      this.moveManager.setCol(btn);
+      btn.toggleActive();
+    }
+  }
+
+  onRowTrigger(btn: KeyboardButton): void {
+    if (this.sourceMoveActive) {
+      this.onSourceMove(this.numberButtons, btn, 'row');
+    } else {
+      this.numberButtons
+        .filter((kb) => !kb.isSecondaryActive())
+        .forEach((kb) => kb.deactivate());
+      this.moveManager.setRow(btn);
+      btn.toggleActive();
+    }
+  }
 
   switchCoordinateButtons(): void {
     if (this.coordinateButtons[0]?.type == 'column') {
