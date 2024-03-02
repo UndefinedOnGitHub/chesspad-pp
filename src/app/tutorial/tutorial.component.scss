@@ -1,0 +1,40 @@
+$boardSize: 300px - 100px;
+
+#tutorial-chessboard {
+  width: $boardSize;
+  height: $boardSize;
+}
+@media (min-width: 576px) {
+  #tutorial-chessboard {
+    width: $boardSize;
+    height: $boardSize;
+  }
+}
+@media (min-width: 768px) {
+  #tutorial-chessboard {
+    width: $boardSize + 100px;
+    height: $boardSize + 100px;
+  }
+}
+@media (min-width: 992px) {
+  #tutorial-chessboard {
+    width: $boardSize + 200px;
+    height: $boardSize + 200px;
+  }
+}
+@media (min-width: 1200px) {
+  #tutorial-chessboard {
+    width: $boardSize + 300px;
+    height: $boardSize + 300px;
+  }
+}
+
+.tutorial-container {
+  height: 100%;
+}
+
+.display-results {
+  max-width: 400px;
+  max-height: 100px;
+  overflow: auto;
+}

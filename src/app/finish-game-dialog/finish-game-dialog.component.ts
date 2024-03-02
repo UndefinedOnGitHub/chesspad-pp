@@ -33,7 +33,7 @@ export class FinishGameDialogComponent {
     public notify: NotifyService,
   ) {
     if (data.game) {
-      this.game.game = data.game
+      this.game.game = data.game;
     }
     this.gameString = data.pgn || this.game.exportPGN();
     this.gameWinner = this.findGameWinner();
