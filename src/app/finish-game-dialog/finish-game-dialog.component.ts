@@ -39,7 +39,6 @@ export class FinishGameDialogComponent {
     this.gameWinner = this.findGameWinner();
     this.onGameWinnerChange({ value: this.gameWinner });
     this.gameDisabled = data.disabled || false;
-    // debugger
   }
 
   findGameWinner(): '1-0' | '1/2-1/2' | '0-1' {
