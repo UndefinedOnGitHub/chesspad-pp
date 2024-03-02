@@ -26,26 +26,7 @@ of this great game.
 - [Chess Notation](https://www.chess.com/terms/chess-notation)
 - [Portable Game Notation - PGN](https://www.chess.com/terms/chess-pgn)
 
-## Learn the keyboard
-
-This app is comprised of a `keyboard` as well as a `notepad` for
-tracking the moves.
-
-### Notepad
-
-- The notepad will reflect the moves of an active game.
-- Moves will be stored on your local storage allowing you to not lose your game if the browser is closed.
-- On the notepad you can click `clear` anytime to reset all the moves.
-- If you click on a move you will be able to edit the selected move.
-- If you click the move again it will deselect the move and the next move entered will be added to the end. `Bug: after deselecting the move the move stays on the keyboard. A simple reset will clear it.`
-- When finished click finish. You will then be prompted to select the winner.
-- On the finish screen click copy or select the PGN and paste it in your favorite game engine.
-  - [`chess.com Analysis Board`](https://www.chess.com/analysis?tab=analysis)
-  - [`lichess Analysis Board`](https://lichess.org/analysis#0)
-- When finished with the game click `New Game` to start a new game.
-- After clicking New Game you will not be able to recover the game.
-
-### Keyboard
+## Keyboard
 
 The keyboard is comprised of `6` key groups. When you click on any button in a group
 it will activate that button. When you set the minimum requirements for a move you will
@@ -108,6 +89,39 @@ When you click on the castle button any other value entered will be removed and 
 `=` `♕Queen` `♖Rook` `♗Bishop` `♘Knight`
 
 When you click on the `=` button it will become active. If you click on a piece that piece will be set as the promotion piece and the `=` button will become inactive. If you click on the `=` again without clicking on a piece it will be inactive. If you wish to change the promotion piece, set the `=` to active and click on the new piece.
+
+## Notepad Tab
+
+This app is comprised of a `keyboard` as well as a `notepad` for
+tracking the moves.
+
+### Notepad
+
+- The notepad will reflect the moves of an active game.
+- Moves will be stored on your local storage allowing you to not lose your game if the browser is closed.
+- On the notepad you can click `clear` anytime to reset all the moves.
+- If you click on a move you will be able to edit the selected move.
+- If you click the move again it will deselect the move and the next move entered will be added to the end. `Bug: after deselecting the move the move stays on the keyboard. A simple reset will clear it.`
+- When finished click finish. You will then be prompted to select the winner.
+- On the finish screen click copy or select the PGN and paste it in your favorite game engine.
+  - [`chess.com Analysis Board`](https://www.chess.com/analysis?tab=analysis)
+  - [`lichess Analysis Board`](https://lichess.org/analysis#0)
+- When finished with the game click `New Game` to start a new game.
+- After clicking New Game you will not be able to recover the game.
+
+## Puzzle Tab:
+
+- The puzzle is fetched from chess.com
+- The puzzle may not refresh after a solve because there is a min time between a new puzzle. If the puzzle is the same try to wait and solve again.
+
+## Game Tab:
+
+- The game tab is a way to practice making moves with the move keyboard.
+- Select a game from one of many GM player's games
+- If the board does not make the first move give some time as the api is sometimes slow
+- When the move is shown on the board enter the corresponding move on the keyboard.
+- After entering all of the moves the finished game window will show
+- You can click the new game anytime on the keyboard
 
 ## Contribute to the project:
 

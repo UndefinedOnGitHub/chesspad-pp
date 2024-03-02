@@ -14,6 +14,7 @@ import {
 import { KeyboardButton } from './button';
 import { GameStorageManagerService } from './game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
+import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -171,6 +172,19 @@ export class GameReviewService {
 
   setMoveClickCallback() {}
 
+  #finishGame() {
+    this.dialog
+      .open(FinishGameDialogComponent, {
+        data: { pgn: this.game.pgn(), disabled: true, game: this.game },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result.new) {
+          this.#newGamePopup();
+        }
+      });
+  }
+
   makeMove(move: Move): { sucess: boolean } {
     if (this.currentMove?.replace('+', '') == String(move)) {
       this.currentMove = this.history.shift();
@@ -185,6 +199,8 @@ export class GameReviewService {
             fen: this.game.fen(),
             lastMove: [gameMove.from, gameMove.to],
           });
+        } else {
+          this.#finishGame()
         }
       }, 500);
       this.#scrollToLastMove();
