@@ -200,7 +200,7 @@ export class GameReviewService {
             lastMove: [gameMove.from, gameMove.to],
           });
         } else {
-          this.#finishGame()
+          this.#finishGame();
         }
       }, 500);
       this.#scrollToLastMove();

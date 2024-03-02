@@ -6,6 +6,7 @@ import {
   faFilePen,
   faPuzzlePiece,
   faChessBoard,
+  faMagnifyingGlass,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,6 +28,7 @@ export class AppComponent {
   githubUrl: string = 'https://github.com/UndefinedOnGitHub/chesspad-pp';
 
   sideBarActions: SideBarAction[] = [
+    { routerLink: '/tutorial', icon: faMagnifyingGlass, text: 'Tutorial' },
     { routerLink: '/', icon: faFilePen, text: 'Notepad' },
     { routerLink: '/puzzles', icon: faPuzzlePiece, text: 'Puzzle' },
     { routerLink: '/games', icon: faChessBoard, text: 'Game' },

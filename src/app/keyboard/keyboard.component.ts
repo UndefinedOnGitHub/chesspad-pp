@@ -7,6 +7,7 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from '../game.service';
 import { PuzzleService } from '../puzzle.service';
 import { GameReviewService } from '../game-review.service';
+import { TutorialService } from '../tutorial.service';
 import { MatDialog } from '@angular/material/dialog';
 import { KeyboardSettingsDialogComponent } from '../keyboard-settings-dialog/keyboard-settings-dialog.component';
 
@@ -28,7 +29,12 @@ export class KeyboardComponent implements OnInit {
   moveManager: Move = new Move();
   // Keyboard Settings
   keyboardSettings: KeyboardSettings = { allowSuggestions: false };
-  @Input() game: GameService | PuzzleService | GameReviewService | undefined;
+  @Input() game:
+    | GameService
+    | PuzzleService
+    | GameReviewService
+    | TutorialService
+    | undefined;
 
   constructor(public dialog: MatDialog) {
     this.game?.setMoveClickCallback((m: Move) => {
