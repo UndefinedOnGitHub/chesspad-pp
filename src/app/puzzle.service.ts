@@ -90,7 +90,7 @@ export class PuzzleService {
     // Set Puzzle Variables
     this.game.loadPgn(response.gamePgn);
     this.boardOrientation = response.orientation;
-    this.solution = [...response.puzzleSolution] || [];
+  this.solution = response.puzzleSolution ? [...response.puzzleSolution] : [];
     this.#storeGame();
     this.#constructBoard();
   }
@@ -153,7 +153,7 @@ export class PuzzleService {
   }
 
   // Move From Keyboard
-  makeMove(move: Move): { sucess: boolean } {
+  makeMove(move: Move): { success: boolean } {
     try {
       const [game1, game2] = [
         new Chess(this.game.fen()),
@@ -174,12 +174,12 @@ export class PuzzleService {
         this.solution.shift();
         // Wait then make opponent move
         setTimeout(() => this.#makeOpponentMove(), 500);
-        return { sucess: true };
+  return { success: true };
       }
 
-      return { sucess: false };
+  return { success: false };
     } catch (err) {
-      return { sucess: false };
+  return { success: false };
     }
   }
 

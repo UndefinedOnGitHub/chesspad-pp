@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { PuzzlesComponent } from './puzzles.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 
 describe('PuzzlesComponent', () => {
@@ -14,16 +14,14 @@ describe('PuzzlesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
+      imports: [
         PuzzlesComponent,
         KeyboardComponent,
         KeyboardButtonComponent,
-      ],
-      imports: [
         HttpClientModule,
         MatCardModule,
         MatDialogModule,
-        FontAwesomeModule,
+        CommonModule,
       ],
     });
     fixture = TestBed.createComponent(PuzzlesComponent);

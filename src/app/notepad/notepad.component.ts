@@ -3,10 +3,15 @@ import { Move } from '../move';
 import { GameService } from '../game.service';
 import { chunk } from 'lodash';
 
+import { CommonModule } from '@angular/common';
+import { MoveDisplayComponent } from '../move-display/move-display.component';
+
 @Component({
   selector: 'app-notepad',
   templateUrl: './notepad.component.html',
   styleUrls: ['./notepad.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MoveDisplayComponent],
 })
 export class NotepadComponent {
   game: GameService;

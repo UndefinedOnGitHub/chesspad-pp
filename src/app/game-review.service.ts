@@ -185,7 +185,7 @@ export class GameReviewService {
       });
   }
 
-  makeMove(move: Move): { sucess: boolean } {
+  makeMove(move: Move): { success: boolean } {
     if (this.currentMove?.replace('+', '') == String(move)) {
       this.currentMove = this.history.shift();
       setTimeout(() => {
@@ -204,9 +204,9 @@ export class GameReviewService {
         }
       }, 500);
       this.#scrollToLastMove();
-      return { sucess: true };
+  return { success: true };
     }
-    return { sucess: false };
+  return { success: false };
   }
 
   isCheckmate(): boolean {

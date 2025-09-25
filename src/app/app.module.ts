@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 // Font Awesome
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -35,7 +34,7 @@ import { GameReviewComponent } from './game-review/game-review.component';
 import { RouterModule, Routes } from '@angular/router';
 import { GameReviewSelectorDialogComponent } from './game-review-selector-dialog/game-review-selector-dialog.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: GameComponent },
   { path: 'puzzles', component: PuzzlesComponent },
   { path: 'games', component: GameReviewComponent },
@@ -43,27 +42,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FinishGameDialogComponent,
-    GameComponent,
-    KeyboardButtonComponent,
-    KeyboardComponent,
-    MoveDisplayComponent,
-    NotepadComponent,
-    KeyboardSettingsDialogComponent,
-    PuzzlesComponent,
-    GameReviewComponent,
-    GameReviewSelectorDialogComponent,
-    TutorialComponent,
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    // Fonts / Icons
-    FontAwesomeModule,
-    // Angular Material Modules
     MatButtonModule,
     MatGridListModule,
     MatListModule,
@@ -81,6 +63,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

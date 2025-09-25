@@ -1,7 +1,6 @@
 <div class="app-container">
   <mat-toolbar color="primary">
     <button mat-icon-button class="" (click)="drawer.toggle()">
-      <fa-icon [icon]="faBars"></fa-icon>
     </button>
     <span routerLink="/" id="chesspad-pp-title" class="chesspad-pp-title">
       Chesspad ++
@@ -37,7 +36,6 @@
           routerLink="{{ action.routerLink }}"
           (click)="drawer.close()"
         >
-          <fa-icon [icon]="action.icon"></fa-icon>
           <span>{{ action.text }}</span>
         </div>
       </div>

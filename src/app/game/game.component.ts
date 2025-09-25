@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NotepadComponent } from '../notepad/notepad.component';
+import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { MatCardModule } from '@angular/material/card';
 import { Move } from '../move';
 import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';
@@ -16,6 +20,8 @@ import { FinishGameDialogComponent } from '../finish-game-dialog/finish-game-dia
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, NotepadComponent, KeyboardComponent],
 })
 export class GameComponent {
   title = 'chesspad.pp';

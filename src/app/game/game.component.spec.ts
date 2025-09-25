@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { NotepadComponent } from '../notepad/notepad.component';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 import { MoveDisplayComponent } from '../move-display/move-display.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -16,18 +16,16 @@ describe('GameComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
+      imports: [
         GameComponent,
         NotepadComponent,
         KeyboardComponent,
         MoveDisplayComponent,
         KeyboardButtonComponent,
-      ],
-      imports: [
         MatCardModule,
-        FontAwesomeModule,
         MatSnackBarModule,
         MatDialogModule,
+        CommonModule,
       ],
     });
     fixture = TestBed.createComponent(GameComponent);

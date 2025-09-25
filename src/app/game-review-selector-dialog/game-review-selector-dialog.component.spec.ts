@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { GameReviewSelectorDialogComponent } from './game-review-selector-dialog.component';
 import {
@@ -14,8 +15,12 @@ describe('GameReviewSelectorDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GameReviewSelectorDialogComponent],
-      imports: [MatSelectModule],
+      imports: [
+        GameReviewSelectorDialogComponent,
+        MatSelectModule,
+        MatDialogModule,
+        CommonModule,
+      ],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -41,7 +41,7 @@ export class GameService {
     this.onMoveClickCallbacks.push(func);
   }
 
-  makeMove(move: Move): { sucess: boolean } {
+  makeMove(move: Move): { success: boolean } {
     try {
       if (this.activeMoveIdx >= 0) {
         this.#makeHistoricalMove(move);
@@ -50,12 +50,12 @@ export class GameService {
       }
     } catch (err) {
       console.error(err);
-      return { sucess: false };
+      return { success: false };
     }
 
     // Save game
     this.storeGame();
-    return { sucess: true };
+    return { success: true };
   }
 
   isCheckmate(): boolean {

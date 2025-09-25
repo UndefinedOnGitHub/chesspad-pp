@@ -14,10 +14,22 @@ export interface DialogCloseResponse {
   color: 'white' | 'black' | '';
 }
 
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+
 @Component({
   selector: 'app-game-review-selector-dialog',
   templateUrl: './game-review-selector-dialog.component.html',
   styleUrls: ['./game-review-selector-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatSelectModule
+  ],
 })
 export class GameReviewSelectorDialogComponent {
   constructor(

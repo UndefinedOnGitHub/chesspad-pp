@@ -1,8 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KeyboardButton } from '../button';
 
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-keyboard-button',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './keyboard-button.component.html',
   styleUrls: ['./keyboard-button.component.scss'],
 })

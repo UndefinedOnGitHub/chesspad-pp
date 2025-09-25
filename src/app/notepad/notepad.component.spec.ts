@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { NotepadComponent } from './notepad.component';
 import { MoveDisplayComponent } from '../move-display/move-display.component';
@@ -9,7 +10,7 @@ describe('NotepadComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotepadComponent, MoveDisplayComponent],
+      imports: [NotepadComponent, MoveDisplayComponent, CommonModule],
     });
     fixture = TestBed.createComponent(NotepadComponent);
     component = fixture.componentInstance;
