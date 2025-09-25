@@ -7,4 +7,5 @@
   [disabled]="disabled"
 >
   <span *ngIf="!button.icon">{{ button.value }}</span>
+  {{button.icon?.iconName}}
 </button>

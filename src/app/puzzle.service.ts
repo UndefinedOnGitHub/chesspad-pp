@@ -90,7 +90,7 @@ export class PuzzleService {
     // Set Puzzle Variables
     this.game.loadPgn(response.gamePgn);
     this.boardOrientation = response.orientation;
-  this.solution = response.puzzleSolution ? [...response.puzzleSolution] : [];
+    this.solution = response.puzzleSolution ? [...response.puzzleSolution] : [];
     this.#storeGame();
     this.#constructBoard();
   }
@@ -174,12 +174,12 @@ export class PuzzleService {
         this.solution.shift();
         // Wait then make opponent move
         setTimeout(() => this.#makeOpponentMove(), 500);
-  return { success: true };
+        return { success: true };
       }
 
-  return { success: false };
+      return { success: false };
     } catch (err) {
-  return { success: false };
+      return { success: false };
     }
   }
 

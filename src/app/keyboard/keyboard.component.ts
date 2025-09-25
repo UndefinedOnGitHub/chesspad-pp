@@ -22,11 +22,7 @@ export interface KeyboardSettings {
 @Component({
   selector: 'app-keyboard',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    KeyboardButtonComponent,
-  ],
+  imports: [CommonModule, MatDialogModule, KeyboardButtonComponent],
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss'],
 })
@@ -121,7 +117,9 @@ export class KeyboardComponent implements OnInit {
   }
 
   async openKeyboardSettings() {
-    const { KeyboardSettingsDialogComponent } = await import('../keyboard-settings-dialog/keyboard-settings-dialog.component');
+    const { KeyboardSettingsDialogComponent } = await import(
+      '../keyboard-settings-dialog/keyboard-settings-dialog.component'
+    );
     const dialogRef = this.dialog.open(KeyboardSettingsDialogComponent, {
       data: this.keyboardSettings,
     });
@@ -134,7 +132,7 @@ export class KeyboardComponent implements OnInit {
 
   submit(event: any): void {
     const result = this.game?.makeMove(this.moveManager.clone());
-  if (result?.success) {
+    if (result?.success) {
       this.onSubmit.emit(this.moveManager.clone());
       this.keyboard.clearKeyboard();
     } else {

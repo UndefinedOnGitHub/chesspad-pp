@@ -28,7 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatSelectModule
+    MatSelectModule,
   ],
 })
 export class GameReviewSelectorDialogComponent {

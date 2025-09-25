@@ -34,7 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogClose,
     MatButtonToggleModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
 })
 export class FinishGameDialogComponent {

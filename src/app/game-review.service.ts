@@ -204,9 +204,9 @@ export class GameReviewService {
         }
       }, 500);
       this.#scrollToLastMove();
-  return { success: true };
+      return { success: true };
     }
-  return { success: false };
+    return { success: false };
   }
 
   isCheckmate(): boolean {

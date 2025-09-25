@@ -11,7 +11,12 @@ describe('KeyboardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-  imports: [KeyboardComponent, KeyboardButtonComponent, MatDialogModule, CommonModule],
+      imports: [
+        KeyboardComponent,
+        KeyboardButtonComponent,
+        MatDialogModule,
+        CommonModule,
+      ],
     });
     fixture = TestBed.createComponent(KeyboardComponent);
     component = fixture.componentInstance;

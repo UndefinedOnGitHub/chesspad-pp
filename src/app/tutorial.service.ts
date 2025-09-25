@@ -50,8 +50,8 @@ export class TutorialService {
         this.currentPosition = position;
         this.init();
       }
-  return { success: true };
+      return { success: true };
     }
-  return { success: false };
+    return { success: false };
   }
 }
