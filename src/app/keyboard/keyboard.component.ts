@@ -13,6 +13,7 @@ import { PuzzleService } from '../puzzle.service';
 import { GameReviewService } from '../game-review.service';
 import { TutorialService } from '../tutorial.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatButton } from '@angular/material/button';
 // ...existing code...
 
 export interface KeyboardSettings {
@@ -22,7 +23,7 @@ export interface KeyboardSettings {
 @Component({
   selector: 'app-keyboard',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, KeyboardButtonComponent],
+  imports: [CommonModule, MatDialogModule, KeyboardButtonComponent, MatButton],
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss'],
 })

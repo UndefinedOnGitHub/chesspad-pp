@@ -1,11 +1,15 @@
-<button
-  mat-raised-button
-  [ngClass]="{ active: button.active }"
-  [class]="button.class"
-  *ngIf="button"
-  (click)="onButtonPressed()"
-  [disabled]="disabled"
->
-  <span *ngIf="!button.icon">{{ button.value }}</span>
-  {{button.icon?.iconName}}
-</button>
+@if (button) {
+  <button
+    mat-raised-button
+    [ngClass]="{ active: button.active }"
+    [class]="button.class"
+    (click)="onButtonPressed()"
+    [disabled]="disabled"
+  >
+    @if (button.icon) {
+      <fa-icon [icon]="button.icon"></fa-icon>
+    } @else {
+      <span>{{ button.value }}</span>
+    }
+  </button>
+}

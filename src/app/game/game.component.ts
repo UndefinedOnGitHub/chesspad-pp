@@ -15,13 +15,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { FinishGameDialogComponent } from '../finish-game-dialog/finish-game-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, NotepadComponent, KeyboardComponent],
+  imports: [CommonModule, MatCardModule, NotepadComponent, KeyboardComponent, MatButtonModule],
 })
 export class GameComponent {
   title = 'chesspad.pp';

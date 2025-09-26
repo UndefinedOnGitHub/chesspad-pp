@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-finish-game-dialog',
@@ -35,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule
   ],
 })
 export class FinishGameDialogComponent {

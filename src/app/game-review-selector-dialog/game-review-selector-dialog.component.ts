@@ -16,6 +16,7 @@ export interface DialogCloseResponse {
 
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-game-review-selector-dialog',
@@ -29,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogActions,
     MatDialogClose,
     MatSelectModule,
+    MatButtonModule
   ],
 })
 export class GameReviewSelectorDialogComponent {
