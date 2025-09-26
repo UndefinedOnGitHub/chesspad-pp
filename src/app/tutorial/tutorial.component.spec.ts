@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { TutorialComponent } from './tutorial.component';
 import { MatCardModule } from '@angular/material/card';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 
 describe('TutorialComponent', () => {
@@ -13,12 +13,14 @@ describe('TutorialComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
+      imports: [
         TutorialComponent,
         KeyboardComponent,
         KeyboardButtonComponent,
+        MatCardModule,
+        MatDialogModule,
+        CommonModule,
       ],
-      imports: [MatCardModule, MatDialogModule, FontAwesomeModule],
     });
     fixture = TestBed.createComponent(TutorialComponent);
     component = fixture.componentInstance;

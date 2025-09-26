@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog.component';
 import {
@@ -14,8 +15,12 @@ describe('KeyboardSettingsDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [KeyboardSettingsDialogComponent],
-      imports: [MatDialogModule, MatSlideToggleModule],
+      imports: [
+        KeyboardSettingsDialogComponent,
+        MatDialogModule,
+        MatSlideToggleModule,
+        CommonModule,
+      ],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },

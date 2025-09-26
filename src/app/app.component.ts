@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
 import { Move } from './move';
 import {
   faBars,
@@ -9,6 +13,8 @@ import {
   faMagnifyingGlass,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { MatButtonModule } from '@angular/material/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 interface SideBarAction {
   routerLink: string;
@@ -20,6 +26,8 @@ interface SideBarAction {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatToolbarModule, MatSidenavModule, RouterModule, MatButtonModule, FontAwesomeModule],
 })
 export class AppComponent {
   faBars: IconDefinition = faBars;

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { KeyboardButtonComponent } from './keyboard-button.component';
 
@@ -8,7 +9,7 @@ describe('KeyboardButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [KeyboardButtonComponent],
+      imports: [KeyboardButtonComponent, CommonModule],
     });
     fixture = TestBed.createComponent(KeyboardButtonComponent);
     component = fixture.componentInstance;

@@ -16,10 +16,28 @@ export interface DialogData {
   game?: Chess;
 }
 
+import { CommonModule } from '@angular/common';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-finish-game-dialog',
   templateUrl: './finish-game-dialog.component.html',
   styleUrls: ['./finish-game-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
 })
 export class FinishGameDialogComponent {
   gameString: string = '';

@@ -26,7 +26,6 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/theme.scss",
-              // "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
               "node_modules/chessground/assets/chessground.base.css",
               "node_modules/chessground/assets/chessground.brown.css",
@@ -66,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "chesspad-pp:build:production"
+              "buildTarget": "chesspad-pp:build:production"
             },
             "development": {
-              "browserTarget": "chesspad-pp:build:development"
+              "buildTarget": "chesspad-pp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "chesspad-pp:build"
+            "buildTarget": "chesspad-pp:build"
           }
         },
         "test": {

@@ -1,4 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
+import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
+// ...existing code...
 import { KeyboardButton } from '../button';
 import { Pieces, Columns, Rows } from '../constants';
 import { Move } from '../move';
@@ -9,7 +13,8 @@ import { PuzzleService } from '../puzzle.service';
 import { GameReviewService } from '../game-review.service';
 import { TutorialService } from '../tutorial.service';
 import { MatDialog } from '@angular/material/dialog';
-import { KeyboardSettingsDialogComponent } from '../keyboard-settings-dialog/keyboard-settings-dialog.component';
+import { MatButton } from '@angular/material/button';
+// ...existing code...
 
 export interface KeyboardSettings {
   allowSuggestions: boolean;
@@ -17,6 +22,8 @@ export interface KeyboardSettings {
 
 @Component({
   selector: 'app-keyboard',
+  standalone: true,
+  imports: [CommonModule, MatDialogModule, KeyboardButtonComponent, MatButton],
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss'],
 })
@@ -110,7 +117,10 @@ export class KeyboardComponent implements OnInit {
     this.keyboard.extractFromMove(move);
   }
 
-  openKeyboardSettings() {
+  async openKeyboardSettings() {
+    const { KeyboardSettingsDialogComponent } = await import(
+      '../keyboard-settings-dialog/keyboard-settings-dialog.component'
+    );
     const dialogRef = this.dialog.open(KeyboardSettingsDialogComponent, {
       data: this.keyboardSettings,
     });
@@ -123,7 +133,7 @@ export class KeyboardComponent implements OnInit {
 
   submit(event: any): void {
     const result = this.game?.makeMove(this.moveManager.clone());
-    if (result?.sucess) {
+    if (result?.success) {
       this.onSubmit.emit(this.moveManager.clone());
       this.keyboard.clearKeyboard();
     } else {

@@ -2,8 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Chess } from 'chess.js';
 import { PuzzleService } from '../puzzle.service';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-puzzles',
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatDialogModule,
+    KeyboardComponent,
+    KeyboardButtonComponent,
+    CommonModule,
+  ],
   templateUrl: './puzzles.component.html',
   styleUrls: ['./puzzles.component.scss'],
 })

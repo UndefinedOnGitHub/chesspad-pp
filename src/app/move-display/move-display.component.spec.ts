@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { MoveDisplayComponent } from './move-display.component';
 
@@ -8,7 +9,7 @@ describe('MoveDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MoveDisplayComponent],
+      imports: [MoveDisplayComponent, CommonModule],
     });
     fixture = TestBed.createComponent(MoveDisplayComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 import { FinishGameDialogComponent } from './finish-game-dialog.component';
 import {
@@ -18,14 +19,15 @@ describe('FinishGameDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FinishGameDialogComponent],
       imports: [
+        FinishGameDialogComponent,
         MatDialogModule,
         MatSnackBarModule,
         MatButtonToggleModule,
         MatFormFieldModule,
         MatInputModule,
         BrowserAnimationsModule,
+        CommonModule,
       ],
       providers: [
         { provide: MatDialogRef, useValue: {} },

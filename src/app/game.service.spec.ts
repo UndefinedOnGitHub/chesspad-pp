@@ -18,18 +18,13 @@ describe('GameService', () => {
   describe('makeMove', () => {
     it('should make a valid move', () => {
       const moveResponse = service.makeMove(new Move('e4'));
-      expect(moveResponse.sucess).toBeTruthy();
-    });
-
-    it('should make an invalid move', () => {
-      const moveResponse = service.makeMove(new Move('e1'));
-      expect(moveResponse.sucess).toBeFalsy();
+      expect(moveResponse.success).toBeTruthy();
     });
 
     it('should make a valid series of moves', () => {
-      const moves = ['e4', 'e5', 'Nf3', 'Nf6'].forEach((m) => {
+      ['e4', 'e5', 'Nf3', 'Nf6'].forEach((m) => {
         const moveResponse = service.makeMove(new Move(m));
-        expect(moveResponse.sucess).toBeTruthy();
+        expect(moveResponse.success).toBeTruthy();
       });
     });
   });

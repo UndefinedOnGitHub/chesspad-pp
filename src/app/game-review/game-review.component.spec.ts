@@ -6,7 +6,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 
 // Facing issues with the popup when testing. Removed for now
@@ -26,7 +25,6 @@ xdescribe('GameReviewComponent', () => {
         MatSelectModule,
         MatCardModule,
         MatDialogModule,
-        FontAwesomeModule,
       ],
       teardown: { destroyAfterEach: false },
     });

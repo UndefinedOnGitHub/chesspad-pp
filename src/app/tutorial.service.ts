@@ -42,7 +42,7 @@ export class TutorialService {
   getAdditionalButton() {
     return null;
   }
-  makeMove(move: Move): { sucess: boolean } {
+  makeMove(move: Move): { success: boolean } {
     if (this.currentPosition.move.toString() == move.toString()) {
       this.positionIdx++;
       const position = positions[this.positionIdx];
@@ -50,8 +50,8 @@ export class TutorialService {
         this.currentPosition = position;
         this.init();
       }
-      return { sucess: true };
+      return { success: true };
     }
-    return { sucess: false };
+    return { success: false };
   }
 }
