@@ -11,7 +11,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('FinishGameDialogComponent', () => {
   let component: FinishGameDialogComponent;
@@ -26,7 +25,6 @@ describe('FinishGameDialogComponent', () => {
         MatButtonToggleModule,
         MatFormFieldModule,
         MatInputModule,
-        BrowserAnimationsModule,
         CommonModule,
       ],
       providers: [

@@ -1,4 +1,3 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KeyboardButton } from './button';
 import { Pieces, Columns, Rows } from './constants';
 import { Move } from './move';

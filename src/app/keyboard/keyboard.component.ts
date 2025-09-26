@@ -4,7 +4,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 // ...existing code...
 import { KeyboardButton } from '../button';
-import { Pieces, Columns, Rows } from '../constants';
 import { Move } from '../move';
 import { Keyboard } from '../keyboard';
 import { faGear } from '@fortawesome/free-solid-svg-icons';

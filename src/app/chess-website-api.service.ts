@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { formatDate } from '@angular/common';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 

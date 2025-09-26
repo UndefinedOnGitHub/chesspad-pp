@@ -1,8 +1,6 @@
 // Angular Core
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 // Font Awesome
 // Angular Material
@@ -20,19 +18,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 // App Components
-import { AppComponent } from './app.component';
-import { KeyboardComponent } from './keyboard/keyboard.component';
-import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
-import { NotepadComponent } from './notepad/notepad.component';
-import { MoveDisplayComponent } from './move-display/move-display.component';
 import { GameComponent } from './game/game.component';
-import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
-import { KeyboardSettingsDialogComponent } from './keyboard-settings-dialog/keyboard-settings-dialog.component';
 import { PuzzlesComponent } from './puzzles/puzzles.component';
 import { GameReviewComponent } from './game-review/game-review.component';
 // Routing
 import { RouterModule, Routes } from '@angular/router';
-import { GameReviewSelectorDialogComponent } from './game-review-selector-dialog/game-review-selector-dialog.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 export const routes: Routes = [
   { path: '', component: GameComponent },
@@ -44,8 +34,6 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
     MatButtonModule,
     MatGridListModule,
     MatListModule,

@@ -1,3 +1,5 @@
-<div *ngIf="move" class="move-container" [ngClass]="{ active: move.active }">
-  <span class="move-cell">{{ move.toString(true) }}</span>
-</div>
+@if (move) {
+  <div class="move-container" [ngClass]="{ active: move.active }">
+    <span class="move-cell">{{ move.toString(true) }}</span>
+  </div>
+}

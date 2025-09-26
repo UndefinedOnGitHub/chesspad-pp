@@ -4,7 +4,6 @@ import { TutorialService } from '../tutorial.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
-import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,7 +13,6 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatDialogModule,
     KeyboardComponent,
-    KeyboardButtonComponent,
     CommonModule,
   ],
   templateUrl: './tutorial.component.html',

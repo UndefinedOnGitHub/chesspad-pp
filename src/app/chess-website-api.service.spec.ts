@@ -1,14 +1,16 @@
-import { TestBed } from '@angular/core/testing';
 
+import { TestBed } from '@angular/core/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { ChessWebsiteApiService } from './chess-website-api.service';
-import { HttpClientModule } from '@angular/common/http';
 
 describe('ChessWebsiteApiService', () => {
   let service: ChessWebsiteApiService;
 
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     });
     service = TestBed.inject(ChessWebsiteApiService);
   });

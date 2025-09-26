@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NotepadComponent } from '../notepad/notepad.component';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
 import { MatCardModule } from '@angular/material/card';
-import { Move } from '../move';
 import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';
 import {

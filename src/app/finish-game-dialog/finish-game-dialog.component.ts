@@ -5,7 +5,6 @@ import {
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
-  MatDialogClose,
 } from '@angular/material/dialog';
 import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';
@@ -32,7 +31,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,

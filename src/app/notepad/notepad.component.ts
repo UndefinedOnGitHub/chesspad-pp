@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Move } from '../move';
 import { GameService } from '../game.service';
 import { chunk } from 'lodash';

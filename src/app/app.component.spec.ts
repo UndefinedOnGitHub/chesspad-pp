@@ -12,9 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { routes } from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -32,10 +31,9 @@ describe('AppComponent', () => {
         MatSnackBarModule,
         MatDialogModule,
         RouterModule,
-        RouterTestingModule,
         MatSidenavModule,
-        BrowserAnimationsModule,
         CommonModule,
+        RouterModule.forRoot(routes)
       ],
     }),
   );

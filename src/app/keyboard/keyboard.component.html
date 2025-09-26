@@ -39,9 +39,11 @@
     </div>
   </div>
   <div class="return-key d-flex flex-column">
-    <div *ngIf="additionalButton" class="flex-grow-2 additional-button">
-      <app-keyboard-button [button]="additionalButton"> </app-keyboard-button>
-    </div>
+    @if (additionalButton) {
+      <div class="flex-grow-2 additional-button">
+        <app-keyboard-button [button]="additionalButton"> </app-keyboard-button>
+      </div>
+    }
     <button
       [disabled]="disableButtons()"
       class="flex-grow-1"
