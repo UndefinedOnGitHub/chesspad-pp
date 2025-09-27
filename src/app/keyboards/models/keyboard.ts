@@ -1,5 +1,5 @@
 import { KeyboardButton } from './button';
-import { Pieces, Columns, Rows } from './constants';
+import { Pieces, Columns, Rows } from '../../constants';
 import { Move } from './move';
 import {
   faHashtag,

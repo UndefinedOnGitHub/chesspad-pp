@@ -57,3 +57,14 @@ export class KeyboardButton {
     return this.symbol;
   }
 }
+
+export class MultiButton {
+  buttons: KeyboardButton[] = []
+  constructor(btns:KeyboardButton[]=[]) {
+    this.buttons = btns
+  }
+
+  index(idx: number) {
+    return this.buttons[idx];
+  }
+}

@@ -1,10 +1,8 @@
-@use "../_theme" as theme;
+@use "../../../theme" as theme;
 
 $keyboard-width: 300px;
 $key-width: calc($keyboard-width / 5);
 
-.keyboard-holder {
-}
 .keyboard-container {
   max-width: $keyboard-width;
 }

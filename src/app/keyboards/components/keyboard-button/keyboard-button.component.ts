@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KeyboardButton } from '../button';
+import { KeyboardButton } from '../../models/button';
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';

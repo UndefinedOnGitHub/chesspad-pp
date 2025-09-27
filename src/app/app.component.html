@@ -31,15 +31,16 @@
   <mat-drawer-container class="mat-drawer-container">
     <mat-drawer #drawer mode="over" class="mat-drawer">
       <div class="d-flex flex-column p-3 navigation-menu">
-        <div
-          *ngFor="let action of sideBarActions"
-          class="d-flex align-content-center"
-          routerLink="{{ action.routerLink }}"
-          (click)="drawer.close()"
-        >
-          <fa-icon [icon]="action.icon"></fa-icon>
-          <span>{{ action.text }}</span>
-        </div>
+        @for (action of sideBarActions; track $index) {
+          <div
+            class="d-flex align-content-center"
+            routerLink="{{ action.routerLink }}"
+            (click)="drawer.close()"
+          >
+            <fa-icon [icon]="action.icon"></fa-icon>
+            <span>{{ action.text }}</span>
+          </div>
+        }
       </div>
     </mat-drawer>
     <mat-drawer-content>

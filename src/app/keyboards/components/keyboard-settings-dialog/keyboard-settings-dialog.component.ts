@@ -11,11 +11,12 @@ export interface KeyboardSettings {
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-keyboard-settings-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatSlideToggleModule],
+  imports: [CommonModule, MatDialogModule, MatSlideToggleModule, MatButtonModule],
   templateUrl: './keyboard-settings-dialog.component.html',
   styleUrls: ['./keyboard-settings-dialog.component.scss'],
 })

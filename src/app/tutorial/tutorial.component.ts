@@ -3,7 +3,7 @@ import { TutorialService } from '../tutorial.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

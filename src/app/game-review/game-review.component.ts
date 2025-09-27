@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { GameReviewService } from '../game-review.service';
 import { chunk } from 'lodash';
 

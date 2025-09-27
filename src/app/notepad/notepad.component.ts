@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Move } from '../move';
+import { Move } from '../keyboards/models/move';
 import { GameService } from '../game.service';
 import { chunk } from 'lodash';
 
 import { CommonModule } from '@angular/common';
-import { MoveDisplayComponent } from '../move-display/move-display.component';
+import { MoveDisplayComponent } from '../keyboards/components/move-display/move-display.component';
 
 @Component({
   selector: 'app-notepad',

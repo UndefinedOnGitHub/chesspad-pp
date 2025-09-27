@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotepadComponent } from '../notepad/notepad.component';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { GameService } from '../game.service';
 import { NotifyService } from '../notify.service';

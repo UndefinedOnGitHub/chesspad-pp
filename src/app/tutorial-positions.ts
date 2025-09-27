@@ -1,4 +1,4 @@
-import { Move } from './move';
+import { Move } from './keyboards/models/move';
 
 export interface Position {
   title: string;

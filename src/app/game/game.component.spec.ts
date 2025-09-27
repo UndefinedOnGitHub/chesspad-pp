@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { NotepadComponent } from '../notepad/notepad.component';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
-import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
-import { MoveDisplayComponent } from '../move-display/move-display.component';
+import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
+import { KeyboardButtonComponent } from '../keyboards/components/keyboard-button/keyboard-button.component';
+import { MoveDisplayComponent } from '../keyboards/components/move-display/move-display.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 

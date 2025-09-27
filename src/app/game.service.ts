@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Move } from './move';
+import { Move } from './keyboards/models/move';
 import { Chess } from 'chess.js';
 import { GameStorageManagerService } from './game-storage-manager.service';
 
