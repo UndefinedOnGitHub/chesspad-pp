@@ -9,12 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-puzzles',
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatDialogModule,
-    KeyboardComponent,
-    CommonModule,
-  ],
+  imports: [MatCardModule, MatDialogModule, KeyboardComponent, CommonModule],
   templateUrl: './puzzles.component.html',
   styleUrls: ['./puzzles.component.scss'],
 })

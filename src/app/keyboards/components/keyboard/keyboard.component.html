@@ -8,10 +8,7 @@
     class="flex-grow-1 d-flex flex-row align-content-center justify-content-around"
   >
     @for (move of possibleMoves(); track $index) {
-      <div
-        class="possible-option-cell"
-        (click)="selectPossibleMove(move)"
-      >
+      <div class="possible-option-cell" (click)="selectPossibleMove(move)">
         {{ move }}
       </div>
     }
@@ -23,9 +20,7 @@
 <!-- Keyboard Buttons -->
 <div class="d-flex flex-row">
   <div class="d-flex flex-row keyboard-container">
-    <div
-      class="flex-fill d-flex flex-row flex-wrap align-content-start"
-    >
+    <div class="flex-fill d-flex flex-row flex-wrap align-content-start">
       @for (r of matrix; track $index) {
         @for (b of r; track $index) {
           <div class="keyboard-cell">

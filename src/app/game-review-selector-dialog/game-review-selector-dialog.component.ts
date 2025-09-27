@@ -27,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogContent,
     MatDialogActions,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
 })
 export class GameReviewSelectorDialogComponent {

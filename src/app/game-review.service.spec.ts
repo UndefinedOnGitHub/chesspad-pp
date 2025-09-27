@@ -1,4 +1,3 @@
-
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { GameReviewService } from './game-review.service';
@@ -11,7 +10,7 @@ describe('GameReviewService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(GameReviewService);
   });

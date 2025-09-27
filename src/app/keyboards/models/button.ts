@@ -59,9 +59,9 @@ export class KeyboardButton {
 }
 
 export class MultiButton {
-  buttons: KeyboardButton[] = []
-  constructor(btns:KeyboardButton[]=[]) {
-    this.buttons = btns
+  buttons: KeyboardButton[] = [];
+  constructor(btns: KeyboardButton[] = []) {
+    this.buttons = btns;
   }
 
   index(idx: number) {

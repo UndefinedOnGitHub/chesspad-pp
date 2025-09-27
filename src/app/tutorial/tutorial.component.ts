@@ -9,12 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-tutorial',
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatDialogModule,
-    KeyboardComponent,
-    CommonModule,
-  ],
+  imports: [MatCardModule, MatDialogModule, KeyboardComponent, CommonModule],
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.scss'],
 })

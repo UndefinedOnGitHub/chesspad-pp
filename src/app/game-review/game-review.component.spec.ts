@@ -21,11 +21,7 @@ xdescribe('GameReviewComponent', () => {
         KeyboardComponent,
         KeyboardButtonComponent,
       ],
-      imports: [
-        MatSelectModule,
-        MatCardModule,
-        MatDialogModule,
-      ],
+      imports: [MatSelectModule, MatCardModule, MatDialogModule],
       providers: [provideHttpClient(), provideHttpClientTesting()],
       teardown: { destroyAfterEach: false },
     });

@@ -34,7 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
 })
 export class FinishGameDialogComponent {

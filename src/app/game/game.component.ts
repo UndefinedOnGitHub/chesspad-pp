@@ -21,7 +21,13 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, NotepadComponent, KeyboardComponent, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    NotepadComponent,
+    KeyboardComponent,
+    MatButtonModule,
+  ],
 })
 export class GameComponent {
   title = 'chesspad.pp';

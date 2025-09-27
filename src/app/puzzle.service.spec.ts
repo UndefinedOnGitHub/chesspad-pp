@@ -1,4 +1,3 @@
-
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { PuzzleService } from './puzzle.service';
@@ -11,7 +10,7 @@ describe('PuzzleService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(PuzzleService);
   });

@@ -23,7 +23,7 @@ describe('PuzzlesComponent', () => {
         MatDialogModule,
         CommonModule,
       ],
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     fixture = TestBed.createComponent(PuzzlesComponent);
     component = fixture.componentInstance;

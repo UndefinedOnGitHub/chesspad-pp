@@ -16,7 +16,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class KeyboardButtonComponent {
   @Input() button: KeyboardButton | null = null;
   @Input() disabled: boolean = false;
-  icon = faCoffee
+  icon = faCoffee;
 
   onButtonPressed() {
     if (this.button) {

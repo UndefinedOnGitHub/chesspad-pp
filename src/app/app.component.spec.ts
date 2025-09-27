@@ -33,7 +33,7 @@ describe('AppComponent', () => {
         RouterModule,
         MatSidenavModule,
         CommonModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
       ],
     }),
   );
