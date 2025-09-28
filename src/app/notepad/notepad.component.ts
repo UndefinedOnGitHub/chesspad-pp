@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Move } from '../keyboards/models/move';
 import { GameService } from '../game.service';
 import { chunk } from 'lodash';
@@ -14,23 +14,19 @@ import { MoveDisplayComponent } from '../keyboards/components/move-display/move-
   imports: [CommonModule, MoveDisplayComponent],
 })
 export class NotepadComponent {
-  game: GameService;
-
-  constructor(game: GameService) {
-    this.game = game;
-  }
+  game = input.required<GameService>()
 
   onMoveClick(move: Move | undefined) {
     if (move && !move.isEmpty()) {
       move.active = !move.active;
-      this.game.onMoveClick(move);
+      this.game().onMoveClick(move);
     }
   }
 
   // Convert a list of moves to a double set of moves
   // to represent white and black
   movesToRows(): Move[][] {
-    const moves = this.game.moves;
+    const moves = this.game().moves;
     const chunked = chunk(moves, 2);
 
     // If the previous line is full insert new line
