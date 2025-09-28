@@ -7,14 +7,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let moveRow of movesToRows(); let i = index">
-      <th scope="row" class="align-middle">{{ i + 1 }}.</th>
-      <td (click)="onMoveClick(moveRow[0])">
-        <app-move-display [move]="moveRow[0]"> </app-move-display>
-      </td>
-      <td (click)="onMoveClick(moveRow[1])">
-        <app-move-display [move]="moveRow[1]"> </app-move-display>
-      </td>
-    </tr>
+    @for (moveRow of movesToRows(); track $index) {
+      <tr>
+        <th scope="row" class="align-middle">{{ $index + 1 }}.</th>
+        <td (click)="onMoveClick(moveRow[0])">
+          <app-move-display [move]="moveRow[0]"> </app-move-display>
+        </td>
+        <td (click)="onMoveClick(moveRow[1])">
+          <app-move-display [move]="moveRow[1]"> </app-move-display>
+        </td>
+      </tr>
+    }
   </tbody>
 </table>

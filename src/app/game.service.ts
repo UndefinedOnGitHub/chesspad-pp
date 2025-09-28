@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Move } from './move';
-import { chunk } from 'lodash';
+import { Move } from './keyboards/models/move';
 import { Chess } from 'chess.js';
 import { GameStorageManagerService } from './game-storage-manager.service';
 
@@ -93,13 +92,13 @@ export class GameService {
    */
 
   exportPGN(): string {
-    this.game.header('Site', 'Chesspadd ++');
-    this.game.header('Date', this.formatDate());
-    this.game.header('Result', this.gameResult);
-    this.game.header('White', '');
-    this.game.header('Black', '');
-    this.game.header('WhiteElo', '');
-    this.game.header('BlackElo', '');
+    this.game.setHeader('Site', 'Chesspadd ++');
+    this.game.setHeader('Date', this.formatDate());
+    this.game.setHeader('Result', this.gameResult);
+    this.game.setHeader('White', '');
+    this.game.setHeader('Black', '');
+    this.game.setHeader('WhiteElo', '');
+    this.game.setHeader('BlackElo', '');
 
     return this.game.pgn();
   }

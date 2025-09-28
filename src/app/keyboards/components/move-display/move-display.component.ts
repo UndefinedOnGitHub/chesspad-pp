@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Move } from '../move';
+import { Move } from '../../models/move';
 
 import { CommonModule } from '@angular/common';
 

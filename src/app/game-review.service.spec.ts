@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { GameReviewService } from './game-review.service';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('GameReviewService', () => {
   let service: GameReviewService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule],
+      imports: [MatDialogModule],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(GameReviewService);
   });

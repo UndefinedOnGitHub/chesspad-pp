@@ -2,11 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
 import { PuzzlesComponent } from './puzzles.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
+import { KeyboardButtonComponent } from '../keyboards/components/keyboard-button/keyboard-button.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('PuzzlesComponent', () => {
   let component: PuzzlesComponent;
@@ -18,11 +19,11 @@ describe('PuzzlesComponent', () => {
         PuzzlesComponent,
         KeyboardComponent,
         KeyboardButtonComponent,
-        HttpClientModule,
         MatCardModule,
         MatDialogModule,
         CommonModule,
       ],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
     fixture = TestBed.createComponent(PuzzlesComponent);
     component = fixture.componentInstance;

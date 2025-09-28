@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { KeyboardButton } from '../button';
+import { Component, Input } from '@angular/core';
+import { KeyboardButton } from '../../models/button';
 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,7 +16,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class KeyboardButtonComponent {
   @Input() button: KeyboardButton | null = null;
   @Input() disabled: boolean = false;
-  icon = faCoffee
+  icon = faCoffee;
 
   onButtonPressed() {
     if (this.button) {

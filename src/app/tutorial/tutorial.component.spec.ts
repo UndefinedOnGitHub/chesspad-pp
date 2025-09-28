@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { TutorialComponent } from './tutorial.component';
 import { MatCardModule } from '@angular/material/card';
-import { KeyboardComponent } from '../keyboard/keyboard.component';
+import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
+import { KeyboardButtonComponent } from '../keyboards/components/keyboard-button/keyboard-button.component';
 
 describe('TutorialComponent', () => {
   let component: TutorialComponent;

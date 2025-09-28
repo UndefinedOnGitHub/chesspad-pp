@@ -1,6 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KeyboardButton } from './button';
-import { Pieces, Columns, Rows } from './constants';
+import { Pieces, Columns, Rows } from '../../constants';
 import { Move } from './move';
 import {
   faHashtag,
@@ -14,10 +13,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export class Keyboard {
-  constructor(move: Move, onKeyboardChange: Function) {
+  constructor(move: Move) {
     this.moveManager = move;
-    this.onKeyboardChange = onKeyboardChange;
   }
+
+  // Index to manage multiple buttons index
+  keyboardIdx: number = 0;
 
   // Variable for move management
   moveManager: Move;
@@ -26,7 +27,6 @@ export class Keyboard {
   // Flag to manage adding to promotion
   promotionMoveActive: boolean = false;
   // Callback to trigger when the display of keyboard needs updating
-  onKeyboardChange: Function;
 
   //
   // Core Buttons Definitions
@@ -67,8 +67,7 @@ export class Keyboard {
     icon: faHashtag,
     symbol: '',
     onTrigger: () => {
-      this.switchCoordinateButtons();
-      this.onKeyboardChange();
+      this.keyboardIdx = this.keyboardIdx == 0 ? 1 : 0;
     },
   });
 
@@ -115,6 +114,11 @@ export class Keyboard {
     onTrigger: (btn: KeyboardButton) => {
       this.moveManager.setTake();
       btn.active = !btn.active;
+
+      const llm = this.moveManager.lastMove(1);
+      if (llm?.moveAttribute == 'column') {
+        this.keyboardIdx = 0;
+      }
     },
   });
 
@@ -171,7 +175,6 @@ export class Keyboard {
     this.castleButton,
     this.captureButton,
   ];
-  coordinateButtons: KeyboardButton[] = this.letterButtons;
 
   //
   // Keyboard Button Functions
@@ -225,6 +228,7 @@ export class Keyboard {
       }
       llm.button?.toggleSecondaryActive(true);
       btn.toggleActive(true);
+      this.switchButton.onTrigger();
       // Hack to prevent rest of code from running
       throw 'Esacpe';
     }
@@ -241,6 +245,7 @@ export class Keyboard {
         .forEach((kb) => kb.deactivate());
       this.moveManager.setCol(btn);
       btn.toggleActive();
+      this.switchButton.onTrigger();
     }
   }
 
@@ -256,45 +261,29 @@ export class Keyboard {
     }
   }
 
-  switchCoordinateButtons(): void {
-    if (this.coordinateButtons[0]?.type == 'column') {
-      this.coordinateButtons = this.numberButtons;
-    } else {
-      this.coordinateButtons = this.letterButtons;
-    }
-  }
-
   resetKeyboardKeys(): void {
     this.pieceButtons
       .concat(this.numberButtons)
       .concat(this.letterButtons)
       .concat(this.additionalButtons)
-      .forEach((b) => (b.active = false));
-    this.clearKeyClass();
+      .forEach((b) => b.deactivate());
     this.resetMainButtons();
   }
 
   clearKeyboard(): void {
     this.moveManager.clear();
+    this.sourceMoveActive = false;
     this.resetKeyboardKeys();
   }
 
-  clearKeyClass(): void {
-    this.letterButtons.forEach((kb: KeyboardButton) => (kb.class = ''));
-    this.numberButtons.forEach((kb: KeyboardButton) => (kb.class = ''));
-  }
-
   resetMainButtons(): void {
-    this.coordinateButtons = [];
-    this.switchCoordinateButtons();
-    this.onKeyboardChange();
+    this.keyboardIdx = 0;
   }
 
   extractFromMove(move: Move) {
     this.clearKeyboard();
     this.moveManager.fromString(String(move));
 
-    const activateButtons: KeyboardButton[] = [];
     if (move.piece) {
       const foundButton = this.pieceButtons.find((b) => b.symbol == move.piece);
       if (foundButton) foundButton.active = true;
@@ -328,7 +317,7 @@ export class Keyboard {
       if (foundButton) foundButton.active = true;
     }
     if (move.take) {
-      activateButtons.push(this.captureButton);
+      this.captureButton.active = true;
     }
   }
 }

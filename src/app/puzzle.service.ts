@@ -5,10 +5,10 @@ import {
   PuzzleResponse,
 } from './chess-website-api.service';
 import { Chessground } from 'chessground';
-import { Move } from './move';
+import { Move } from './keyboards/models/move';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { KeyboardButton } from './button';
+import { KeyboardButton } from './keyboards/models/button';
 import { ChessgroundConfig } from './constants';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { GameStorageManagerService } from './game-storage-manager.service';

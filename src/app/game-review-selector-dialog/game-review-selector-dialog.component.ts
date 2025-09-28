@@ -5,9 +5,7 @@ import {
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
-  MatDialogClose,
 } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
 export interface DialogData {}
 export interface DialogCloseResponse {
   username: string;
@@ -28,9 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
 })
 export class GameReviewSelectorDialogComponent {

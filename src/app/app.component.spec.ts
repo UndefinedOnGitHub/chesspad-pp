@@ -2,19 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { NotepadComponent } from './notepad/notepad.component';
-import { KeyboardComponent } from './keyboard/keyboard.component';
-import { KeyboardButtonComponent } from './keyboard-button/keyboard-button.component';
+import { KeyboardComponent } from './keyboards/components/keyboard/keyboard.component';
+import { KeyboardButtonComponent } from './keyboards/components/keyboard-button/keyboard-button.component';
 import { GameComponent } from './game/game.component';
-import { MoveDisplayComponent } from './move-display/move-display.component';
+import { MoveDisplayComponent } from './keyboards/components/move-display/move-display.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { routes } from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -32,10 +31,9 @@ describe('AppComponent', () => {
         MatSnackBarModule,
         MatDialogModule,
         RouterModule,
-        RouterTestingModule,
         MatSidenavModule,
-        BrowserAnimationsModule,
         CommonModule,
+        RouterModule.forRoot(routes),
       ],
     }),
   );

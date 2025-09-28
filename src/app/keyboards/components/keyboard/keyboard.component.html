@@ -1,0 +1,54 @@
+<!-- Output display of buttons -->
+<div class="d-flex flex-row mb-2 current-move-row align-content-center">
+  <div class="d-flex current-move-display" style="min-width: 75px">
+    <span>&gt;</span>
+    <span id="currentMoveDisplay">{{ displayCurrentMove() }}</span>
+  </div>
+  <div
+    class="flex-grow-1 d-flex flex-row align-content-center justify-content-around"
+  >
+    @for (move of possibleMoves(); track $index) {
+      <div class="possible-option-cell" (click)="selectPossibleMove(move)">
+        {{ move }}
+      </div>
+    }
+  </div>
+  <div class="flex-shrink-0 keyboard-settings-gear">
+    <fa-icon [icon]="faGear" (click)="openKeyboardSettings()"></fa-icon>
+  </div>
+</div>
+<!-- Keyboard Buttons -->
+<div class="d-flex flex-row">
+  <div class="d-flex flex-row keyboard-container">
+    <div class="flex-fill d-flex flex-row flex-wrap align-content-start">
+      @for (r of matrix; track $index) {
+        @for (b of r; track $index) {
+          <div class="keyboard-cell">
+            @if (isMulti(b)) {
+              <app-keyboard-button [button]="b.index(keyboard.keyboardIdx)">
+              </app-keyboard-button>
+            } @else {
+              <app-keyboard-button [button]="b"> </app-keyboard-button>
+            }
+          </div>
+        }
+      }
+    </div>
+  </div>
+  <div class="return-key d-flex flex-column">
+    @if (additionalButton) {
+      <div class="flex-grow-2 additional-button">
+        <app-keyboard-button [button]="additionalButton"> </app-keyboard-button>
+      </div>
+    }
+    <button
+      id="submit"
+      [disabled]="disableButtons()"
+      class="flex-grow-1"
+      mat-raised-button
+      (click)="submit($event)"
+    >
+      ||
+    </button>
+  </div>
+</div>

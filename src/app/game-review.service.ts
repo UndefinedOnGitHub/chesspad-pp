@@ -5,13 +5,13 @@ import {
   GameResponse,
 } from './chess-website-api.service';
 import { Chessground } from 'chessground';
-import { Move } from './move';
+import { Move } from './keyboards/models/move';
 import { MatDialog } from '@angular/material/dialog';
 import {
   GameReviewSelectorDialogComponent,
   DialogCloseResponse,
 } from './game-review-selector-dialog/game-review-selector-dialog.component';
-import { KeyboardButton } from './button';
+import { KeyboardButton } from './keyboards/models/button';
 import { GameStorageManagerService } from './game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 import { FinishGameDialogComponent } from './finish-game-dialog/finish-game-dialog.component';
@@ -186,7 +186,10 @@ export class GameReviewService {
   }
 
   makeMove(move: Move): { success: boolean } {
-    if (this.currentMove?.replace('+', '') == String(move)) {
+    if (
+      this.currentMove?.replace('+', '')?.replace('x', '').replace('#', '') ==
+      String(move)?.replace('x', '')
+    ) {
       this.currentMove = this.history.shift();
       setTimeout(() => {
         if (this.currentMove) {

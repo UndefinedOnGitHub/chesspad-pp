@@ -4,7 +4,7 @@
   <div class="flex-grow-1 p-1 mb-2 notepad-content-container">
     <mat-card>
       <mat-card-content>
-        <app-notepad></app-notepad>
+        <app-notepad [game]="game"></app-notepad>
       </mat-card-content>
       <mat-card-actions align="end" class="d-flex justify-content-between">
         <button (click)="onFinish()" mat-raised-button color="accent">
