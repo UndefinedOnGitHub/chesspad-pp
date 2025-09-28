@@ -23,7 +23,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
               "src/theme.scss",
               "src/styles.scss",
@@ -32,7 +32,9 @@
               "node_modules/chessground/assets/chessground.cburnett.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": ["lodash", "moment"]
+            "allowedCommonJsDependencies": ["lodash", "moment"],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {

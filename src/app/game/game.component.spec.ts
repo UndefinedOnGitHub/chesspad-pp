@@ -37,25 +37,25 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("Enter moves", () => {
+  describe('Enter moves', () => {
     beforeEach(() => {
       component.game.clearGame();
-    })
+    });
 
     it('should add the move e4', () => {
       const gameElement: HTMLElement = fixture.nativeElement;
-      const column = gameElement.querySelector("#col_e") as HTMLElement;
+      const column = gameElement.querySelector('#col_e') as HTMLElement;
       column.click();
       fixture.detectChanges();
-  
-      const row = gameElement.querySelector("#row_4") as HTMLElement;
+
+      const row = gameElement.querySelector('#row_4') as HTMLElement;
       row.click();
 
-      const submit = gameElement.querySelector("#submit") as HTMLElement;
-      submit.click()
+      const submit = gameElement.querySelector('#submit') as HTMLElement;
+      submit.click();
       fixture.detectChanges();
-      const move = gameElement.querySelector("app-move-display") as HTMLElement;
-      expect(move.innerText).toEqual("e4")
+      const move = gameElement.querySelector('app-move-display') as HTMLElement;
+      expect(move.innerText).toEqual('e4');
     });
-  })
+  });
 });

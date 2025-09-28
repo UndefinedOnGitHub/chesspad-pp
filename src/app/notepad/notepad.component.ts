@@ -14,7 +14,7 @@ import { MoveDisplayComponent } from '../keyboards/components/move-display/move-
   imports: [CommonModule, MoveDisplayComponent],
 })
 export class NotepadComponent {
-  game = input.required<GameService>()
+  game = input.required<GameService>();
 
   onMoveClick(move: Move | undefined) {
     if (move && !move.isEmpty()) {
