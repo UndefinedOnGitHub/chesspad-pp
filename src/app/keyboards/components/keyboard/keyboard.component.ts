@@ -42,6 +42,12 @@ export class KeyboardComponent implements OnInit {
   moveManager: Move = new Move();
   // Keyboard Settings
   keyboardSettings: KeyboardSettings = { allowSuggestions: false };
+  keyboardIdx: number = 0;
+
+  keyboard: Keyboard = new Keyboard(this.moveManager);
+  matrix: (KeyboardButton | MB)[][] = [];
+  additionalButton: KeyboardButton | null = null;
+
   @Input() game:
     | GameService
     | PuzzleService
@@ -59,10 +65,6 @@ export class KeyboardComponent implements OnInit {
   ngOnInit() {
     this.setButtons();
   }
-
-  keyboard: Keyboard = new Keyboard(this.moveManager, () => this.ngOnInit());
-  matrix: (KeyboardButton | MB)[][] = [];
-  additionalButton: KeyboardButton | null = null;
 
   setButtons() {
     const [k, q, r, n, b, p] = this.keyboard.pieceButtons;

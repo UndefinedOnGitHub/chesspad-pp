@@ -25,7 +25,8 @@
         @for (b of r; track $index) {
           <div class="keyboard-cell">
             @if (isMulti(b)) {
-              <app-keyboard-button [button]="b.index(0)"> </app-keyboard-button>
+              <app-keyboard-button [button]="b.index(keyboard.keyboardIdx)">
+              </app-keyboard-button>
             } @else {
               <app-keyboard-button [button]="b"> </app-keyboard-button>
             }

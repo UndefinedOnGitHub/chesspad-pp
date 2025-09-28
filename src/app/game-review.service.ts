@@ -186,7 +186,10 @@ export class GameReviewService {
   }
 
   makeMove(move: Move): { success: boolean } {
-    if (this.currentMove?.replace('+', '') == String(move)) {
+    if (
+      this.currentMove?.replace('+', '')?.replace('x', '').replace('#', '') ==
+      String(move)?.replace('x', '')
+    ) {
       this.currentMove = this.history.shift();
       setTimeout(() => {
         if (this.currentMove) {
