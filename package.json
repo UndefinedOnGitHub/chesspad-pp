@@ -28,6 +28,7 @@
     "@fortawesome/angular-fontawesome": "^4.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
     "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "bootstrap": "^5.3.8",
     "chess.js": "^1.0.0-beta.7",
     "chessground": "^9.0.2",
     "lodash": "^4.17.21",

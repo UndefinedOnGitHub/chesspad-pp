@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
+import { AppComponent } from '@components/app/app.component';
 import { provideRouter } from '@angular/router';
-import { routes } from './app/app.module';
+import { routes } from './routes';
 import { importProvidersFrom, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
@@ -12,7 +12,8 @@ import { provideServiceWorker } from '@angular/service-worker';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),provideRouter(routes),
+    provideZoneChangeDetection(),
+    provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       BrowserModule,

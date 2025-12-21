@@ -30,7 +30,8 @@
               "src/styles.scss",
               "node_modules/chessground/assets/chessground.base.css",
               "node_modules/chessground/assets/chessground.brown.css",
-              "node_modules/chessground/assets/chessground.cburnett.css"
+              "node_modules/chessground/assets/chessground.cburnett.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": ["lodash"],

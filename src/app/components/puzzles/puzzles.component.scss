@@ -1,0 +1,49 @@
+@use "../../_theme" as theme;
+
+.keyboard-puzzle-container {
+  height: 100%;
+}
+#puzzle-chessboard {
+  width: 300px;
+  height: 300px;
+}
+@media (min-width: 576px) {
+  #puzzle-chessboard {
+    width: 300px;
+    height: 300px;
+  }
+}
+@media (min-width: 768px) {
+  #puzzle-chessboard {
+    width: 400px;
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  #puzzle-chessboard {
+    width: 500px;
+    height: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  #puzzle-chessboard {
+    width: 600px;
+    height: 600px;
+  }
+}
+.first-move-display-color {
+  width: 20px;
+  height: 20px;
+  border: 2px solid lightgrey;
+  margin-right: 10px;
+  &.w {
+    background-color: white;
+  }
+  &.b {
+    background-color: black;
+  }
+}
+.first-move-display-text {
+  @include theme.on-background;
+  font-weight: 500;
+}
