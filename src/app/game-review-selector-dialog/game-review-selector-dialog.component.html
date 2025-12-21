@@ -2,9 +2,11 @@
 <div mat-dialog-content class="mat-typography">
   <p>User's Games</p>
   <mat-select [(value)]="activeUsername">
-    <mat-option *ngFor="let username of usernames" [value]="username.username">
-      {{ username.name }}
-    </mat-option>
+    @for (username of usernames; track username) {
+      <mat-option [value]="username.username">
+        {{ username.name }}
+      </mat-option>
+    }
   </mat-select>
   <hr />
   <p>Game Color</p>

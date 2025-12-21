@@ -3,7 +3,7 @@ import { map } from 'rxjs';
 import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 export interface PuzzleResponse {
   gamePgn: string;
@@ -52,11 +52,21 @@ export class ChessWebsiteApiService {
     );
   }
 
+  private lastMonthFormattedDate() {
+    const date = new Date();
+    date.setMonth(date.getMonth() - 1);
+    const year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString();
+    if (month.length < 2) month = '0' + month;
+
+    return `${year}/${month}`;
+  }
+
   loadChessComGame(
     username: string,
     color: 'white' | 'black' | '' = '',
   ): Observable<GameResponse> {
-    const date = moment().subtract(1, 'month').format('YYYY/MM');
+    const date = this.lastMonthFormattedDate();
 
     return this.http
       .get(`https://api.chess.com/pub/player/${username}/games/${date}`)

@@ -12,7 +12,7 @@ export interface DialogCloseResponse {
   color: 'white' | 'black' | '';
 }
 
-import { CommonModule } from '@angular/common';
+
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -22,13 +22,12 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./game-review-selector-dialog.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatSelectModule,
-    MatButtonModule,
-  ],
+    MatButtonModule
+],
 })
 export class GameReviewSelectorDialogComponent {
   constructor(

@@ -3,7 +3,7 @@ import { Move } from '../keyboards/models/move';
 import { GameService } from '../game.service';
 import { chunk } from 'lodash';
 
-import { CommonModule } from '@angular/common';
+
 import { MoveDisplayComponent } from '../keyboards/components/move-display/move-display.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { MoveDisplayComponent } from '../keyboards/components/move-display/move-
   templateUrl: './notepad.component.html',
   styleUrls: ['./notepad.component.scss'],
   standalone: true,
-  imports: [CommonModule, MoveDisplayComponent],
+  imports: [MoveDisplayComponent],
 })
 export class NotepadComponent {
   game = input.required<GameService>();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+
 import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { GameReviewService } from '../game-review.service';
 import { chunk } from 'lodash';
@@ -10,7 +10,7 @@ import { chunk } from 'lodash';
   templateUrl: './game-review.component.html',
   styleUrls: ['./game-review.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, KeyboardComponent],
+  imports: [MatCardModule, KeyboardComponent],
 })
 export class GameReviewComponent implements OnInit {
   constructor(public gameReview: GameReviewService) {}

@@ -4,12 +4,12 @@ import { TutorialService } from '../tutorial.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-tutorial',
   standalone: true,
-  imports: [MatCardModule, MatDialogModule, KeyboardComponent, CommonModule],
+  imports: [MatCardModule, MatDialogModule, KeyboardComponent],
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.scss'],
 })

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
@@ -27,13 +27,12 @@ interface SideBarAction {
   styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     MatToolbarModule,
     MatSidenavModule,
     RouterModule,
     MatButtonModule,
-    FontAwesomeModule,
-  ],
+    FontAwesomeModule
+],
 })
 export class AppComponent {
   faBars: IconDefinition = faBars;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NotepadComponent } from '../notepad/notepad.component';
 import { KeyboardComponent } from '../keyboards/components/keyboard/keyboard.component';
 import { MatCardModule } from '@angular/material/card';
@@ -22,12 +22,11 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./game.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
     NotepadComponent,
     KeyboardComponent,
-    MatButtonModule,
-  ],
+    MatButtonModule
+],
 })
 export class GameComponent {
   title = 'chesspad.pp';
