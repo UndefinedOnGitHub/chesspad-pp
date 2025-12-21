@@ -33,7 +33,7 @@
               "node_modules/chessground/assets/chessground.cburnett.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": ["lodash", "moment"],
+            "allowedCommonJsDependencies": ["lodash"],
             "serviceWorker": "ngsw-config.json",
             "browser": "src/main.ts"
           },

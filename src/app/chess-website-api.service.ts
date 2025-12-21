@@ -3,7 +3,6 @@ import { map } from 'rxjs';
 import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// import * as moment from 'moment';
 
 export interface PuzzleResponse {
   gamePgn: string;
