@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
 // ...existing code...
@@ -7,10 +7,11 @@ import { KeyboardButton, MultiButton as MB } from '../../models/button';
 import { Move } from '../../models/move';
 import { Keyboard } from '../../models/keyboard';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-import { GameService } from '../../../game.service';
-import { PuzzleService } from '../../../puzzle.service';
-import { GameReviewService } from '../../../game-review.service';
-import { TutorialService } from '../../../tutorial.service';
+import { GameService } from '../../services/game.service';
+import { GameService as OldGameService} from '@services/game.service';
+import { PuzzleService } from '../../../services/puzzle.service';
+import { GameReviewService } from '../../../services/game-review.service';
+import { TutorialService } from '@services/tutorial.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -24,12 +25,11 @@ export interface KeyboardSettings {
   selector: 'app-keyboard',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     KeyboardButtonComponent,
     MatButton,
     FaIconComponent,
-  ],
+],
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss'],
 })
@@ -50,9 +50,10 @@ export class KeyboardComponent implements OnInit {
 
   @Input() game:
     | GameService
-    | PuzzleService
-    | GameReviewService
-    | TutorialService
+    | OldGameService // TO REMOVE
+    | PuzzleService // TO REMOVE
+    | GameReviewService // TO REMOVE
+    | TutorialService // TO REMOVE
     | undefined;
 
   constructor(public dialog: MatDialog) {

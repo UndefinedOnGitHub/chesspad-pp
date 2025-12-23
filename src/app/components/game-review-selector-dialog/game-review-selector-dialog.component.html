@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Select Game Info</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>User's Games</p>
+  <mat-select [(value)]="activeUsername">
+    @for (username of usernames; track username) {
+      <mat-option [value]="username.username">
+        {{ username.name }}
+      </mat-option>
+    }
+  </mat-select>
+  <hr />
+  <p>Game Color</p>
+  <mat-select [(value)]="activeColor">
+    <mat-option value=""> Both </mat-option>
+    <mat-option value="white"> White </mat-option>
+    <mat-option value="black"> Black </mat-option>
+  </mat-select>
+</div>
+<hr />
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</div>

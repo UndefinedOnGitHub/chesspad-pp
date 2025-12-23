@@ -4,6 +4,9 @@
 @include mat.core();
 body {
   @include theme.background-color();
+  --bs-body-bg: #0e0e10;
+  --bs-body-color: #dee2e6;
+  --bs-body-font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 // core-color or core-theme
