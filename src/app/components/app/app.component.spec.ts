@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { AppComponent } from '../../app.component';
+import { AppComponent } from '@components/app/app.component';
 import { NotepadComponent } from '../notepad/notepad.component';
 import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
 import { KeyboardButtonComponent } from '../../keyboards/components/keyboard-button/keyboard-button.component';
