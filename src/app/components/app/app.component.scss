@@ -16,6 +16,7 @@
 
 .mat-drawer {
   width: 85%;
+  max-width: 300px;
   @include theme.background-color;
   @include theme.on-background;
   .navigation-menu {

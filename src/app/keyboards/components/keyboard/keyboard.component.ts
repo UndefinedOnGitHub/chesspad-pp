@@ -7,7 +7,8 @@ import { KeyboardButton, MultiButton as MB } from '../../models/button';
 import { Move } from '../../models/move';
 import { Keyboard } from '../../models/keyboard';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-import { GameService } from '@services/game.service';
+import { GameService } from '../../services/game.service';
+import { GameService as OldGameService} from '@services/game.service';
 import { PuzzleService } from '../../../services/puzzle.service';
 import { GameReviewService } from '../../../services/game-review.service';
 import { TutorialService } from '@services/tutorial.service';
@@ -27,7 +28,7 @@ export interface KeyboardSettings {
     MatDialogModule,
     KeyboardButtonComponent,
     MatButton,
-    FaIconComponent
+    FaIconComponent,
 ],
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss'],
@@ -49,9 +50,10 @@ export class KeyboardComponent implements OnInit {
 
   @Input() game:
     | GameService
-    | PuzzleService
-    | GameReviewService
-    | TutorialService
+    | OldGameService // TO REMOVE
+    | PuzzleService // TO REMOVE
+    | GameReviewService // TO REMOVE
+    | TutorialService // TO REMOVE
     | undefined;
 
   constructor(public dialog: MatDialog) {

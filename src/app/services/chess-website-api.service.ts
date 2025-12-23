@@ -3,6 +3,7 @@ import { map } from 'rxjs';
 import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Logger } from './logger';
 
 export interface PuzzleResponse {
   gamePgn: string;
@@ -19,12 +20,12 @@ export interface GameResponse {
   providedIn: 'root',
 })
 export class ChessWebsiteApiService {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, private logger: Logger) {}
 
   loadLichessPuzzle(): Observable<PuzzleResponse> {
     return this.http.get('https://lichess.org/api/puzzle/daily').pipe(
       map((response: any) => {
-        console.log(response);
+        this.logger.log(response);
         return {
           gamePgn: response.game.pgn,
           puzzleSolution: response.puzzle.solution,
@@ -37,7 +38,7 @@ export class ChessWebsiteApiService {
   loadChessComPuzzle(): Observable<PuzzleResponse> {
     return this.http.get('https://api.chess.com/pub/puzzle/random').pipe(
       map((response: any) => {
-        console.log(response);
+        this.logger.log(response);
         const chessHistory = new Chess();
         chessHistory.loadPgn(response.pgn);
 
@@ -71,7 +72,7 @@ export class ChessWebsiteApiService {
       .get(`https://api.chess.com/pub/player/${username}/games/${date}`)
       .pipe(
         map((response: any) => {
-          console.log(response);
+          this.logger.log(response);
           let games = response.games.filter((g: any) => g.rules == 'chess');
           if (color) {
             games = games.filter(
@@ -81,7 +82,7 @@ export class ChessWebsiteApiService {
           }
           const randGame = Math.floor(Math.random() * games.length);
           const game = games[randGame];
-          console.log(game);
+          this.logger.log(game);
           const chess = new Chess();
           chess.loadPgn(game.pgn);
 
@@ -115,9 +116,9 @@ export class ChessWebsiteApiService {
       .get(`https://lichess.org/api/games/user/${username}`, requestOptions)
       .pipe(
         map((response: any) => {
-          console.log(response);
+          this.logger.log(response);
           const game = response.games[0];
-          console.log(game);
+          this.logger.log(game);
           const chess = new Chess();
           chess.loadPgn(game.pgn);
 

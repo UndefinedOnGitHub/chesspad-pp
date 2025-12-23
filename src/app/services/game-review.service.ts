@@ -15,6 +15,7 @@ import { KeyboardButton } from '../keyboards/models/button';
 import { GameStorageManagerService } from './game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 import { FinishGameDialogComponent } from '../components/finish-game-dialog/finish-game-dialog.component';
+import { Logger } from './logger';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class GameReviewService {
     icon: faNotesMedical,
     symbol: '',
     onTrigger: () => {
-      this.#newGamePopup();
+      this.newGamePopup();
     },
   });
 
@@ -38,6 +39,7 @@ export class GameReviewService {
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
     public storage: GameStorageManagerService,
+    private logger: Logger
   ) {}
 
   getAdditionalButton() {
@@ -45,7 +47,7 @@ export class GameReviewService {
   }
 
   init(element: HTMLElement | null = null): void {
-    return this.#loadGame(element);
+    return this.loadGame(element);
   }
 
   // Not in use. May be needed if board loading takes a long time.
@@ -70,18 +72,18 @@ export class GameReviewService {
   //   }, 200);
   // }
 
-  #newGamePopup() {
+  private newGamePopup() {
     const dialogRef = this.dialog.open(GameReviewSelectorDialogComponent, {
       data: {},
     });
     dialogRef.afterClosed().subscribe((result: DialogCloseResponse) => {
       if (result) {
-        this.#fetchAndLoadGame(result);
+        this.fetchAndLoadGame(result);
       }
     });
   }
 
-  #loadGame(element: HTMLElement | null = null): void {
+  private loadGame(element: HTMLElement | null = null): void {
     if (element) {
       this.element = element;
       this.groundboard = Chessground(this.element, {
@@ -103,14 +105,14 @@ export class GameReviewService {
       const orientation =
         this.storage.fetch('local_game_review_orientation') == 'b' ? 'b' : 'w';
 
-      this.#initiateGame({ history, orientation, gamePgn: game.pgn() });
-      this.#scrollToLastMove();
+      this.initiateGame({ history, orientation, gamePgn: game.pgn() });
+      this.scrollToLastMove();
     } else {
-      this.#newGamePopup();
+      this.newGamePopup();
     }
   }
 
-  #fetchAndLoadGame(result: DialogCloseResponse): void {
+  private fetchAndLoadGame(result: DialogCloseResponse): void {
     if (this.element) {
       this.groundboard = Chessground(this.element, {
         coordinates: false,
@@ -120,11 +122,11 @@ export class GameReviewService {
     this.game = new Chess();
     const promise = this.api.fetchChessGame(result.username, result.color);
     promise.subscribe((response: GameResponse) => {
-      this.#setGameFromResponse(response);
+      this.setGameFromResponse(response);
     });
   }
 
-  #constructConfig(response: GameResponse, firstMove: any) {
+  private constructConfig(response: GameResponse, firstMove: any) {
     const orientation: 'white' | 'black' =
       response.orientation == 'w' ? 'white' : 'black';
 
@@ -137,7 +139,7 @@ export class GameReviewService {
     };
   }
 
-  #storeGame(response: GameResponse) {
+  private storeGame(response: GameResponse) {
     const storageGame = new Chess();
     storageGame.loadPgn(response.gamePgn);
     this.storage.storeGame('local_game_review', storageGame);
@@ -145,13 +147,13 @@ export class GameReviewService {
     this.storage.store('local_game_review_orientation', response.orientation);
   }
 
-  #initiateGame(response: GameResponse): void {
+  private initiateGame(response: GameResponse): void {
     // Set Game
     this.history = response.history;
     this.currentMove = this.history.shift();
     if (this.currentMove) {
       const firstMove = this.game.move(this.currentMove);
-      const config = this.#constructConfig(response, firstMove);
+      const config = this.constructConfig(response, firstMove);
       // Set Digital Board
       if (this.element) {
         this.groundboard = Chessground(this.element, config);
@@ -159,20 +161,20 @@ export class GameReviewService {
     }
 
     // Log Game
-    console.log(this.game.ascii());
-    console.log(this.history);
+    this.logger.log(this.game.ascii());
+    this.logger.log(this.history);
   }
 
-  #setGameFromResponse(response: GameResponse): void {
+  private setGameFromResponse(response: GameResponse): void {
     // Store Game
-    this.#storeGame(response);
+    this.storeGame(response);
     // Start Game
-    this.#initiateGame(response);
+    this.initiateGame(response);
   }
 
   setMoveClickCallback() {}
 
-  #finishGame() {
+  private finishGame() {
     this.dialog
       .open(FinishGameDialogComponent, {
         data: { pgn: this.game.pgn(), disabled: true, game: this.game },
@@ -180,7 +182,7 @@ export class GameReviewService {
       .afterClosed()
       .subscribe((result) => {
         if (result.new) {
-          this.#newGamePopup();
+          this.newGamePopup();
         }
       });
   }
@@ -203,10 +205,10 @@ export class GameReviewService {
             lastMove: [gameMove.from, gameMove.to],
           });
         } else {
-          this.#finishGame();
+          this.finishGame();
         }
       }, 500);
-      this.#scrollToLastMove();
+      this.scrollToLastMove();
       return { success: true };
     }
     return { success: false };
@@ -216,7 +218,7 @@ export class GameReviewService {
     return this.game.isCheckmate();
   }
 
-  #scrollToLastMove(): void {
+  private scrollToLastMove(): void {
     // Scroll to last move
     // Keep slight delay to force the render of the move before animation
     try {

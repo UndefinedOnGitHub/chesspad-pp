@@ -12,6 +12,7 @@ import { KeyboardButton } from '../keyboards/models/button';
 import { ChessgroundConfig } from '../constants';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { GameStorageManagerService } from './game-storage-manager.service';
+import { Logger } from './logger';
 
 /**
  *
@@ -46,6 +47,7 @@ export class PuzzleService {
     public api: ChessWebsiteApiService,
     public dialog: MatDialog,
     public storage: GameStorageManagerService,
+    private logger: Logger
   ) {}
 
   init(element: HTMLElement | null = null): void {
@@ -102,8 +104,8 @@ export class PuzzleService {
       this.groundboard = Chessground(this.element, config);
     }
     // Log Puzzle For Debugging
-    console.log(this.game.ascii());
-    console.log(this.solution);
+    this.logger.log(this.game.ascii());
+    this.logger.log(this.solution);
   }
 
   // Construct configuration for chessground board
@@ -146,7 +148,7 @@ export class PuzzleService {
       })
       .afterClosed()
       .subscribe(() => {
-        console.log('FINISHED');
+        this.logger.log('FINISHED');
         this.storage.clearGame('local_puzzle');
         this.loadPuzzle();
       });

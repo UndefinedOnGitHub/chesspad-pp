@@ -53,7 +53,6 @@ export class GameComponent {
       data: { pgn: this.game.game.pgn(), game: this.game.game },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result?.new) {
         this.game.clearGame();
       }

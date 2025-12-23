@@ -16,7 +16,7 @@
     </mat-card-actions> -->
   </mat-card>
   <div class="d-flex flex-column display-results p-2">
-    @for (moveRow of currentMoves(); track moveRow; let idx = $index) {
+    @for (moveRow of currentMoves(); track $index; let idx = $index) {
       <div
         class="d-flex display-results-move-row"
         >

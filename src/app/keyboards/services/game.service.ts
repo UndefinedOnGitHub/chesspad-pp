@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Move } from '../keyboards/models/move';
+import { Move } from '../models/move';
 import { Chess } from 'chess.js';
-import { GameStorageManagerService } from '../services/game-storage-manager.service';
-import { Logger } from './logger';
+// import { GameStorageManagerService } from '../services/game-storage-manager.service';
+// import { Logger } from './logger';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,7 @@ export class GameService {
 
   onMoveClickCallbacks: Function[] = [];
 
-  constructor(public storage: GameStorageManagerService, private logger: Logger) {
+  constructor() {
     this.game = new Chess();
   }
 
@@ -110,19 +110,20 @@ export class GameService {
 
   // Game Storage Functions
   storeGame(): void {
-    this.storage.storeGame('local_game', this.game);
+    // this.storage.storeGame('local_game', this.game);
   }
 
   fetchGame(): Move[] {
-    const storedGame = this.storage.fetchGame('local_game');
-    if (storedGame) {
-      this.game = storedGame;
-      this.logGame('Game Loaded');
-      this.moves = this.game.history().map((h) => new Move(h));
-      this.scrollToLastMove();
-    }
+    // const storedGame = this.storage.fetchGame('local_game');
+    // if (storedGame) {
+    //   this.game = storedGame;
+    //   this.logGame('Game Loaded');
+    //   this.moves = this.game.history().map((h) => new Move(h));
+    //   this.scrollToLastMove();
+    // }
 
-    return this.moves;
+    // return this.moves;
+    return []
   }
 
   clearGame(): void {
@@ -188,6 +189,6 @@ export class GameService {
     if (logLabel) {
       printString = `${logLabel}\n\n${printString}`;
     }
-    this.logger.log(printString);
+    console.log(printString);
   }
 }

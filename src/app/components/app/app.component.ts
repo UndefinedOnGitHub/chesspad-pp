@@ -46,6 +46,4 @@ export class AppComponent {
     { routerLink: '/puzzles', icon: faPuzzlePiece, text: 'Puzzle' },
     { routerLink: '/games', icon: faChessBoard, text: 'Game' },
   ];
-
-  constructor() {}
 }
