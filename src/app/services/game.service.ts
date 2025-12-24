@@ -34,10 +34,6 @@ export class GameService extends BaseGameService {
   public storage = inject(GameStorageManagerService);
   private logger = inject(Logger);
 
-  // setMoveClickCallback(func: Function): void {
-  //   this.onMoveClickCallbacks.push(func);
-  // }
-
   override validateMove(move: Move) {
     if (this.activeMoveIdx >= 0) {
       this.makeHistoricalMove(move);
@@ -46,19 +42,6 @@ export class GameService extends BaseGameService {
     }
     this.storeGame();
   }
-
-  // makeMove(move: Move): { success: boolean } {
-  //   try {
-
-  //   } catch (err) {
-  //     console.error(err);
-  //     return { success: false };
-  //   }
-
-  //   // Save game
-
-  //   return { success: true };
-  // }
 
   isCheckmate(): boolean {
     return this.game.isCheckmate();
@@ -72,7 +55,6 @@ export class GameService extends BaseGameService {
     if (move.active) {
       this.activeMoveIdx = this.moves.findIndex((f) => f == move);
       this.moveSubject.next(move);
-      // this.onMoveClickCallbacks.forEach((f) => f(move));
     } else {
       this.activeMoveIdx = -1;
     }

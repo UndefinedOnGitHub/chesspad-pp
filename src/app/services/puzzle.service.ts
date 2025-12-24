@@ -13,7 +13,6 @@ import { ChessgroundConfig } from '../constants';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { GameStorageManagerService } from './game-storage-manager.service';
 import { Logger } from './logger';
-import { BehaviorSubject } from 'rxjs';
 import { BaseGameService } from '../keyboards/services/base-game.service';
 
 /**
@@ -31,9 +30,7 @@ import { BaseGameService } from '../keyboards/services/base-game.service';
   providedIn: 'root',
 })
 export class PuzzleService extends BaseGameService {
-  // moveSubject = new BehaviorSubject(new Move())
   groundboard: ReturnType<typeof Chessground> | undefined;
-  // game: Chess = new Chess();
   solution: string[] = [];
   element: HTMLElement | undefined | null;
   boardOrientation: string | undefined;
@@ -49,13 +46,6 @@ export class PuzzleService extends BaseGameService {
   dialog = inject(MatDialog);
   storage = inject(GameStorageManagerService);
   logger = inject(Logger);
-
-  // constructor(
-  //   public api: ChessWebsiteApiService,
-  //   public dialog: MatDialog,
-  //   public storage: GameStorageManagerService,
-  //   private logger: Logger
-  // ) {}
 
   init(element: HTMLElement | null = null): void {
     return this.loadPuzzle(element);
@@ -185,37 +175,6 @@ export class PuzzleService extends BaseGameService {
       throw 'Invalid Move';
     }
   }
-
-  // Move From Keyboard
-  // makeMove(move: Move): { success: boolean } {
-  //   try {
-  //     const [game1, game2] = [
-  //       new Chess(this.game.fen()),
-  //       new Chess(this.game.fen()),
-  //     ];
-  //     const gameMove = game1.move(move.toString());
-  //     const solutionMove = game2.move(this.solution[0]);
-
-  //     if (solutionMove.san == gameMove.san) {
-  //       this.game.move(move.toString());
-  //       if (this.groundboard) {
-  //         this.groundboard.set({
-  //           fen: this.game.fen(),
-  //           lastMove: [gameMove.from, gameMove.to],
-  //         });
-  //       }
-  //       // Remove move from solution
-  //       this.solution.shift();
-  //       // Wait then make opponent move
-  //       setTimeout(() => this.makeOpponentMove(), 500);
-  //       return { success: true };
-  //     }
-
-  //     return { success: false };
-  //   } catch (err) {
-  //     return { success: false };
-  //   }
-  // }
 
   // Provide the solution button to the keyboard
   getAdditionalButton() {

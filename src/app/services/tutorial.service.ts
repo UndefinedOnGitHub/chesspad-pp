@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Chess } from 'chess.js';
 import { Move } from '../keyboards/models/move';
 import { positions, Position } from '../tutorial-positions';
 import { Chessground } from 'chessground';
-import { BehaviorSubject } from 'rxjs';
 import { BaseGameService } from '../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TutorialService extends BaseGameService {
-  // moveSubject = new BehaviorSubject(new Move())
   positionIdx: number = 0;
   currentPosition: Position = positions[this.positionIdx];
-  // game: Chess = new Chess();
   element: HTMLElement | undefined | null;
   groundboard: ReturnType<typeof Chessground> | undefined;
-
-  // constructor() {}
 
   init(element: HTMLElement | null = null): void {
     if (element) {
