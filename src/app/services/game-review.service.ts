@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Chess } from 'chess.js';
 import {
   ChessWebsiteApiService,
@@ -16,13 +16,16 @@ import { GameStorageManagerService } from './game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 import { FinishGameDialogComponent } from '../components/finish-game-dialog/finish-game-dialog.component';
 import { Logger } from './logger';
+import { BehaviorSubject } from 'rxjs';
+import { BaseGameService } from '../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GameReviewService {
+export class GameReviewService extends BaseGameService {
+  // moveSubject = new BehaviorSubject(new Move())
   groundboard: any | undefined;
-  game: Chess = new Chess();
+  // game: Chess = new Chess();
   element: HTMLElement | undefined | null;
   history: string[] = [];
   currentMove: string | undefined | null;
@@ -35,12 +38,17 @@ export class GameReviewService {
     },
   });
 
-  constructor(
-    public api: ChessWebsiteApiService,
-    public dialog: MatDialog,
-    public storage: GameStorageManagerService,
-    private logger: Logger
-  ) {}
+  api = inject(ChessWebsiteApiService);
+  dialog = inject(MatDialog);
+  storage = inject(GameStorageManagerService);
+  logger = inject(Logger);
+
+  // constructor(
+  //   public api: ChessWebsiteApiService,
+  //   public dialog: MatDialog,
+  //   public storage: GameStorageManagerService,
+  //   private logger: Logger
+  // ) {}
 
   getAdditionalButton() {
     return this.additionalButton;
@@ -187,7 +195,7 @@ export class GameReviewService {
       });
   }
 
-  makeMove(move: Move): { success: boolean } {
+  override validateMove(move: Move): void {
     if (
       this.currentMove?.replace('+', '')?.replace('x', '').replace('#', '') ==
       String(move)?.replace('x', '')
@@ -209,10 +217,37 @@ export class GameReviewService {
         }
       }, 500);
       this.scrollToLastMove();
-      return { success: true };
+    } else {
+      throw 'Invalid Move';
     }
-    return { success: false };
   }
+
+  // makeMove(move: Move): { success: boolean } {
+  //   if (
+  //     this.currentMove?.replace('+', '')?.replace('x', '').replace('#', '') ==
+  //     String(move)?.replace('x', '')
+  //   ) {
+  //     this.currentMove = this.history.shift();
+  //     setTimeout(() => {
+  //       if (this.currentMove) {
+  //         const gameMove = this.game.move(this.currentMove);
+  //         this.storage.store(
+  //           'local_game_review_move_number',
+  //           String(this.game.history().length - 1),
+  //         );
+  //         this.groundboard.set({
+  //           fen: this.game.fen(),
+  //           lastMove: [gameMove.from, gameMove.to],
+  //         });
+  //       } else {
+  //         this.finishGame();
+  //       }
+  //     }, 500);
+  //     this.scrollToLastMove();
+  //     return { success: true };
+  //   }
+  //   return { success: false };
+  // }
 
   isCheckmate(): boolean {
     return this.game.isCheckmate();

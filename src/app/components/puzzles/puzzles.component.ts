@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
 
-
 @Component({
   selector: 'app-puzzles',
   standalone: true,

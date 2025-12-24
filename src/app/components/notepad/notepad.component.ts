@@ -3,7 +3,6 @@ import { Move } from '../../keyboards/models/move';
 import { GameService } from '@services/game.service';
 import { chunk } from 'lodash';
 
-
 import { MoveDisplayComponent } from '../../keyboards/components/move-display/move-display.component';
 
 @Component({

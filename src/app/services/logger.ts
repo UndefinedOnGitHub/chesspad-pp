@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class Logger {
   log(logObject: any) {
-    if (location.origin.includes("localhost")) console.log(logObject);
+    if (location.origin.includes('localhost')) console.log(logObject);
   }
 }

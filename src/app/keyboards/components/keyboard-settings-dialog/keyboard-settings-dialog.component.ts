@@ -5,7 +5,6 @@ export interface KeyboardSettings {
   allowSuggestions: boolean;
 }
 
-
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,11 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-keyboard-settings-dialog',
   standalone: true,
-  imports: [
-    MatDialogModule,
-    MatSlideToggleModule,
-    MatButtonModule
-],
+  imports: [MatDialogModule, MatSlideToggleModule, MatButtonModule],
   templateUrl: './keyboard-settings-dialog.component.html',
   styleUrls: ['./keyboard-settings-dialog.component.scss'],
 })

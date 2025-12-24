@@ -12,7 +12,6 @@ export interface DialogCloseResponse {
   color: 'white' | 'black' | '';
 }
 
-
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -26,8 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogContent,
     MatDialogActions,
     MatSelectModule,
-    MatButtonModule
-],
+    MatButtonModule,
+  ],
 })
 export class GameReviewSelectorDialogComponent {
   constructor(

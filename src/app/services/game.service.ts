@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Move } from '../keyboards/models/move';
 import { Chess } from 'chess.js';
 import { GameStorageManagerService } from '../services/game-storage-manager.service';
 import { Logger } from './logger';
+import { BaseGameService } from '../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,39 +25,40 @@ import { Logger } from './logger';
  * We manage both lists as they provide flexibilty for future changes.
  *
  */
-export class GameService {
-  moves: Move[] = [];
-  game: Chess;
-
+export class GameService extends BaseGameService {
   activeMoveIdx: number = -1;
   gameResult: '1-0' | '1/2-1/2' | '0-1' = '1/2-1/2';
 
   onMoveClickCallbacks: Function[] = [];
 
-  constructor(public storage: GameStorageManagerService, private logger: Logger) {
-    this.game = new Chess();
-  }
+  public storage = inject(GameStorageManagerService);
+  private logger = inject(Logger);
 
-  setMoveClickCallback(func: Function): void {
-    this.onMoveClickCallbacks.push(func);
-  }
+  // setMoveClickCallback(func: Function): void {
+  //   this.onMoveClickCallbacks.push(func);
+  // }
 
-  makeMove(move: Move): { success: boolean } {
-    try {
-      if (this.activeMoveIdx >= 0) {
-        this.makeHistoricalMove(move);
-      } else {
-        this.makeNextMove(move);
-      }
-    } catch (err) {
-      console.error(err);
-      return { success: false };
+  override validateMove(move: Move) {
+    if (this.activeMoveIdx >= 0) {
+      this.makeHistoricalMove(move);
+    } else {
+      this.makeNextMove(move);
     }
-
-    // Save game
     this.storeGame();
-    return { success: true };
   }
+
+  // makeMove(move: Move): { success: boolean } {
+  //   try {
+
+  //   } catch (err) {
+  //     console.error(err);
+  //     return { success: false };
+  //   }
+
+  //   // Save game
+
+  //   return { success: true };
+  // }
 
   isCheckmate(): boolean {
     return this.game.isCheckmate();
@@ -69,7 +71,8 @@ export class GameService {
   onMoveClick(move: Move): void {
     if (move.active) {
       this.activeMoveIdx = this.moves.findIndex((f) => f == move);
-      this.onMoveClickCallbacks.forEach((f) => f(move));
+      this.moveSubject.next(move);
+      // this.onMoveClickCallbacks.forEach((f) => f(move));
     } else {
       this.activeMoveIdx = -1;
     }
@@ -104,7 +107,7 @@ export class GameService {
     return this.game.pgn();
   }
 
-  toString(): string {
+  override toString(): string {
     return this.exportPGN();
   }
 

@@ -1,22 +1,11 @@
 <!-- Output display of buttons -->
-<div class="d-flex flex-row mb-2 current-move-row align-content-center">
-  <div class="d-flex current-move-display" style="min-width: 75px">
-    <span>&gt;</span>
-    <span id="currentMoveDisplay">{{ displayCurrentMove() }}</span>
-  </div>
-  <div
-    class="flex-grow-1 d-flex flex-row align-content-center justify-content-around"
-  >
-    @for (move of possibleMoves(); track $index) {
-      <div class="possible-option-cell" (click)="selectPossibleMove(move)">
-        {{ move }}
-      </div>
-    }
-  </div>
-  <div class="flex-shrink-0 keyboard-settings-gear">
-    <fa-icon [icon]="faGear" (click)="openKeyboardSettings()"></fa-icon>
-  </div>
-</div>
+<app-keyboard-display
+  [move]="moveManager"
+  [keyboardSettings]="keyboardSettings"
+  (onMoveSelect)="selectPossibleMove($event)"
+  [moveSuggestions]="legalMoves()"
+>
+</app-keyboard-display>
 <!-- Keyboard Buttons -->
 <div class="d-flex flex-row">
   <div class="d-flex flex-row keyboard-container">
@@ -36,9 +25,9 @@
     </div>
   </div>
   <div class="return-key d-flex flex-column">
-    @if (additionalButton) {
+    @if (externalButton(); as external) {
       <div class="flex-grow-2 additional-button">
-        <app-keyboard-button [button]="additionalButton"> </app-keyboard-button>
+        <app-keyboard-button [button]="external"> </app-keyboard-button>
       </div>
     }
     <button

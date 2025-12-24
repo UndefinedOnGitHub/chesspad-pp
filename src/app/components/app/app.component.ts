@@ -31,8 +31,8 @@ interface SideBarAction {
     MatSidenavModule,
     RouterModule,
     MatButtonModule,
-    FontAwesomeModule
-],
+    FontAwesomeModule,
+  ],
 })
 export class AppComponent {
   faBars: IconDefinition = faBars;

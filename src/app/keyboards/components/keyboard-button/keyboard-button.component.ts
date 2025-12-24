@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { KeyboardButton } from '../../models/button';
 
 import { CommonModule } from '@angular/common';
@@ -14,13 +14,11 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./keyboard-button.component.scss'],
 })
 export class KeyboardButtonComponent {
-  @Input() button: KeyboardButton | null = null;
-  @Input() disabled: boolean = false;
+  button = input.required<KeyboardButton>();
+  disabled = input<boolean>(false);
   icon = faCoffee;
 
   onButtonPressed() {
-    if (this.button) {
-      this.button.trigger(this.button);
-    }
+    this.button()?.trigger(this.button());
   }
 }

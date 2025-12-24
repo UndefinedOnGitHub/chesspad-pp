@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
 
-
 @Component({
   selector: 'app-tutorial',
   standalone: true,
@@ -14,8 +13,8 @@ import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.
   styleUrls: ['./tutorial.component.scss'],
 })
 export class TutorialComponent implements AfterViewInit {
-  @ViewChild("chessboard") chessboard!: ElementRef
-  
+  @ViewChild('chessboard') chessboard!: ElementRef;
+
   constructor(public tutorial: TutorialService) {}
   ngAfterViewInit() {
     this.tutorial.init(this.chessboard.nativeElement);

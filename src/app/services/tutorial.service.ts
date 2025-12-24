@@ -3,18 +3,21 @@ import { Chess } from 'chess.js';
 import { Move } from '../keyboards/models/move';
 import { positions, Position } from '../tutorial-positions';
 import { Chessground } from 'chessground';
+import { BehaviorSubject } from 'rxjs';
+import { BaseGameService } from '../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TutorialService {
+export class TutorialService extends BaseGameService {
+  // moveSubject = new BehaviorSubject(new Move())
   positionIdx: number = 0;
   currentPosition: Position = positions[this.positionIdx];
-  game: Chess = new Chess();
+  // game: Chess = new Chess();
   element: HTMLElement | undefined | null;
   groundboard: ReturnType<typeof Chessground> | undefined;
 
-  constructor() {}
+  // constructor() {}
 
   init(element: HTMLElement | null = null): void {
     if (element) {
@@ -42,7 +45,8 @@ export class TutorialService {
   getAdditionalButton() {
     return null;
   }
-  makeMove(move: Move): { success: boolean } {
+
+  override validateMove(move: Move): void {
     if (this.currentPosition.move.toString() == move.toString()) {
       this.positionIdx++;
       const position = positions[this.positionIdx];
@@ -50,8 +54,8 @@ export class TutorialService {
         this.currentPosition = position;
         this.init();
       }
-      return { success: true };
+    } else {
+      throw 'Invalid Move';
     }
-    return { success: false };
   }
 }

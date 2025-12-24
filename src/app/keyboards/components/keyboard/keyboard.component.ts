@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  input,
+  ViewChild,
+} from '@angular/core';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.component';
@@ -6,15 +14,12 @@ import { KeyboardButtonComponent } from '../keyboard-button/keyboard-button.comp
 import { KeyboardButton, MultiButton as MB } from '../../models/button';
 import { Move } from '../../models/move';
 import { Keyboard } from '../../models/keyboard';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
-import { GameService } from '../../services/game.service';
-import { GameService as OldGameService} from '@services/game.service';
+import { BaseGameService } from '../../services/base-game.service';
 import { PuzzleService } from '../../../services/puzzle.service';
 import { GameReviewService } from '../../../services/game-review.service';
 import { TutorialService } from '@services/tutorial.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { KeyboardDisplay } from '../keyboard-display/keyboard-display';
 // ...existing code...
 
 export interface KeyboardSettings {
@@ -28,14 +33,13 @@ export interface KeyboardSettings {
     MatDialogModule,
     KeyboardButtonComponent,
     MatButton,
-    FaIconComponent,
-],
+    KeyboardDisplay,
+  ],
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss'],
 })
 export class KeyboardComponent implements OnInit {
-  // Settings gear
-  faGear = faGear;
+  @ViewChild(KeyboardDisplay) display!: KeyboardDisplay;
   // Let the editor know the move
   @Output() onSubmit = new EventEmitter<Move>();
   // For tracking the move
@@ -46,24 +50,17 @@ export class KeyboardComponent implements OnInit {
 
   keyboard: Keyboard = new Keyboard(this.moveManager);
   matrix: (KeyboardButton | MB)[][] = [];
-  additionalButton: KeyboardButton | null = null;
+  externalButton = input<KeyboardButton>();
 
-  @Input() game:
-    | GameService
-    | OldGameService // TO REMOVE
-    | PuzzleService // TO REMOVE
-    | GameReviewService // TO REMOVE
-    | TutorialService // TO REMOVE
-    | undefined;
+  @Input() game: BaseGameService | undefined;
 
-  constructor(public dialog: MatDialog) {
-    this.game?.setMoveClickCallback((m: Move) => {
+  constructor() {}
+
+  ngOnInit() {
+    this.game?.moveSubject.subscribe((m) => {
       this.moveManager.fromString(String(m));
       this.keyboard.extractFromMove(m);
     });
-  }
-
-  ngOnInit() {
     this.setButtons();
   }
 
@@ -84,47 +81,22 @@ export class KeyboardComponent implements OnInit {
       [r, new MB([cg, r7]), new MB([ch, r8]), swch, p],
       [clr, mm, csl, cpt, prm],
     ];
-
-    if (this.game) {
-      this.additionalButton = this.game.getAdditionalButton();
-    }
   }
 
   isMulti(btn: KeyboardButton | MB) {
     return btn instanceof MB;
   }
 
-  displayCurrentMove(): string {
-    return this.moveManager.toString(true);
-  }
-
   triggerErrorAnimation(): void {
-    const ele = document.getElementById('currentMoveDisplay');
-    if (ele) {
-      ele.className = 'error-animation';
-      setTimeout(() => {
-        ele.className = '';
-      }, 1000);
-    }
+    this.display.triggerError();
   }
 
-  possibleMoves(): Move[] {
-    if (!this.keyboardSettings.allowSuggestions || !this.game) {
+  legalMoves(): Move[] {
+    if (!this.keyboardSettings.allowSuggestions) {
       return [];
     }
-    const possibleMoves = this.game.game
-      .moves()
-      .filter((m) => m.includes(String(this.moveManager)))
-      .slice(0, 3)
-      .map((m) => new Move(m));
 
-    if (
-      possibleMoves.length == 1 &&
-      possibleMoves[0].toString() == this.moveManager.toString()
-    ) {
-      return [];
-    }
-    return possibleMoves;
+    return this.game?.legalMoves(this.moveManager) || [];
   }
 
   selectPossibleMove(move: Move): void {
@@ -132,22 +104,9 @@ export class KeyboardComponent implements OnInit {
     this.keyboard.extractFromMove(move);
   }
 
-  async openKeyboardSettings() {
-    const { KeyboardSettingsDialogComponent } = await import(
-      '../keyboard-settings-dialog/keyboard-settings-dialog.component'
-    );
-    const dialogRef = this.dialog.open(KeyboardSettingsDialogComponent, {
-      data: this.keyboardSettings,
-    });
-    dialogRef.afterClosed().subscribe((result: KeyboardSettings | null) => {
-      if (result) {
-        this.keyboardSettings = result;
-      }
-    });
-  }
-
   submit(event: any): void {
     const result = this.game?.makeMove(this.moveManager.clone());
+
     if (result?.success) {
       this.onSubmit.emit(this.moveManager.clone());
       this.keyboard.clearKeyboard();

@@ -25,8 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     NotepadComponent,
     KeyboardComponent,
-    MatButtonModule
-],
+    MatButtonModule,
+  ],
 })
 export class GameComponent {
   title = 'chesspad.pp';
