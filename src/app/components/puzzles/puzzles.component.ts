@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PuzzleService } from '@services/puzzle.service';
+import { PuzzleService } from '@components/puzzles/puzzle.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';

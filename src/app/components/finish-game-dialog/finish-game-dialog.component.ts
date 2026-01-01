@@ -6,8 +6,8 @@ import {
   MatDialogContent,
   MatDialogActions,
 } from '@angular/material/dialog';
-import { GameService } from '@services/game.service';
-import { NotifyService } from '../../services/notify.service';
+import { GameService } from '@components/game/game.service';
+import { NotifyService } from '@services/notify.service';
 import { Chess } from 'chess.js';
 export interface DialogData {
   pgn: string;

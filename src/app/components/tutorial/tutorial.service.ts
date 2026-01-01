@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Move } from '../keyboards/models/move';
-import { positions, Position } from '../tutorial-positions';
+import { Move } from '../../keyboards/models/move';
+import { positions, Position } from './tutorial-positions';
 import { Chessground } from 'chessground';
-import { BaseGameService } from '../keyboards/services/base-game.service';
+import { BaseGameService } from '@keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NotepadComponent } from './notepad.component';
 import { MoveDisplayComponent } from '../../keyboards/components/move-display/move-display.component';
-import { GameService } from '@services/game.service';
+import { GameService } from '@components/game/game.service';
 
 describe('NotepadComponent', () => {
   let component: NotepadComponent;

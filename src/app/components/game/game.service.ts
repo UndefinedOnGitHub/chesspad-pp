@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { Move } from '../keyboards/models/move';
+import { Move } from '../../keyboards/models/move';
 import { Chess } from 'chess.js';
-import { GameStorageManagerService } from '../services/game-storage-manager.service';
-import { Logger } from './logger';
-import { BaseGameService } from '../keyboards/services/base-game.service';
+import { GameStorageManagerService } from '../../services/game-storage-manager.service';
+import { Logger } from '../../services/logger';
+import { BaseGameService } from '../../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',

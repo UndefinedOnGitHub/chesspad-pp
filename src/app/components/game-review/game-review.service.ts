@@ -3,20 +3,20 @@ import { Chess } from 'chess.js';
 import {
   ChessWebsiteApiService,
   GameResponse,
-} from './chess-website-api.service';
+} from '../../services/chess-website-api.service';
 import { Chessground } from 'chessground';
-import { Move } from '../keyboards/models/move';
+import { Move } from '../../keyboards/models/move';
 import { MatDialog } from '@angular/material/dialog';
 import {
   GameReviewSelectorDialogComponent,
   DialogCloseResponse,
-} from '@components/game-review-selector-dialog/game-review-selector-dialog.component';
-import { KeyboardButton } from '../keyboards/models/button';
-import { GameStorageManagerService } from './game-storage-manager.service';
+} from '@components/game-review/game-review-selector-dialog/game-review-selector-dialog.component';
+import { KeyboardButton } from '../../keyboards/models/button';
+import { GameStorageManagerService } from '../../services/game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
-import { FinishGameDialogComponent } from '../components/finish-game-dialog/finish-game-dialog.component';
-import { Logger } from './logger';
-import { BaseGameService } from '../keyboards/services/base-game.service';
+import { FinishGameDialogComponent } from '../finish-game-dialog/finish-game-dialog.component';
+import { Logger } from '../../services/logger';
+import { BaseGameService } from '../../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',

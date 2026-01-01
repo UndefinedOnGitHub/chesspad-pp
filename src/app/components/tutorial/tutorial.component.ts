@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { TutorialService } from '@services/tutorial.service';
+import { TutorialService } from '@components/tutorial/tutorial.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';

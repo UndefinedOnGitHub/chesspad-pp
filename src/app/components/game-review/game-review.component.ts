@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
 import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
-import { GameReviewService } from '../../services/game-review.service';
+import { GameReviewService } from './game-review.service';
 import { chunk } from 'lodash';
 
 @Component({
