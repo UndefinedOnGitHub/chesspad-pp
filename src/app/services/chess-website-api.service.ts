@@ -20,7 +20,10 @@ export interface GameResponse {
   providedIn: 'root',
 })
 export class ChessWebsiteApiService {
-  constructor(public http: HttpClient, private logger: Logger) {}
+  constructor(
+    public http: HttpClient,
+    private logger: Logger,
+  ) {}
 
   loadLichessPuzzle(): Observable<PuzzleResponse> {
     return this.http.get('https://lichess.org/api/puzzle/daily').pipe(

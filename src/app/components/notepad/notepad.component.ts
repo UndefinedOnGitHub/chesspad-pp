@@ -1,8 +1,7 @@
 import { Component, input } from '@angular/core';
 import { Move } from '../../keyboards/models/move';
-import { GameService } from '@services/game.service';
+import { GameService } from '@components/game/game.service';
 import { chunk } from 'lodash';
-
 
 import { MoveDisplayComponent } from '../../keyboards/components/move-display/move-display.component';
 

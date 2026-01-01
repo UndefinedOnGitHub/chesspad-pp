@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/chesspad-pp",
+    "public": "dist/chesspad-pp/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

@@ -4,7 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Logger {
-  log(logObject: any) {
-    if (location.origin.includes("localhost")) console.log(logObject);
+  log(...logObject: any) {
+    if (location.origin.includes('localhost')) console.log(...logObject);
+  }
+  error(...logObject: any) {
+    if (location.origin.includes('localhost')) console.error(...logObject);
   }
 }

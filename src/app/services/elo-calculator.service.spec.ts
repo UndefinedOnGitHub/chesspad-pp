@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EloCalculatorService, GameResult } from '@services/elo-calculator.service';
+import {
+  EloCalculatorService,
+  GameResult,
+} from '@services/elo-calculator.service';
 
 describe('EloCalculatorService', () => {
   let service: EloCalculatorService;

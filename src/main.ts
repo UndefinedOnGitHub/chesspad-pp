@@ -2,7 +2,11 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from '@components/app/app.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './routes';
-import { importProvidersFrom, isDevMode, provideZoneChangeDetection } from '@angular/core';
+import {
+  importProvidersFrom,
+  isDevMode,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   provideHttpClient,
@@ -15,9 +19,7 @@ bootstrapApplication(AppComponent, {
     provideZoneChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
-    importProvidersFrom(
-      BrowserModule,
-    ),
+    importProvidersFrom(BrowserModule),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Chess } from 'chess.js';
+import { Logger } from './logger';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStorageManagerService {
+  logger = inject(Logger)
   constructor() {}
 
   storeGame(key: string, game: Chess): void {
@@ -12,7 +14,7 @@ export class GameStorageManagerService {
       const pgn64 = btoa(game.pgn());
       this.store(key, pgn64);
     } catch {
-      console.error('Failed to store game');
+      this.logger.error('Failed to store game');
     }
   }
 
@@ -26,7 +28,7 @@ export class GameStorageManagerService {
         return game;
       }
     } catch (err) {
-      console.error('Failed to fetch game', err);
+      this.logger.error('Failed to fetch game', err);
     }
     return;
   }

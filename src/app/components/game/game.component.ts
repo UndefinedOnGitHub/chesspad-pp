@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NotepadComponent } from '../notepad/notepad.component';
 import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
 import { MatCardModule } from '@angular/material/card';
-import { GameService } from '@services/game.service';
+import { GameService } from '@components/game/game.service';
 import { NotifyService } from '@services/notify.service';
 import {
   faBars,
@@ -25,8 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     NotepadComponent,
     KeyboardComponent,
-    MatButtonModule
-],
+    MatButtonModule,
+  ],
 })
 export class GameComponent {
   title = 'chesspad.pp';

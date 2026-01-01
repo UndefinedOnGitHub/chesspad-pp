@@ -6,15 +6,14 @@ import {
   MatDialogContent,
   MatDialogActions,
 } from '@angular/material/dialog';
-import { GameService } from '@services/game.service';
-import { NotifyService } from '../../services/notify.service';
+import { GameService } from '@components/game/game.service';
+import { NotifyService } from '@services/notify.service';
 import { Chess } from 'chess.js';
 export interface DialogData {
   pgn: string;
   disabled?: boolean;
   game?: Chess;
 }
-
 
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,8 +32,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
-],
+    MatButtonModule,
+  ],
 })
 export class FinishGameDialogComponent {
   gameString: string = '';

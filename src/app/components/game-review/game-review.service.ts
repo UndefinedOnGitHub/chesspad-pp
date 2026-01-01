@@ -1,28 +1,28 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Chess } from 'chess.js';
 import {
   ChessWebsiteApiService,
   GameResponse,
-} from './chess-website-api.service';
+} from '../../services/chess-website-api.service';
 import { Chessground } from 'chessground';
-import { Move } from '../keyboards/models/move';
+import { Move } from '../../keyboards/models/move';
 import { MatDialog } from '@angular/material/dialog';
 import {
   GameReviewSelectorDialogComponent,
   DialogCloseResponse,
-} from '@components/game-review-selector-dialog/game-review-selector-dialog.component';
-import { KeyboardButton } from '../keyboards/models/button';
-import { GameStorageManagerService } from './game-storage-manager.service';
+} from '@components/game-review/game-review-selector-dialog/game-review-selector-dialog.component';
+import { KeyboardButton } from '../../keyboards/models/button';
+import { GameStorageManagerService } from '../../services/game-storage-manager.service';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
-import { FinishGameDialogComponent } from '../components/finish-game-dialog/finish-game-dialog.component';
-import { Logger } from './logger';
+import { FinishGameDialogComponent } from '../finish-game-dialog/finish-game-dialog.component';
+import { Logger } from '../../services/logger';
+import { BaseGameService } from '../../keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GameReviewService {
+export class GameReviewService extends BaseGameService {
   groundboard: any | undefined;
-  game: Chess = new Chess();
   element: HTMLElement | undefined | null;
   history: string[] = [];
   currentMove: string | undefined | null;
@@ -35,12 +35,10 @@ export class GameReviewService {
     },
   });
 
-  constructor(
-    public api: ChessWebsiteApiService,
-    public dialog: MatDialog,
-    public storage: GameStorageManagerService,
-    private logger: Logger
-  ) {}
+  api = inject(ChessWebsiteApiService);
+  dialog = inject(MatDialog);
+  storage = inject(GameStorageManagerService);
+  logger = inject(Logger);
 
   getAdditionalButton() {
     return this.additionalButton;
@@ -187,7 +185,7 @@ export class GameReviewService {
       });
   }
 
-  makeMove(move: Move): { success: boolean } {
+  override validateMove(move: Move): void {
     if (
       this.currentMove?.replace('+', '')?.replace('x', '').replace('#', '') ==
       String(move)?.replace('x', '')
@@ -209,9 +207,9 @@ export class GameReviewService {
         }
       }, 500);
       this.scrollToLastMove();
-      return { success: true };
+    } else {
+      throw 'Invalid Move';
     }
-    return { success: false };
   }
 
   isCheckmate(): boolean {

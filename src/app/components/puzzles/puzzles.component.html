@@ -1,13 +1,11 @@
 <div
   class="d-flex flex-column flex-lg-row flex-xl-row flex-xs-column flex-sm-column flex-md-row keyboard-puzzle-container p-2"
-  >
+>
   <div class="flex-grow-1 p-1 mb-2 notepad-content-container">
     <mat-card>
       <mat-card-content class="d-flex flex-column align-items-center">
         @if (boardOrientation()) {
-          <div
-            class="p-2 d-flex justify-content-center align-content-center"
-            >
+          <div class="p-2 d-flex justify-content-center align-content-center">
             <div
               class="first-move-display-color {{ puzzle.boardOrientation }}"
             ></div>
@@ -26,9 +24,13 @@
         Clear
       </button>
     </mat-card-actions> -->
-  </mat-card>
-</div>
-<div class="d-flex p-1 justify-content-center">
-  <app-keyboard [game]="puzzle"> </app-keyboard>
-</div>
+    </mat-card>
+  </div>
+  <div class="d-flex p-1 justify-content-center">
+    <app-keyboard
+      [game]="puzzle"
+      [externalButton]="puzzle.getAdditionalButton()"
+    >
+    </app-keyboard>
+  </div>
 </div>
