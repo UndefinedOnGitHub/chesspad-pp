@@ -3,17 +3,17 @@ import { Chess } from 'chess.js';
 import {
   ChessWebsiteApiService,
   PuzzleResponse,
-} from '../../services/chess-website-api.service';
+} from '@services/chess-website-api.service';
 import { Chessground } from 'chessground';
-import { Move } from '../../keyboards/models/move';
-import { FinishGameDialogComponent } from '../finish-game-dialog/finish-game-dialog.component';
+import { Move } from '@keyboards/models/move';
+import { FinishGameDialogComponent } from '../../finish-game-dialog/finish-game-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { KeyboardButton } from '../../keyboards/models/button';
-import { ChessgroundConfig } from '../../constants';
+import { KeyboardButton } from '@keyboards/models/button';
+import { ChessgroundConfig } from '../../../constants';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
-import { GameStorageManagerService } from '../../services/game-storage-manager.service';
-import { Logger } from '../../services/logger';
-import { BaseGameService } from '../../keyboards/services/base-game.service';
+import { GameStorageManagerService } from '@services/game-storage-manager.service';
+import { Logger } from '@services/logger';
+import { BaseGameService } from '@keyboards/services/base-game.service';
 
 /**
  *
@@ -42,7 +42,7 @@ export class PuzzleService extends BaseGameService {
       this.makeMove(new Move(this.solution[0]));
     },
   });
-  api = inject(ChessWebsiteApiService);
+  private api = inject(ChessWebsiteApiService);
   dialog = inject(MatDialog);
   storage = inject(GameStorageManagerService);
   logger = inject(Logger);

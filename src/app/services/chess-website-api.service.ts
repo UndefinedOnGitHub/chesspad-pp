@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { Chess } from 'chess.js';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
@@ -20,12 +20,10 @@ export interface GameResponse {
   providedIn: 'root',
 })
 export class ChessWebsiteApiService {
-  constructor(
-    public http: HttpClient,
-    private logger: Logger,
-  ) {}
+  public http = inject(HttpClient)
+  private logger = inject(Logger)
 
-  loadLichessPuzzle(): Observable<PuzzleResponse> {
+  private loadLichessPuzzle(): Observable<PuzzleResponse> {
     return this.http.get('https://lichess.org/api/puzzle/daily').pipe(
       map((response: any) => {
         this.logger.log(response);
@@ -38,7 +36,7 @@ export class ChessWebsiteApiService {
     );
   }
 
-  loadChessComPuzzle(): Observable<PuzzleResponse> {
+  private loadChessComPuzzle(): Observable<PuzzleResponse> {
     return this.http.get('https://api.chess.com/pub/puzzle/random').pipe(
       map((response: any) => {
         this.logger.log(response);
@@ -59,13 +57,12 @@ export class ChessWebsiteApiService {
     const date = new Date();
     date.setMonth(date.getMonth() - 1);
     const year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString();
-    if (month.length < 2) month = '0' + month;
+    let month = (date.getMonth() + 1).toString().padStart(2, '0');
 
     return `${year}/${month}`;
   }
 
-  loadChessComGame(
+  private loadChessComGame(
     username: string,
     color: 'white' | 'black' | '' = '',
   ): Observable<GameResponse> {
@@ -104,7 +101,7 @@ export class ChessWebsiteApiService {
 
   // Not Working. Need to get the response to be in json format.
   // Some attempts have been made but none successful.
-  loadLichessGame(username: string): Observable<GameResponse> {
+  private loadLichessGame(username: string): Observable<GameResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'Accept',
       Accept: 'application/json',

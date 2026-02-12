@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { GameReviewService } from '@components/game-review/game-review.service';
+import { GameReviewService } from '@pages/game-review/game-review.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { provideHttpClient } from '@angular/common/http';
 

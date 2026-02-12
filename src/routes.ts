@@ -1,12 +1,24 @@
-import { GameComponent } from '@components/game/game.component';
-import { PuzzlesComponent } from '@components/puzzles/puzzles.component';
-import { GameReviewComponent } from '@components/game-review/game-review.component';
-import { TutorialComponent } from '@components/tutorial/tutorial.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', component: GameComponent },
-  { path: 'puzzles', component: PuzzlesComponent },
-  { path: 'games', component: GameReviewComponent },
-  { path: 'tutorial', component: TutorialComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('@components/pages/game/game.component').then((m) => m.GameComponent),
+  },
+  {
+    path: 'puzzles',
+    loadComponent: () =>
+      import('@components/pages/puzzles/puzzles.component').then((m) => m.PuzzlesComponent),
+  },
+  {
+    path: 'games',
+    loadComponent: () =>
+      import('@components/pages/game-review/game-review.component').then((m) => m.GameReviewComponent),
+  },
+  {
+    path: 'tutorial',
+    loadComponent: () =>
+      import('@components/pages/tutorial/tutorial.component').then((m) => m.TutorialComponent),
+  },
 ];

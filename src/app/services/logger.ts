@@ -1,13 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Logger {
-  log(...logObject: any) {
-    if (location.origin.includes('localhost')) console.log(...logObject);
+  get log() {
+    if (isDevMode()) {
+      return console.log.bind(console)
+    } else {
+      return () => {}
+    };
   }
-  error(...logObject: any) {
-    if (location.origin.includes('localhost')) console.error(...logObject);
+  get error() {
+    if (isDevMode()) {
+      return console.error.bind(console)
+    } else {
+      return () => {}
+    };
   }
 }

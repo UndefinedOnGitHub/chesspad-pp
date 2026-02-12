@@ -6,7 +6,7 @@ import { Logger } from './logger';
   providedIn: 'root',
 })
 export class GameStorageManagerService {
-  logger = inject(Logger)
+  private logger = inject(Logger)
   constructor() {}
 
   storeGame(key: string, game: Chess): void {

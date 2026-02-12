@@ -2,10 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '@components/app/app.component';
 import { NotepadComponent } from '../notepad/notepad.component';
-import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
-import { KeyboardButtonComponent } from '../../keyboards/components/keyboard-button/keyboard-button.component';
-import { GameComponent } from '@components/game/game.component';
-import { MoveDisplayComponent } from '../../keyboards/components/move-display/move-display.component';
+import { KeyboardComponent } from '@keyboards/components/keyboard/keyboard.component';
+import { KeyboardButtonComponent } from '@keyboards/components/keyboard-button/keyboard-button.component';
+import { MoveDisplayComponent } from '@keyboards/components/move-display/move-display.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +23,6 @@ describe('AppComponent', () => {
         KeyboardComponent,
         MoveDisplayComponent,
         KeyboardButtonComponent,
-        GameComponent,
         MatToolbarModule,
         MatCardModule,
         MatButtonModule,

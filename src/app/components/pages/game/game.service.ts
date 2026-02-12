@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { Move } from '../../keyboards/models/move';
+import { Move } from '@keyboards/models/move';
 import { Chess } from 'chess.js';
-import { GameStorageManagerService } from '../../services/game-storage-manager.service';
-import { Logger } from '../../services/logger';
-import { BaseGameService } from '../../keyboards/services/base-game.service';
+import { GameStorageManagerService } from '@services/game-storage-manager.service';
+import { Logger } from '@services/logger';
+import { BaseGameService } from '@keyboards/services/base-game.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,9 +29,7 @@ export class GameService extends BaseGameService {
   activeMoveIdx: number = -1;
   gameResult: '1-0' | '1/2-1/2' | '0-1' = '1/2-1/2';
 
-  onMoveClickCallbacks: Function[] = [];
-
-  public storage = inject(GameStorageManagerService);
+  private storage = inject(GameStorageManagerService);
   private logger = inject(Logger);
 
   override validateMove(move: Move) {
@@ -62,7 +60,7 @@ export class GameService extends BaseGameService {
 
   formatDate(): string {
     const now = new Date();
-    return `${now.getFullYear()}.${now.getMonth()}.${now.getDate()}`;
+    return `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
   }
 
   /**

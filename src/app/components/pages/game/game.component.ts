@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { NotepadComponent } from '../notepad/notepad.component';
-import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
+import { NotepadComponent } from '@components/notepad/notepad.component';
+import { KeyboardComponent } from '@keyboards/components/keyboard/keyboard.component';
 import { MatCardModule } from '@angular/material/card';
-import { GameService } from '@components/game/game.service';
+import { GameService } from './game.service';
 import { NotifyService } from '@services/notify.service';
 import {
   faBars,
@@ -35,16 +35,11 @@ export class GameComponent {
   faHeart: IconDefinition = faHeart;
   faShare: IconDefinition = faShare;
   faCircleStop: IconDefinition = faCircleStop;
-  game: GameService;
-  notify: NotifyService;
+  game: GameService = inject(GameService);
+  private notify: NotifyService = inject(NotifyService);
+  private dialog = inject(MatDialog);
 
-  constructor(
-    notify: NotifyService,
-    game: GameService,
-    public dialog: MatDialog,
-  ) {
-    this.notify = notify;
-    this.game = game;
+  constructor() {
     this.game.fetchGame();
   }
 
