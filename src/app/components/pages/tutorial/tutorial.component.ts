@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { TutorialService } from '@components/tutorial/tutorial.service';
+import { TutorialService } from './tutorial.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
+import { KeyboardComponent } from '@keyboards/components/keyboard/keyboard.component';
 
 @Component({
   selector: 'app-tutorial',

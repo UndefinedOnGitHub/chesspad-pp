@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PuzzleService } from '@components/puzzles/puzzle.service';
+import { PuzzleService } from './puzzle.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import { KeyboardComponent } from '../../keyboards/components/keyboard/keyboard.component';
+import { KeyboardComponent } from '@keyboards/components/keyboard/keyboard.component';
 
 @Component({
   selector: 'app-puzzles',

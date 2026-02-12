@@ -34,7 +34,7 @@
     "lodash": "^4.17.21",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.2",
-    "zone.js": "~0.15.0"
+    "zone.js": "^0.16.0"
   },
   "devDependencies": {
     "@angular/build": "^21.0.4",
@@ -42,7 +42,7 @@
     "@angular/compiler-cli": "^21.0.6",
     "@types/jasmine": "^5.1.13",
     "@types/lodash": "^4.14.202",
-    "firebase-tools": "^13.0.1",
+    "firebase-tools": "^15.1.0",
     "jasmine-core": "^5.13.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
