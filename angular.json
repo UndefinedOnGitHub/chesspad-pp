@@ -40,7 +40,10 @@
             "scripts": [],
             "allowedCommonJsDependencies": ["lodash"],
             "serviceWorker": "ngsw-config.json",
-            "browser": "src/main.ts"
+            "browser": "src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app"]
+            }
           },
           "configurations": {
             "production": {
@@ -96,7 +99,10 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app"]
+            }
           }
         }
       }

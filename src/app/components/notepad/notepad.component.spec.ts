@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
 import { NotepadComponent } from './notepad.component';
-import { MoveDisplayComponent } from '../../keyboards/components/move-display/move-display.component';
-import { GameService } from '@components/game/game.service';
+import { MoveDisplayComponent } from '@keyboards/components/move-display/move-display.component';
+import { GameService } from '@pages/game/game.service';
 
 describe('NotepadComponent', () => {
   let component: NotepadComponent;
