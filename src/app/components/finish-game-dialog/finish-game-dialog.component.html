@@ -1,76 +1,70 @@
 <form [formGroup]="pgnForm">
   <h1 mat-dialog-title>Game Results</h1>
   <div mat-dialog-content>
-    <table>
-      <tr>
-        <td colspan="4">
-          <mat-button-toggle-group
-            formControlName="result"
-            aria-label="Game Winner"
-          >
-            <mat-button-toggle value="1-0">White Won</mat-button-toggle>
-            <mat-button-toggle value="1/2-1/2">Draw</mat-button-toggle>
-            <mat-button-toggle value="0-1">Black Won</mat-button-toggle>
-          </mat-button-toggle-group>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="4">
+    <div class="form-container">
+      <div class="full-width">
+        <mat-button-toggle-group
+          formControlName="result"
+          aria-label="Game Winner"
+          class="result-toggle-group"
+        >
+          <mat-button-toggle value="1-0">White Won</mat-button-toggle>
+          <mat-button-toggle value="1/2-1/2">Draw</mat-button-toggle>
+          <mat-button-toggle value="0-1">Black Won</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      <div class="full-width">
+        <mat-form-field>
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="player-row">
+        <mat-form-field>
+          <mat-label>White</mat-label>
+          <input matInput formControlName="white">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Black</mat-label>
+          <input matInput formControlName="black">
+        </mat-form-field>
+      </div>
+
+      <div class="player-row">
+        @if (pgnForm.get('white')?.value) {
           <mat-form-field>
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date">
-            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>White Elo</mat-label>
+            <input matInput type="number"
+              step="1"
+              min="0"
+              max="3500"
+              formControlName="whiteElo" />
           </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan="2">
-          <mat-form-field class="">
-            <mat-label>White</mat-label>
-            <input matInput formControlName="white">
+        }
+
+        @if (pgnForm.get('black')?.value) {
+          <mat-form-field>
+            <mat-label>Black Elo</mat-label>
+            <input matInput type="number"
+              step="1"
+              min="0"
+              max="3500"
+              formControlName="blackElo" />
           </mat-form-field>
-        </td>
-        <td colSpan="2">
-          <mat-form-field class="">
-            <mat-label>Black</mat-label>
-            <input matInput formControlName="black">
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan="2">
-          @if (pgnForm.get('white')?.value) {
-            <mat-form-field class="">
-              <mat-label>White Elo</mat-label>
-              <input matInput type="number"
-                step="1"
-                min="0"
-                max="3500"
-                formControlName="whiteElo" />
-            </mat-form-field>
-          }
-        </td>
-        <td colSpan="2">
-          @if (pgnForm.get('black')?.value) {
-            <mat-form-field class="">
-              <mat-label>Black Elo</mat-label>
-              <input matInput type="number"
-                step="1"
-                min="0"
-                max="3500"
-                formControlName="blackElo" />
-            </mat-form-field>
-          }
-        </td>
-      </tr>
-    </table>
+        }
+      </div>
+    </div>
+
     <mat-form-field class="game-moves-input-container">
       <textarea disabled matInput [value]="gameString"></textarea>
     </mat-form-field>
   </div>
-  <div mat-dialog-actions class="d-flex justify-content-around">
+  <div mat-dialog-actions class="action-buttons">
     <button mat-button type="button" (click)="close()">New Game</button>
     <button mat-button type="button" (click)="copy()">Copy</button>
     <button mat-button type="button" (click)="copyAndGo('https://lichess.org/analysis')">

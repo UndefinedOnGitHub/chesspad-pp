@@ -6,7 +6,6 @@ import {
   MatDialogContent,
   MatDialogActions,
 } from '@angular/material/dialog';
-import { GameService } from '@components/pages/game/game.service';
 import { NotifyService } from '@services/notify.service';
 import { Chess } from 'chess.js';
 export interface DialogData {
@@ -62,7 +61,6 @@ export class FinishGameDialogComponent implements OnInit {
     this.assignHeaders()
     this.pgnForm.valueChanges.subscribe(changes => {
       this.assignHeaders(changes)
-      // console.log(changes)
     })
   }
 
@@ -99,11 +97,6 @@ export class FinishGameDialogComponent implements OnInit {
     }
     return '1/2-1/2';
   }
-
-  // onGameWinnerChange(ev: any) {
-  //   this.game.gameResult = ev.value;
-  //   this.gameString = this.game.exportPGN();
-  // }
 
   close() {
     this.dialogRef.close({ new: true });

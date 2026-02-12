@@ -1,3 +1,57 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.result-toggle-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.player-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  // Stack vertically on mobile devices
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  // Stack buttons on very small screens
+  @media (max-width: 480px) {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
 .game-moves-input-container {
   padding-top: 15px;
   width: 100%;
