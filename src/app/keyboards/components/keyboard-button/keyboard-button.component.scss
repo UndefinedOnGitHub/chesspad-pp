@@ -3,12 +3,38 @@
 // Overwrite Angular Material
 button.mdc-button--raised {
   padding: 0 8px 0 8px;
+
+  // Flat key slab: no Material elevation in any state
+  &,
+  &:hover,
+  &:focus,
+  &:active,
+  &[disabled] {
+    box-shadow: none;
+  }
 }
 button.mdc-button {
-  font-size: var(--mdc-typography-button-font-size, 20px);
+  font-size: var(--kb-key-font-size, 22px);
+  font-weight: var(--kb-key-font-weight, 400);
+  letter-spacing: normal;
   min-width: auto;
   width: 100%;
   height: 100%;
+  background: var(--kb-key-bg);
+  color: var(--kb-key-fg);
+  border-radius: var(--kb-key-radius);
+
+  fa-icon {
+    font-size: 1.05em;
+  }
+
+  // Action keys (switch, capture, castle, clear, promotion, external) all
+  // default to type 'base'; pieces/rows/columns carry their own type.
+  &[data-key-type="base"] {
+    background: var(--kb-key-fn-bg);
+    color: var(--kb-key-fn-fg);
+  }
+
   &.active {
     @include theme.primary-background-color;
     &.secondary-active {

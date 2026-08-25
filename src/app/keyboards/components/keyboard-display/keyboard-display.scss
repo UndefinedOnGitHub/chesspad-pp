@@ -1,42 +1,3 @@
-@use "../../../theme";
-
-$scale: 0.6;
-@keyframes shake {
-  0% {
-    transform: translate(1px * $scale, 1px * $scale) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px * $scale, -2px * $scale) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px * $scale, 0px * $scale) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px * $scale, 2px * $scale) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px * $scale, -1px * $scale) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px * $scale, 2px * $scale) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px * $scale, 1px * $scale) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px * $scale, 1px * $scale) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px * $scale, -1px * $scale) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px * $scale, 2px * $scale) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px * $scale, -2px * $scale) rotate(-1deg);
-  }
-}
-
 $sideScale: 0.7;
 @keyframes sideShake {
   10%,
@@ -61,8 +22,19 @@ $sideScale: 0.7;
   }
 }
 
+.current-move-row {
+  align-items: center;
+  min-height: 40px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
 .current-move-display {
-  @include theme.on-background;
+  align-items: center;
+  min-width: 75px;
+  color: var(--kb-key-fg);
+
   span {
     font-weight: bold;
     font-size: 17px;
@@ -70,6 +42,8 @@ $sideScale: 0.7;
     padding-left: 4px;
     transition: color 0.3s ease-out;
 
+    // triggerError() assigns className wholesale, so this span must not
+    // carry any static class of its own.
     &.error-animation {
       color: #e70909;
       animation: sideShake 0.3s;
@@ -78,14 +52,27 @@ $sideScale: 0.7;
   }
 }
 
+.move-suggestions {
+  align-items: center;
+  gap: 6px;
+}
+
 .possible-option-cell {
-  @include theme.secondary-background-color;
-  font-weight: bold;
-  border-radius: 20px;
-  padding: 0px 15px;
-  text-shadow: 2px 3px 5px black;
+  background: var(--kb-key-fn-bg);
+  color: var(--kb-key-fg);
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 4px 14px;
+  cursor: pointer;
 }
 
 .keyboard-settings-gear {
-  @include theme.on-background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--kb-key-fn-fg);
+  font-size: 18px;
+  cursor: pointer;
 }

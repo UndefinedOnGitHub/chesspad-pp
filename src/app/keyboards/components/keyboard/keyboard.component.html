@@ -7,9 +7,9 @@
 >
 </app-keyboard-display>
 <!-- Keyboard Buttons -->
-<div class="d-flex flex-row">
-  <div class="d-flex flex-row keyboard-container">
-    <div class="flex-fill d-flex flex-row flex-wrap align-content-start">
+<div class="keyboard-surface">
+  <div class="keyboard-container">
+    <div class="keyboard-grid">
       @for (r of matrix; track $index) {
         @for (b of r; track $index) {
           <div class="keyboard-cell">
@@ -24,16 +24,15 @@
       }
     </div>
   </div>
-  <div class="return-key d-flex flex-column">
+  <div class="return-key">
     @if (externalButton(); as external) {
-      <div class="flex-grow-2 additional-button">
+      <div class="additional-button">
         <app-keyboard-button [button]="external"> </app-keyboard-button>
       </div>
     }
     <button
       id="submit"
       [disabled]="disableButtons()"
-      class="flex-grow-1"
       mat-raised-button
       (click)="submit($event)"
     >

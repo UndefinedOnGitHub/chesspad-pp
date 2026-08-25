@@ -1,0 +1,87 @@
+@use "sass:map";
+@use "../../../../theme" as theme;
+
+@mixin from($key) {
+  @media (min-width: map.get(theme.$breakpoints, $key)) {
+    @content;
+  }
+}
+
+:host {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+
+// Redundant with the dots when space is scarce
+.step-count {
+  flex: 0 0 auto;
+  font-size: 12px;
+  opacity: 0.8;
+  white-space: nowrap;
+  display: none;
+}
+
+// Dots share whatever width is left, so they never push Restart onto a second
+// line however many steps there are.
+.step-dots {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.step-dot {
+  flex: 1 1 0;
+  min-width: 18px;
+  max-width: 40px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--kb-key-fn-bg);
+  }
+  &.visited::before {
+    background: var(--kb-key-fg);
+    opacity: 0.45;
+  }
+  &.current::before {
+    width: 12px;
+    height: 12px;
+    @include theme.primary-background-color;
+  }
+}
+
+.restart-button {
+  flex: 0 0 auto;
+  min-width: 0;
+
+  .button-label {
+    display: none;
+    margin-left: 6px;
+  }
+}
+
+@include from(xs) {
+  .step-count,
+  .restart-button .button-label {
+    display: inline;
+  }
+}
+
+@include from(sm) {
+  .step-dot {
+    height: 40px;
+  }
+}
