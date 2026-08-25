@@ -1,18 +1,47 @@
-<div
-  class="d-flex flex-column flex-lg-row flex-xl-row flex-xs-column flex-sm-column flex-md-row p-2 tutorial-container"
->
-  <div class="flex-grow-1 p-1 mb-2 notepad-content-container">
-    <mat-card>
-      <mat-card-content class="d-flex justify-content-center">
-        <div #chessboard class="tutorial-chessboard"></div>
-      </mat-card-content>
-    </mat-card>
-    <div class="d-flex flex-column display-results p-2">
-      <p>{{ tutorial.currentPosition.title }}</p>
-      <p [innerHTML]="tutorial.currentPosition.hint"></p>
+<div class="tutorial-page p-2">
+  <app-step-progress
+    class="tutorial-header"
+    [steps]="steps"
+    [current]="tutorial.positionIdx"
+    (stepSelect)="tutorial.goTo($event)"
+    (restart)="tutorial.restart()"
+  />
+
+  <div class="tutorial-body">
+    <div class="board-zone">
+      <mat-card>
+        <mat-card-content class="d-flex justify-content-center">
+          <div #chessboard class="tutorial-chessboard"></div>
+        </mat-card-content>
+      </mat-card>
     </div>
-  </div>
-  <div class="d-flex p-1 justify-content-center">
-    <app-keyboard [game]="tutorial"> </app-keyboard>
+
+    <div class="explain-zone">
+      <app-step-card [position]="tutorial.currentPosition" />
+    </div>
+
+    <div class="keyboard-zone">
+      <div class="step-nav">
+        <button
+          mat-stroked-button
+          type="button"
+          [disabled]="tutorial.isFirstStep"
+          (click)="tutorial.back()"
+        >
+          <fa-icon [icon]="faChevronLeft"></fa-icon>
+          Back
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          [disabled]="tutorial.isLastStep"
+          (click)="tutorial.next()"
+        >
+          Skip
+          <fa-icon [icon]="faChevronRight"></fa-icon>
+        </button>
+      </div>
+      <app-keyboard [game]="tutorial"></app-keyboard>
+    </div>
   </div>
 </div>

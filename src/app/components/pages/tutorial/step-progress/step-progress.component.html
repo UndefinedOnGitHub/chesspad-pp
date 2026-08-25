@@ -1,0 +1,24 @@
+<span class="step-count">Step {{ current() + 1 }} of {{ steps().length }}</span>
+<nav class="step-dots" aria-label="Tutorial steps">
+  @for (step of steps(); track $index) {
+    <button
+      type="button"
+      class="step-dot"
+      [class.current]="$index === current()"
+      [class.visited]="$index < current()"
+      [attr.aria-label]="'Step ' + ($index + 1) + ': ' + step.title"
+      [attr.aria-current]="$index === current() ? 'step' : null"
+      (click)="stepSelect.emit($index)"
+    ></button>
+  }
+</nav>
+<button
+  mat-button
+  type="button"
+  class="restart-button"
+  aria-label="Restart the tutorial"
+  (click)="restart.emit()"
+>
+  <fa-icon [icon]="faRotateLeft"></fa-icon>
+  <span class="button-label">Restart</span>
+</button>

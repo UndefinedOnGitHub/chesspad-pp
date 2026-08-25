@@ -1,0 +1,16 @@
+@if (cap().auto) {
+  <span class="auto-badge">{{ cap().auto }}</span>
+}
+<span
+  class="cap"
+  [attr.data-kind]="cap().kind"
+  [class.source]="cap().source"
+  [attr.aria-label]="cap().aria"
+  role="img"
+>
+  @if (cap().icon; as icon) {
+    <fa-icon [icon]="icon"></fa-icon>
+  } @else {
+    {{ cap().label }}
+  }
+</span>

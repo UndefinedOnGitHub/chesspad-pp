@@ -1,11 +1,9 @@
-<div class="d-flex flex-row mb-2 current-move-row align-content-center">
-  <div class="d-flex current-move-display" style="min-width: 75px">
+<div class="d-flex flex-row mb-2 current-move-row">
+  <div class="d-flex current-move-display">
     <span>&gt;</span>
     <span #currentMoveDisplay>{{ displayCurrentMove() }}</span>
   </div>
-  <div
-    class="flex-grow-1 d-flex flex-row align-content-center justify-content-around"
-  >
+  <div class="flex-grow-1 d-flex flex-row justify-content-around move-suggestions">
     @if(moveSuggestions()) { @for (move of moveSuggestions(); track $index) {
     <div class="possible-option-cell" (click)="selectMoveSuggestions(move)">
       {{ move }}

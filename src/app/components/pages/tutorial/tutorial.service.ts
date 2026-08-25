@@ -20,18 +20,72 @@ export class TutorialService extends BaseGameService {
     this.constructBoard();
   }
 
+  get totalSteps(): number {
+    return positions.length;
+  }
+
+  get stepNumber(): number {
+    return this.positionIdx + 1;
+  }
+
+  get isFirstStep(): boolean {
+    return this.positionIdx == 0;
+  }
+
+  get isLastStep(): boolean {
+    return this.positionIdx == positions.length - 1;
+  }
+
+  goTo(idx: number): void {
+    const clamped = Math.min(Math.max(idx, 0), positions.length - 1);
+    if (clamped == this.positionIdx) return;
+
+    this.positionIdx = clamped;
+    this.currentPosition = positions[clamped];
+    this.init();
+    this.clearKeyboard();
+  }
+
+  next(): void {
+    this.goTo(this.positionIdx + 1);
+  }
+
+  back(): void {
+    this.goTo(this.positionIdx - 1);
+  }
+
+  restart(): void {
+    this.goTo(0);
+  }
+
+  /**
+   * The keyboard owns its own Move and button state. It subscribes to
+   * moveSubject and pipes whatever arrives through Keyboard#extractFromMove,
+   * which clears the pad first — so an empty move resets it.
+   */
+  private clearKeyboard(): void {
+    this.moveSubject.next(new Move(''));
+  }
+
   private constructBoard() {
-    // Set Digital Board
-    if (this.element) {
-      this.game.loadPgn(this.currentPosition.pgn);
-      const m = this.game.history({ verbose: true })[0];
-      const config = {
+    if (!this.element) return;
+
+    this.game.loadPgn(this.currentPosition.pgn);
+    const m = this.game.history({ verbose: true })[0];
+    const fen = this.game.fen();
+    const lastMove = m ? [m.from, m.to] : [];
+
+    // Reuse the instance across steps rather than leaving an orphan
+    // Chessground on the element every time the position changes.
+    if (this.groundboard) {
+      this.groundboard.set({ fen, lastMove });
+    } else {
+      this.groundboard = Chessground(this.element, {
         coordinates: false,
-        fen: this.game.fen(),
+        fen,
         viewOnly: true,
-        lastMove: m ? [m.from, m.to] : [],
-      };
-      this.groundboard = Chessground(this.element, config);
+        lastMove,
+      });
     }
   }
 
@@ -42,12 +96,7 @@ export class TutorialService extends BaseGameService {
 
   override validateMove(move: Move): void {
     if (this.currentPosition.move.toString() == move.toString()) {
-      this.positionIdx++;
-      const position = positions[this.positionIdx];
-      if (position) {
-        this.currentPosition = position;
-        this.init();
-      }
+      this.next();
     } else {
       throw 'Invalid Move';
     }

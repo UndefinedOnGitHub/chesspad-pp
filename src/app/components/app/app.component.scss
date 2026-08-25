@@ -10,8 +10,14 @@
   height: 100%;
 }
 
+// mat-toolbar is 64px tall, but drops to 56px below 600px — subtracting a flat
+// 64px there left the container 8px too tall and gave every page a stray scrollbar.
 .mat-drawer-container {
   height: calc(100% - 64px);
+
+  @media (max-width: 599px) {
+    height: calc(100% - 56px);
+  }
 }
 
 .mat-drawer {

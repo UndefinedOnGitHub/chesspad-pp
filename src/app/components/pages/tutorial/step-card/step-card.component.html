@@ -1,0 +1,44 @@
+<h2 class="step-title">{{ position().title }}</h2>
+<p class="step-summary">{{ position().summary }}</p>
+
+@if (position().sequence.length) {
+  <div class="cap-strip">
+    @for (cap of position().sequence; track $index) {
+      <span class="cap-item">
+        @if ($index > 0) {
+          <span class="cap-arrow" aria-hidden="true">&#8594;</span>
+        }
+        <app-keycap [cap]="cap" />
+      </span>
+    }
+  </div>
+}
+
+@if (position().alternate; as alternate) {
+  <p class="alternate-label">{{ alternate.label }}</p>
+  <div class="cap-strip">
+    @for (cap of alternate.sequence; track $index) {
+      <span class="cap-item">
+        @if ($index > 0) {
+          <span class="cap-arrow" aria-hidden="true">&#8594;</span>
+        }
+        <app-keycap [cap]="cap" />
+      </span>
+    }
+  </div>
+}
+
+@if (position().legend; as legend) {
+  <ul class="legend">
+    @for (entry of legend; track $index) {
+      <li class="legend-row">
+        <app-keycap [cap]="entry.cap" />
+        <span>{{ entry.text }}</span>
+      </li>
+    }
+  </ul>
+}
+
+@if (position().note; as note) {
+  <p class="step-note">{{ note }}</p>
+}

@@ -1,0 +1,47 @@
+@use "../../../../theme" as theme;
+
+// Caps sit in a wrapping row and hang their "auto" caption above, so the
+// baseline stays level whether or not a cap is captioned.
+:host {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.auto-badge {
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.75;
+  @include theme.secondary-color;
+}
+
+.cap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  // Roughly the real key's 1.25:1 slab, shrunk for prose
+  min-width: clamp(28px, 8vw, 36px);
+  height: clamp(24px, 6.5vw, 30px);
+  padding: 0 6px;
+  border-radius: 6px;
+  font-size: clamp(13px, 3.5vw, 16px);
+  background: var(--kb-key-bg);
+  color: var(--kb-key-fg);
+
+  // The always-present action keys are the dimmer slabs on the real pad
+  &[data-kind="fn"] {
+    background: var(--kb-key-fn-bg);
+    color: var(--kb-key-fn-fg);
+  }
+
+  &[data-kind="submit"] {
+    border-radius: 15px;
+    background: var(--kb-key-pill-bg);
+  }
+
+  &.source {
+    @include theme.secondary-background-color;
+  }
+}

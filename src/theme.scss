@@ -9,6 +9,37 @@ body {
   --bs-body-font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/**
+ * Keyboard design tokens
+ *
+ * Defined once here rather than as mixins so components don't each have to
+ * repeat the prefers-color-scheme block (and blow the component style budget).
+ */
+:root {
+  --kb-surface: #131314;
+  --kb-key-bg: #3a3a3d;
+  --kb-key-fn-bg: #48484b;
+  --kb-key-pill-bg: #48484b;
+  --kb-key-fg: #e3e3e3;
+  --kb-key-fn-fg: #c7c7ca;
+  --kb-key-radius: 10px;
+  --kb-key-gap: 5px;
+  --kb-key-ratio: 1.25;
+  --kb-key-font-size: 22px;
+  --kb-key-font-weight: 400;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --kb-surface: #f1f1f4;
+    --kb-key-bg: #ffffff;
+    --kb-key-fn-bg: #dfe1e5;
+    --kb-key-pill-bg: #dfe1e5;
+    --kb-key-fg: #1f1f1f;
+    --kb-key-fn-fg: #3c4043;
+  }
+}
+
 // core-color or core-theme
 @include mat.core-color(theme.$dark-theme);
 @include mat.button-color(theme.$dark-theme);
